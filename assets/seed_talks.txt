@@ -1,0 +1,16 @@
+# Kaiming He talks corpus
+# Format: <type> <url> <short_id> <year> <title>
+# type: pdf | youtube
+#
+# PDF slide decks (from people.csail.mit.edu/kaiming/)
+pdf      https://people.csail.mit.edu/kaiming/neurips2025talk/neurips2025_fasterrcnn_kaiming.pdf      neurips2025_fasterrcnn  2025  Brief History of Visual Object Detection (NeurIPS 2025 Test-of-Time)
+pdf      https://people.csail.mit.edu/kaiming/cvpr25talk/cvpr2025_meanflow_kaiming.pdf                cvpr2025_meanflow       2025  Towards End-to-End Generative Modeling (CVPR 2025 Workshop)
+pdf      https://people.csail.mit.edu/kaiming/neurips2024workshop/neurips2024_newinml_kaiming.pdf     neurips2024_newinml     2024  ML Research, via the Lens of ML (NeurIPS 2024 New-in-ML)
+pdf      https://people.csail.mit.edu/kaiming/eccv18tutorial/eccv2018_tutorial_kaiminghe.pdf          eccv2018_tutorial       2018  Visual Recognition Tutorial (ECCV 2018)
+pdf      https://people.csail.mit.edu/kaiming/cvpr18tutorial/cvpr2018_tutorial_kaiminghe.pdf          cvpr2018_tutorial       2018  Visual Recognition Tutorial (CVPR 2018)
+pdf      https://people.csail.mit.edu/kaiming/iccv17tutorial/maskrcnn_iccv2017_tutorial_kaiminghe.pdf iccv2017_maskrcnn       2017  Instance-level Recognition Tutorial (ICCV 2017)
+pdf      https://people.csail.mit.edu/kaiming/cvpr17tutorial/cvpr2017_tutorial_kaiminghe.pdf          cvpr2017_tutorial       2017  Deep Learning for Objects & Scenes (CVPR 2017)
+
+# YouTube talks (auto-captions via yt-dlp)
+youtube  https://www.youtube.com/watch?v=D_jt-xO_RmI    yt_mit_dlbootcamp_2024  2024  Learning Deep Representations (MIT Deep Learning Bootcamp)
+youtube  https://www.youtube.com/watch?v=jHv37mKAhV4    yt_cvpr2017_tutorial    2017  Deep Learning for Objects & Scenes (CVPR 2017 video)

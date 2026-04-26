@@ -1,0 +1,72 @@
+Loading text corpus from /Users/kk/Documents/projects/kaiming-he-skill/text…
+  55 source files
+
+[SKILL.md]  22 quotes to verify
+
+[references/research/verbatim-corpus.md]  496 quotes to verify
+  ✗ MISS: Our method avoids repeatedly computing the convolutional features. In processing test imag…
+  ✗ MISS: we show that a simple, flexible, and effective architecture that can match accuracy for bo…
+  ✗ MISS: Learning the reverse model is not merely a form of distillation, even though we use a pre-…
+  ✗ MISS: This comparison shows that non-local dependency has not been sufficiently captured by exis…
+  ✗ MISS: in recent years, novel architectures often seek to replace attention or convolution layers…
+  ✗ MISS: while we use the focal loss definition above, its precise form is not crucial. In the appe…
+  ✗ MISS: We hope this work will provide useful data points and experience for future research.…
+  ✗ MISS: the 32×4d ResNeXt also has a much lower training error than the ResNet counterpart, sugges…
+  ✗ MISS: our reverse model 𝒢 ϕ is not constrained by explicit invertibility. As a result, this allo…
+  ✗ MISS: again this demonstrate the generality of the deep learning methodology that is to say if w…
+  ✗ MISS: in my understanding the success of deep learning is the success of feature learning so in …
+  ✗ MISS: the minibatch size n over which the BN statistics are computed is a key component of the l…
+  ✗ MISS: Setting γ=0 in the last BN of each residual block causes the forward/backward signal initi…
+  ✗ MISS: RegNet models are surprisingly effective in this regime considering the substantial body o…
+  ✗ MISS: Interestingly, if g is restricted to be 1 (depthwise conv), Swish performs much better tha…
+
+[references/research/03-expression-dna.md]  26 quotes to verify
+  ✗ MISS: In a nutshell, our method can be thought of as 'BYOL without the momentum encoder'. Unlike…
+
+[references/research/05-decisions.md]  0 quotes to verify
+
+[references/research/04-external-views.md]  0 quotes to verify
+
+[references/research/02-talks.md]  26 quotes to verify
+  ✗ MISS: A conceptual shift in CV from \…
+  ✗ MISS: again this demonstrate the generality of the deep learning methodology that is to say if w…
+  ✗ MISS: in my understanding the success of deep learning is the success of feature learning so in …
+
+[references/research/01-papers.md]  27 quotes to verify
+
+[references/research/06-timeline.md]  0 quotes to verify
+
+============================================================
+Total quotes checked : 597
+Verified             : 578
+Misses               : 19
+
+Misses by file:
+  references/research/verbatim-corpus.md: 15
+  references/research/02-talks.md: 3
+  references/research/03-expression-dna.md: 1
+
+First 20 missing quotes (not found in text/):
+  references/research/verbatim-corpus.md: Our method avoids repeatedly computing the convolutional features. In processing test images, our method is 24-102 × fas
+  references/research/verbatim-corpus.md: we show that a simple, flexible, and effective architecture that can match accuracy for both tasks using a single networ
+  references/research/verbatim-corpus.md: Learning the reverse model is not merely a form of distillation, even though we use a pre-trained forward model: in fact
+  references/research/verbatim-corpus.md: This comparison shows that non-local dependency has not been sufficiently captured by existing models despite increased 
+  references/research/verbatim-corpus.md: in recent years, novel architectures often seek to replace attention or convolution layers, but almost always retain the
+  references/research/verbatim-corpus.md: while we use the focal loss definition above, its precise form is not crucial. In the appendix we consider other instant
+  references/research/verbatim-corpus.md: We hope this work will provide useful data points and experience for future research.
+  references/research/verbatim-corpus.md: the 32×4d ResNeXt also has a much lower training error than the ResNet counterpart, suggesting that the gains are not fr
+  references/research/verbatim-corpus.md: our reverse model 𝒢 ϕ is not constrained by explicit invertibility. As a result, this allows us to design the reverse mo
+  references/research/verbatim-corpus.md: again this demonstrate the generality of the deep learning methodology that is to say if we develop a very effective and
+  references/research/verbatim-corpus.md: in my understanding the success of deep learning is the success of feature learning so in the case of uh visual recognit
+  references/research/verbatim-corpus.md: the minibatch size n over which the BN statistics are computed is a key component of the loss: if the per-worker minibat
+  references/research/verbatim-corpus.md: Setting γ=0 in the last BN of each residual block causes the forward/backward signal initially to propagate through the 
+  references/research/verbatim-corpus.md: RegNet models are surprisingly effective in this regime considering the substantial body of work on finding better mobil
+  references/research/verbatim-corpus.md: Interestingly, if g is restricted to be 1 (depthwise conv), Swish performs much better than ReLU. This suggests that dep
+  references/research/03-expression-dna.md: In a nutshell, our method can be thought of as 'BYOL without the momentum encoder'. Unlike BYOL but like SimCLR and SwAV
+  references/research/02-talks.md: A conceptual shift in CV from \
+  references/research/02-talks.md: again this demonstrate the generality of the deep learning methodology that is to say if we develop a very effective and
+  references/research/02-talks.md: in my understanding the success of deep learning is the success of feature learning so in the case of uh visual recognit
+
+⚠ WARN: SKILL.md is clean, but auxiliary files have 19 unverified quotes (3.2%).
+        These are typically notation drift (subscripts, math symbols) on real Kaiming text.
+        Inspect the list above; if any look fabricated, fix them.

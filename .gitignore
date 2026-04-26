@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.DS_Store
+.venv/
+# Raw fetched corpus is reproducible — don't commit blobs
+papers/
+talks/
+text/
+notes/
+themes.md

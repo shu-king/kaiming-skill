@@ -1,0 +1,61 @@
+# Kaiming He paper corpus — ~50 curated arxiv IDs
+# Format: <arxiv_id> <author_position> <year> <short_title>
+# author_position: 1st | last | 2nd | middle  (drives voice_certain weighting)
+#
+# Tier 1: high-voice-certainty (1st or last author) — 26 papers
+1512.03385  1st     2015  ResNet
+1603.05027  1st     2016  Identity Mappings (ResNet v2)
+1502.01852  1st     2015  PReLU + Kaiming init (Delving Deep into Rectifiers)
+1703.06870  1st     2017  Mask R-CNN
+1911.05722  1st     2019  MoCo v1
+2003.04297  last    2020  MoCo v2
+2104.02057  last    2021  MoCo v3
+2011.10566  last    2020  SimSiam
+2111.06377  1st     2021  MAE (Masked Autoencoders)
+2205.09113  last    2022  ST-MAE (Spatiotemporal MAE)
+2401.14404  last    2024  l-DAE (Deconstructing DDM)
+2312.03701  last    2023  RCG (Return of Unconditional Generation)
+2406.11838  last    2024  MAR (Autoregressive without VQ)
+2410.13863  last    2024  Fluid (Continuous-token T2I)
+2403.08632  last    2024  Decade's Battle on Dataset Bias
+2502.13129  last    2025  Is Noise Conditioning Necessary
+2502.17437  last    2025  Fractal Generative Models
+2505.13447  last    2025  MeanFlow (NeurIPS 2025 Oral)
+2511.13720  last    2025  JiT (Back to Basics: Let DGM Denoise)
+2511.14761  last    2025  ARC Is a Vision Problem!
+2506.09027  last    2025  Diffuse and Disperse
+2512.02012  last    2025  Improved Mean Flows
+2512.10953  last    2025  Bidirectional Normalizing Flow
+1811.08883  1st     2018  Rethinking ImageNet Pre-training
+1803.08494  last    2018  Group Normalization
+1711.07971  last    2017  Non-local Neural Networks
+
+# Tier 2: middle-author / supporting — 20 papers
+1506.01497  2nd     2015  Faster R-CNN
+1612.03144  middle  2016  FPN (Feature Pyramid Networks)
+1708.02002  middle  2017  Focal Loss / RetinaNet
+1611.05431  last    2016  ResNeXt
+2003.13678  middle  2020  RegNet (Designing Network Design Spaces)
+1406.4729   1st     2014  SPP-Net
+1605.06409  middle  2016  R-FCN
+1801.00868  middle  2018  Panoptic Segmentation
+1901.02446  middle  2019  Panoptic FPN
+1912.08193  middle  2019  PointRend
+2104.14558  last    2021  Large-Scale Spatiotemporal SSL Study
+2212.00794  last    2022  FLIP (Masked CLIP)
+2203.16527  last    2022  ViTDet (Plain ViT for detection)
+1812.03982  last    2018  SlowFast Networks
+1706.02677  last    2017  Accurate, Large Minibatch SGD (1-Hour ImageNet)
+1812.03411  last    2018  Feature Denoising for Adversarial Robustness
+1904.09664  middle  2019  VoteNet
+2503.10622  middle  2025  Transformers without Normalization (DyT)
+2007.06559  last    2020  Graph Structure of Neural Networks
+2409.20537  last    2024  HPT (Heterogeneous Pre-trained Transformers)
+
+# Tier 3: early MSRA pre-DL (no arxiv — fetch from MSRA mirrors / Kaiming's homepage) — 5 papers
+# Listed for reference; will be added to corpus from people.csail.mit.edu/kaiming/ if downloadable
+# - Single Image Haze Removal Using Dark Channel Prior (CVPR 2009 Best Paper, 1st)
+# - Guided Image Filtering (ECCV 2010 / TPAMI 2012, 1st)
+# - Optimized Product Quantization (CVPR 2013, 2nd)
+# - SRCNN — Image Super-Resolution Using Deep Convolutional Networks (ECCV 2014, 3rd)
+# - Statistics of Patch Offsets for Image Completion (ECCV 2012, 1st)
