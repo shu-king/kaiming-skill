@@ -18,7 +18,7 @@ Built from 46 first/last-author papers, 9 public talks and tutorials, and 521 ve
 
 The repo organizes recurring patterns in problem framing, paper structure, ablation design, baseline comparison, and research writing into practical notes and checklists for students and early-stage researchers.
 
-[Install](#install) · [What this repo helps with](#what-this-repo-helps-with) · [What's included](#whats-included) · [Sources](#sources) · [How the star works](#how-the-star-works)
+[Install](#install) · [Who can benefit](#who-can-benefit) · [What this repo can do](#what-this-repo-can-do) · [What's included](#whats-included) · [Sources](#sources)
 
 </div>
 
@@ -34,6 +34,47 @@ The goal is practical. The repo helps users inspect whether a draft has a clear 
 
 ---
 
+## Who can benefit
+
+This repo is mainly useful for people who are learning how to turn research ideas into clear papers and convincing experiments.
+
+| User | How this repo helps |
+|---|---|
+| **Students starting research** | Learn how strong papers frame problems, introduce methods, and avoid unnecessary claims. |
+| **Early-stage PhD students** | Use the checklists to revise abstracts, introductions, ablations, and experiment plans. |
+| **Researchers writing a first paper** | Compare a draft against concrete patterns from a strong computer-vision research corpus. |
+| **Advisors and mentors** | Use the prompts and checklists as teaching material for paper revision and experiment design. |
+| **LLM / agent builders** | Use the structured notes as a reference for research-writing review tools. |
+
+The repo is most helpful when the user already has a draft, idea, experiment plan, or paper section to revise.
+
+---
+
+## What this repo can do
+
+**Keywords:** `problem framing` · `paper structure` · `abstract revision` · `claim calibration` · `ablation design` · `baseline selection` · `experiment planning` · `writing cleanup` · `overclaim removal`
+
+| Task | What the repo provides |
+|---|---|
+| **Clarify the core idea** | Helps turn a vague motivation into a specific observation, question, or hypothesis. |
+| **Improve paper structure** | Provides patterns for abstracts, introductions, method sections, experiments, and discussions. |
+| **Reduce overclaiming** | Flags inflated wording and suggests more precise, evidence-backed claims. |
+| **Plan cleaner experiments** | Encourages one-variable-at-a-time ablations, stronger baselines, and clearer comparisons. |
+| **Review ablation tables** | Helps make ablation rows, captions, and takeaways easier to interpret. |
+| **Check baseline fairness** | Prompts users to ask whether the comparison is strong, simple, and relevant. |
+| **Study writing style** | Extracts recurring sentence patterns, vocabulary choices, and section-level structure from the corpus. |
+| **Support revision workflows** | Works as a second reader for drafts, rebuttals, experiment plans, and paper outlines. |
+
+A good use case looks like this:
+
+```text
+Here is my abstract / introduction / ablation plan.
+Please review it using the kaiming-he-skill checklist.
+Make the claims more precise and suggest missing experiments.
+```
+
+---
+
 ## Install
 
 ```bash
@@ -42,29 +83,25 @@ git clone https://github.com/shu-king/kaiming-skill ~/kaiming-skill && bash ~/ka
 
 This symlinks the skill into `~/.claude/skills/`.
 
-The installer also attempts to star the repo through your local `gh` authentication. Set `NO_STAR=1` to skip this step:
-
-```bash
-NO_STAR=1 bash ~/kaiming-skill/install.sh
-```
-
 A complete usage transcript lives at [`examples/demo-conversation-2026-04-27.md`](examples/demo-conversation-2026-04-27.md).
 
 ---
 
-## What this repo helps with
-
-This repo can help users:
-
-- clarify the main observation of a paper;
-- improve abstract and introduction structure;
-- make claims more precise and less inflated;
-- design cleaner ablations and baseline comparisons;
-- compare a method against stronger or simpler baselines;
-- study writing patterns from a concrete research corpus;
-- ask better questions before scaling up experiments.
+## How to use it well
 
 The repo works best as a revision aid. It is meant to support thinking, not replace it.
+
+Use it with concrete material:
+
+- a draft abstract;
+- an introduction outline;
+- a method description;
+- an ablation table;
+- a baseline comparison;
+- an experiment plan;
+- a reviewer-response draft.
+
+The more specific the input, the more useful the feedback.
 
 ---
 
@@ -169,60 +206,13 @@ Every verbatim quote is grounded to a source tag and checked against the local p
 
 ---
 
-## How the star works
-
-`install.sh` makes one optional GitHub API call.
-
-### What it does
-
-If `gh` is installed and already authenticated, the script issues:
-
-```bash
-PUT /user/starred/shu-king/kaiming-skill
-```
-
-This is the same endpoint used when starring a repository from the GitHub web UI. The request uses your local `gh` authentication.
-
-### What it does not do
-
-The script does not:
-
-- read your token;
-- transmit your token to a third-party server;
-- run after installation;
-- make additional network calls beyond the star request.
-
-### Failure handling
-
-The star step is best-effort and non-fatal.
-
-The install continues if:
-
-- `gh` is not installed;
-- `gh` is not authenticated;
-- the API request fails;
-- the request is rate-limited;
-- the token does not have the required scope.
-
-### Opt out
-
-Use:
-
-```bash
-NO_STAR=1 bash install.sh
-```
-
-You can also skip the installer and create the symlink manually.
-
----
-
 ## Repository layout
 
 ```text
 kaiming-he-skill/
 ├── README.md
 ├── SKILL.md                              # Installable skill body
-├── install.sh                            # Symlink install + optional GitHub star
+├── install.sh                            # Symlink install
 ├── references/
 │   └── research/
 │       ├── 01-papers.md
