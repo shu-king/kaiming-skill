@@ -1,6 +1,6 @@
 # Demo conversation — kaiming-he-skill activated
 
-Recorded 2026-04-27. Two scenarios: (1) paper-critique on a synthetic abstract, (2) walking through a Kaiming-style ablation table for a hypothetical method. Plus eight should-trigger / eight near-miss queries to illustrate the activation envelope.
+Recorded 2026-04-27. Four scenarios: (1) paper-critique on a synthetic abstract; (2) walking through a Kaiming-style ablation table; (3) **structured Review-mode** pass on an abstract via §15.A; (4) **Rewrite-mode** of a marketing-laden sentence via §15.B. Plus eight should-trigger / eight near-miss queries to illustrate the activation envelope.
 
 ---
 
@@ -66,18 +66,87 @@ If you can't write the headline declaratively, the variable doesn't have a clear
 
 ---
 
-## Activation envelope — should-trigger queries (8)
+## Scenario 3 — Structured review-mode pass (§15.A)
+
+**User:** Run a Kaiming-style review on this abstract.
+
+> *Abstract.* In this paper, we introduce a novel multi-modal contrastive framework that leverages a powerful transformer-based architecture for unified representation learning across image and text modalities. Our approach significantly improves zero-shot classification by combining a learned scheduler, an auxiliary alignment loss, and a frozen CLIP encoder. Extensive experiments on ImageNet, COCO, and Flickr30k demonstrate that our method achieves state-of-the-art performance and opens up exciting new possibilities for multimodal AI research.
+
+---
+
+**Skill (Review mode):**
+
+```
+## Title — not provided
+[skip]
+
+## Abstract — needs work
+6 marketing words: "novel", "powerful", "significantly improves", "extensive", "state-of-the-art", "exciting new possibilities". 4 components added (scheduler, alignment loss, frozen CLIP encoder, transformer architecture) with zero observations justifying any of them. The abstract describes the method but not the surprise. The closer ("opens up exciting new possibilities") is filler.
+
+## Introduction — not provided
+[skip]
+
+## Method — needs work (from abstract description)
+4 components, 0 observations. Run an ablation that removes the scheduler, the alignment loss, and the frozen encoder one at a time. The component whose removal hurts most is the load-bearing one — make the paper about that, not about the 4-component bundle.
+
+## Ablations — not provided
+[skip]
+
+## Claims & writing — needs work
+"Significantly improves" with no number is hedging. Replace with the actual gap (e.g., "+1.8 zero-shot accuracy on ImageNet"). "State-of-the-art" is a fact about the past — drop it; let the number speak.
+
+## Top 3 things to fix
+1. Add the missing observation. Write one sentence beginning "We observe that…" or "Surprisingly,…" that explains what motivated the 4-component bundle. If you cannot write it honestly, the paper has a method but not a research contribution.
+2. Strip the marketing words. "Novel", "powerful", "significantly", "exciting" all delete. The construct earns its own credit if it works.
+3. Replace the closer. Try: "We hope this approach serves as a solid baseline for end-to-end multimodal representation learning."
+```
+
+---
+
+## Scenario 4 — Rewrite-mode (§15.B)
+
+**User:** Rewrite this in Kaiming style:
+
+> "Our novel and powerful method significantly improves the state-of-the-art and may have broader applications across multimodal AI."
+
+---
+
+**Skill (Rewrite mode):**
+
+```
+### Rewritten
+
+"We observe that the standard contrastive objective over-weights global features. Our method is simple: we apply contrastive loss only to local patch tokens. Without bells and whistles, our method outperforms the previous best by <X> points on ImageNet zero-shot."
+
+### Changes
+
+- "novel and powerful" → deleted (marketing words; the construct earns its own credit if it works)
+- inserted "We observe that…" sentence at the start — added the missing observation that motivates the method (used a placeholder; user should fill in their actual observation)
+- "Our novel and powerful method" → "Our method is simple:" — replaced novelty-claim with the simplicity-claim that is canonical Kaiming framing (e.g. MAE: "Our MAE approach is simple:")
+- "significantly improves the state-of-the-art" → "outperforms the previous best by <X> points on ImageNet zero-shot" — replaced vague intensifier with a placeholder for the actual number; ask user to fill in
+- prepended "Without bells and whistles," — anti-marketing tag (canonical: Mask R-CNN abstract; Non-local NN abstract); signals the result holds at bare configuration
+- "may have broader applications across multimodal AI" → deleted (filler closer; should be replaced by a community-serving statement if the abstract closes here)
+- split into 3 short declaratives — short / long / short rhythm typical of Kaiming abstracts
+```
+
+(Note: in Rewrite mode the skill inserts placeholders like `<X>` when the user-provided text lacks the concrete number Kaiming-style writing requires. The placeholder is a forcing function, not a hallucinated value.)
+
+---
+
+## Activation envelope — should-trigger queries (10)
 
 These should activate the skill cleanly:
 
-1. "Review my ML paper from a Kaiming-style perspective." → activates; routes to Expression DNA + Subtraction.
-2. "What would Kaiming say about adding a learnable gate to my residual block?" → activates; routes to Subtraction over Addition.
-3. "Design my ablation table the way Mask R-CNN does." → activates; routes to §14 Ablation Tutor.
-4. "Is this method too complex? Can I remove the auxiliary loss?" → activates; routes to Subtraction.
-5. "Less is More — apply this to my pipeline." → activates; routes to Future is the Real Test Set + Subtraction.
-6. "What's the simplest version that still works for X?" → activates; routes to Subtraction.
-7. "Challenge the inherited default in my paper draft." → activates; routes to Observation Precedes Formalism.
-8. "Is vector quantization necessary for autoregressive image generation?" → activates; routes to Pixels Over Tokens (and answers via MAR).
+1. "Review my ML paper from a Kaiming-style perspective." → activates; routes to **§15.A Review mode**.
+2. "Run the 12-step Kaiming review on this abstract." → activates; routes to **§15.A Review mode**.
+3. "Rewrite this paragraph in Kaiming style." → activates; routes to **§15.B Rewrite mode**.
+4. "Strip the marketing language from my intro." → activates; routes to **§15.B Rewrite mode**.
+5. "What would Kaiming say about adding a learnable gate to my residual block?" → activates; routes to Subtraction over Addition.
+6. "Design my ablation table the way Mask R-CNN does." → activates; routes to §14 Ablation Tutor.
+7. "Is this method too complex? Can I remove the auxiliary loss?" → activates; routes to Subtraction.
+8. "Less is More — apply this to my pipeline." → activates; routes to Future is the Real Test Set + Subtraction.
+9. "Challenge the inherited default in my paper draft." → activates; routes to Observation Precedes Formalism.
+10. "Is vector quantization necessary for autoregressive image generation?" → activates; routes to Pixels Over Tokens (and answers via MAR).
 
 ## Activation envelope — near-miss queries (8)
 
