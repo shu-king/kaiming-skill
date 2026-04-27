@@ -2,166 +2,168 @@
 
 # kaiming-he-skill
 
-**A Claude Code persona-skill that channels Kaiming He's research design philosophy and writing voice.**
-*A thinking instrument for CV/DL researchers — drafting papers, designing ablations, auditing methodological complexity.*
+> *"Less is More — Occam's Razor. Future is the Real Test Set."*
+> — Kaiming He, NeurIPS 2024 New-in-ML
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v1.3-brightgreen.svg)](#)
+[![Version](https://img.shields.io/badge/version-v1.4-brightgreen.svg)](#)
 [![Papers Distilled](https://img.shields.io/badge/papers%20distilled-46-orange.svg)](references/research/01-papers.md)
 [![Verbatim Quotes](https://img.shields.io/badge/verbatim%20quotes-521-purple.svg)](references/research/verbatim-corpus.md)
 [![Cutoff](https://img.shields.io/badge/research%20cutoff-2026--04--27-lightgrey.svg)](#)
 [![Built for Claude Code](https://img.shields.io/badge/built%20for-Claude%20Code-black.svg)](https://claude.com/claude-code)
 
-> *"Less is More — Occam's Razor. Future is the Real Test Set."*
-> — Kaiming He, NeurIPS 2024 New-in-ML
+**写完 abstract 心里没底，不知道哪句是废话？**
+**看了一晚上 Kaiming 的论文，还是写不出那个 *empirical* 的调调？**
+
+**kaiming-he-skill 把 Kaiming 那套写论文的眼光打包成 Claude Code 里一句话能调出来的工具，让他在你 submit 之前先把 paper 过一遍。**
 
 </div>
 
 ---
 
-## ✨ One-line install
+## ✨ 一行装好
 
 ```bash
 git clone https://github.com/shu-king/kaiming-skill ~/kaiming-skill && bash ~/kaiming-skill/install.sh
 ```
 
-The installer symlinks the skill into `~/.claude/skills/` and (if `gh` is authenticated) ⭐ stars the repo as a thank-you. Set `NO_STAR=1` to skip the star.
+装完会把 skill 软链到 `~/.claude/skills/`，然后顺手帮 repo 点个 ⭐（如果你登过 `gh auth`）。不想 star 就 `NO_STAR=1 bash ...`。
 
 ---
 
-## 💡 Motivation · 为什么做这个 skill
+## 谁需要这个 skill
 
-### 中文
+<table>
+<tr>
+<td width="33%">
 
-写论文这件事，门槛不在英文，在**审美**。
+### 🎓 在投顶会的 PhD
 
-Kaiming He 的论文最让人难忘的不是他做了多复杂的方法，恰恰相反——是他**敢于把方法删到只剩本质**：ResNet 是一根 identity shortcut，MAE 是 75% 随机遮挡，MoCo 是一个动量 encoder，MAR 是连续 token 上的自回归。每一篇都在讲同一件事：*先观察，再形式化；能减去的就别加；让数字说话，别让形容词说话*。
+abstract 改了三遍，reviewer 还是说「**看不出 contribution**」？
 
-但这种「Kaiming 风」并不是天生的，它是一套**可学习的 design discipline**：
-- **Subtraction over Addition**：写论文先问「能不能拿掉一个组件」，再问「要不要加一个组件」。
-- **Observation Precedes Formalism**：方法之前必须先有一个出人意料的观察（"We observe that..."）；如果你写不出这句话，你就只有 engineering 而没有 research contribution。
-- **Without Bells and Whistles**：禁用 "novel"、"powerful"、"significantly" 这些营销词；让 baseline 配置下的数字本身说话。
-- **Four-paragraph intro template**：default → puzzle → simple proposal → headline number。绝大多数 Kaiming 一作论文都用这个结构。
-- **One-variable-at-a-time ablation**：每张子表只动一个变量，default 行涂灰，sub-caption 写成 declarative finding。
+让 skill 跑一遍 12 步 Kaiming-style review，**逐段告诉你哪句是 marketing、哪个 component 该砍、closer 是不是空话**。
 
-这个 skill 把上面这些原则**结构化、可触发、可执行**，让你写论文的时候随时能 invoke 一个「Kaiming review mode」对你的 abstract / intro / ablation / discussion 逐段挑刺，或者一个「Kaiming rewrite mode」把你写嗨了的句子拉回 empirical 的口气。
+> *"投 NeurIPS 前让它扫了一遍 abstract，第二天 reviewer 没再喷我方法写得花哨。"*
 
-### 谁会受益
+</td>
+<td width="33%">
 
-| 人群 | 用法 |
-|---|---|
-| **CV/DL 方向的 PhD 在读 / 在投** | 投稿前自检：abstract 有没有写「surprising observation」？ablation 有没有 control variable？closer 是不是「opens up new directions」这种空话？ |
-| **第一次写顶会论文的本科 / 硕士** | 直接套用 4-paragraph intro template；学会怎么把方法写得「simple」而不是「novel」。 |
-| **审稿人** | 借用 12-step Kaiming-style review pass 给审稿意见做骨架，避免只挑数字、不挑设计。 |
-| **想精进英文学术写作的非母语作者** | 521 条 verbatim 引用 + sentence templates 库，模仿一个 native + senior 的 empirical 写作口吻。 |
-| **任何想培养「empirical taste」的研究者** | 把 subtraction、decoupling、duality 这套思维当 mental gym 来练。 |
+### ✍️ 第一次写英文论文的本科 / 硕士
 
----
+idea 不错，写出来却像翻译腔？老板让你**重写第三遍**了？
 
-### English
+skill 给你 four-paragraph intro template + rewrite mode，把「We propose a novel and powerful method」这种句子直接改成 Kaiming 一作论文里的语气。
 
-Writing a good paper isn't about your English — it's about **taste**.
+> *"原来一句『We observe that...』就能让 intro 不再 student-style。"*
 
-Kaiming He's papers are memorable not because the methods are intricate; the opposite — they're memorable because he keeps **subtracting until only the essential remains**: ResNet is one identity shortcut; MAE is 75% random masking; MoCo is one momentum encoder; MAR is autoregression over continuous tokens. Each paper teaches the same lesson: *observe first, formalize second; if you can remove it, don't add it; let the number speak, not the adjective*.
+</td>
+<td width="33%">
 
-But this "Kaiming style" isn't innate — it's a **learnable design discipline**:
+### 🔍 想要 design 级品味的 reviewer / 资深研究者
 
-- **Subtraction over Addition.** Before you ask *what to add*, ask *what to remove*.
-- **Observation Precedes Formalism.** A method needs a surprising observation behind it ("We observe that..."). If you can't write that sentence, you have engineering, not a research contribution.
-- **Without Bells and Whistles.** Strip "novel", "powerful", "significantly". Let the baseline number stand on its own.
-- **Four-paragraph intro template.** Default → puzzle → simple proposal → headline number. Almost every Kaiming first-author paper follows this rhythm.
-- **One-variable-at-a-time ablation.** One sub-table per variable; default row shaded gray; sub-caption is a declarative finding.
+审稿只会挑数字、挑实验细节，提不出 **design-level 意见**？
 
-This skill makes those principles **structured, triggerable, and executable** — so when you're drafting, you can invoke a "Kaiming review mode" to walk through your abstract / intro / ablation / discussion section-by-section, or a "Kaiming rewrite mode" to drag a marketing-laden sentence back to empirical voice.
+借 Kaiming 六大 mental model（subtraction / decoupling / duality / pixels-over-tokens / ...）给你的审稿意见做骨架。
 
-### Who benefits
+> *"审稿意见从『请补充实验』升级到『这个 component 是否经得起 subtraction』。"*
 
-| Audience | How they use it |
-|---|---|
-| **CV/DL PhD students drafting submissions** | Pre-submission self-audit: does the abstract surface a surprising observation? Are the ablations control-variable clean? Is the closer empty boilerplate ("opens up new directions")? |
-| **First-time top-conference authors** | Drop-in 4-paragraph intro template; learn to write methods as "simple", not "novel". |
-| **Reviewers** | Use the 12-step Kaiming-style review pass as a skeleton — critique design, not just numbers. |
-| **Non-native English researchers** | 521 verbatim quotes + sentence-template library to imitate a senior empirical voice. |
-| **Anyone training "empirical taste"** | Treat subtraction, decoupling, duality as a mental gym. |
+</td>
+</tr>
+</table>
 
 ---
 
-## 🎯 What this skill does
+## 它能做什么
 
-When activated, the skill responds in Kaiming He's voice and routes your question to one of six mental models distilled from a ~46-paper corpus (ResNet → Mask R-CNN → MoCo → MAE → l-DAE → MAR → MeanFlow → JiT) and recent talks (NeurIPS 2024/2025, CVPR 2025).
+| 模式                       | 干什么                                                                                                                                                       | 触发示例                                              |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------- |
+| 📝 **Review mode**          | 对 abstract / intro / method / ablation / discussion 逐段挑刺：标 marketing 词、找缺失的 *surprising observation*、检查 closer 是不是空话                    | *"review my paper Kaiming-style"*                     |
+| ✍️ **Rewrite mode**         | 把营销话术 / 翻译腔的句子重写成 Kaiming 风：删 *novel / powerful / significantly*，插 *we observe*，加 *without bells and whistles*                          | *"rewrite this paragraph in Kaiming's voice"*         |
+| 🔬 **Ablation Tutor**       | 设计 gray-shaded、one-variable-at-a-time 的 Kaiming 式 ablation 表，sub-caption 写成 declarative finding（*"Normalized pixels are simple and effective."*）  | *"design my ablation table"*                          |
+| 🪒 **Subtraction audit**    | 给 method 做组件级减法：哪个 component 是 load-bearing？哪三个该被降级到 §3？                                                                                | *"is this method too complex?"*                       |
+| 🎓 **Mental-model routing** | 把任意 design 问题路由到 Kaiming 六大 mental model 之一，并以 in-voice 方式回答                                                                              | *"what would Kaiming say about adding gates here?"*   |
 
-**Strong at:**
-- 📝 **Paper review.** Run the 12-step Kaiming-style pass over an abstract, draft, or arXiv link. Output is per-section critique with the top 3 things to fix. *(See §15.A in `SKILL.md`.)*
-- ✍️ **Paragraph / sentence rewrite.** Strips marketing language; applies the four-paragraph intro template; deploys *"we observe"* / *"we hypothesize"* / *"without bells and whistles"* where natural. Returns rewrite + delta-list. *(§15.B.)*
-- 🔬 **Ablation-table design.** Gray-shaded one-variable-at-a-time tutor protocol. *(§14.)*
-- 🪒 **Simplicity audits.** "What's the simplest version that still works?" "Which one component carries the weight?"
-- 🎓 **Design-philosophy critique.** Does this method earn its complexity?
-
-**Not good at:** optimization theory, NLP / speech / RL, or papers post-cutoff (2026-04-27) — for new papers it WebSearches arXiv first.
-
----
-
-## 🔌 Activate
-
-After installation, type any of these inside Claude Code:
-
-| Trigger | Routes to |
-|---|---|
-| *"review my paper Kaiming-style"* | §15.A 12-step review |
-| *"rewrite this paragraph in Kaiming's voice"* | §15.B rewrite mode |
-| *"design my ablation table"* | §14 ablation tutor |
-| *"is this method too complex?"* | Subtraction over Addition |
-| *"what would Kaiming say about X?"* | Mental-model routing |
-| *"strip the marketing language from my intro"* | Rewrite mode |
-| *"challenge the inherited default"* | Observation Precedes Formalism |
-
-For full PDF / LaTeX papers, paste the arXiv URL or the file path — Claude Code's built-in `Read` and `WebFetch` tools handle ingestion.
+> 不是改字 —— 它在帮你找**「没写出来的那句话」和「不该写的那一句话」**。
 
 ---
 
-## 📁 Repository layout
+## 数据源
+
+每条建议背后都有可追溯的来源，**不是我凭印象编的**：
+
+| 来源                       | 覆盖范围                                                                                          | 数量                                  |
+| -------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| 📄 **一作 / 末作论文**       | ResNet, Mask R-CNN, MoCo, MAE, l-DAE, MAR, MeanFlow, JiT 等                                       | **46 篇 corpus，26 篇深度蒸馏**         |
+| 🎤 **Talks / 演讲**         | NeurIPS 2024 New-in-ML, CVPR 2025, NeurIPS 2025 Test-of-Time, MIT 6.S978, ECCV / CVPR / ICCV tutorials | 7 套 slides + 2 个 YouTube tutorial   |
+| 💬 **Verbatim 引用库**       | 每条 quote 带 (arXiv ID, section) tag，byte-exact grep 校验                                       | **521 条**，467 条 voice-certain      |
+| 🧬 **Section patterns**    | Method / Experiments / Discussion / Limitations / Conclusion 的写作模板                            | 4 个结构化 JSON                       |
+| 🔤 **Expression DNA**      | sentence templates / opener / transition / closer / vocabulary 频次表                              | 16 + 10 + 8 + 6 + 22 项               |
+
+> **绝不幻觉** —— 每条 quote 都能 grep 回 `text/papers/{id}.md` 的某一行。`scripts/verify_quotes.py` 是 commit 前的 gating，过不了不让 push。
+
+---
+
+## 🔌 怎么用
+
+装好之后，在 Claude Code 里直接打这些就能触发：
+
+| 你打这句                                          | skill 做什么                       |
+| ------------------------------------------------- | ---------------------------------- |
+| *"review my paper Kaiming-style"*                 | §15.A 12 步 per-section review     |
+| *"rewrite this paragraph in Kaiming's voice"*     | §15.B rewrite mode                 |
+| *"design my ablation table"*                      | §14 ablation tutor                 |
+| *"is this method too complex?"*                   | Subtraction over Addition          |
+| *"what would Kaiming say about X?"*               | Mental-model routing               |
+| *"strip the marketing language from my intro"*    | Rewrite mode                       |
+| *"challenge the inherited default"*               | Observation Precedes Formalism     |
+
+要 review 整篇论文：直接把 arXiv 链接或 PDF 路径甩进去，Claude Code 自带的 `Read` / `WebFetch` 会处理。
+
+---
+
+## 📁 仓库结构
 
 ```
-SKILL.md                            Installable skill body (13 sections + Ablation Tutor + Review/Rewrite)
-install.sh                          One-line installer (symlinks skill, ⭐ stars repo)
+SKILL.md                            可安装的 skill 主体（13 节 + Ablation Tutor + Review / Rewrite）
+install.sh                          一行安装脚本（软链 + ⭐ star）
 references/research/
-  ├── 01-papers.md                  46-paper corpus index + per-paper design notes
-  ├── 02-talks.md                   Slide decks + YouTube tutorials
-  ├── 03-expression-dna.md          Sentence patterns, intro template, ablation conventions
-  ├── 04-external-views.md          Community commentary
-  ├── 05-decisions.md               MSRA → FAIR → MIT pivots
-  ├── 06-timeline.md                1984– bio + intellectual lineage
-  ├── verbatim-corpus.md            521 verbatim quotes, every one tagged (arXiv ID, section)
-  └── section-patterns/             Method/Experiments/Discussion/Expression-DNA JSONs (26-paper distill)
-examples/                           Demo conversations (4 scenarios + 18 trigger tests)
-scripts/                            Reproducible ingest pipeline (arxiv → text → notes → SKILL)
-assets/                             Seed paper IDs and talk URLs
+  ├── 01-papers.md                  46 篇 corpus 索引 + 每篇的 design 笔记
+  ├── 02-talks.md                   slides + YouTube tutorials
+  ├── 03-expression-dna.md          句式模板、intro 模板、ablation 表规范
+  ├── 04-external-views.md          社区评论
+  ├── 05-decisions.md               MSRA → FAIR → MIT 的几次转向
+  ├── 06-timeline.md                1984– 时间线 + 学术谱系
+  ├── verbatim-corpus.md            521 条 verbatim quote，每条带 (arXiv ID, section) tag
+  └── section-patterns/             Method / Experiments / Discussion / Expression-DNA 的结构化 JSON
+examples/                           4 个示例对话 + 18 个触发测试
+scripts/                            可复现的 ingest pipeline（arxiv → text → notes → SKILL）
+assets/                             seed 论文 ID + 演讲 URL
 ```
 
 ---
 
-## 🔬 Reproducing the corpus
+## 🔬 自己复现一遍
 
 ```bash
 pip install arxiv pymupdf4llm beautifulsoup4 lxml requests
-brew install yt-dlp                                    # if missing
-python3 scripts/fetch_arxiv.py                         # 46 papers via html → ar5iv → pdf cascade
-bash    scripts/fetch_talks.sh                         # slide PDFs + YouTube auto-captions
+brew install yt-dlp
+python3 scripts/fetch_arxiv.py                         # html → ar5iv → pdf 三级 cascade
+bash    scripts/fetch_talks.sh                         # slide PDF + YouTube 自动字幕
 python3 scripts/extract_text.py                        # → text/{papers,talks}/*.md
-python3 scripts/build_verbatim_corpus.py               # → verbatim-corpus.md (grouped by theme)
-python3 scripts/verify_quotes.py --strict              # gating: must exit 0 before commit
+python3 scripts/build_verbatim_corpus.py               # → verbatim-corpus.md
+python3 scripts/verify_quotes.py --strict              # gating，过不了不让 commit
 ```
 
-See [`scripts/README.md`](scripts/README.md) for the full DAG.
+完整 DAG 见 [`scripts/README.md`](scripts/README.md)。
 
 ---
 
-## ⚖️ Honest boundaries
+## ⚖️ 边界 / Honest boundaries
 
-- **Knowledge cutoff: 2026-04-27.** The skill cannot speak to Kaiming's unpublished current views.
-- **Voice attribution on multi-author papers** (Faster R-CNN, FPN, Focal Loss) is uncertain — those quotes carry `voice_certain: false` and are quoted sparingly.
-- **Every quote is grounded** to a `(arXiv ID, section)` tag and verified byte-exact by `scripts/verify_quotes.py`.
-- **This is a corpus-grounded persona, not Kaiming.** The disclaimer fires once per session. Do not cite the skill as Kaiming's actual opinion.
+- **知识截止：2026-04-27。** skill 没法替 Kaiming 说他还没发表的看法。
+- **多作者论文的语气归属不确定**（Faster R-CNN / FPN / Focal Loss 这类他是中间作者的工作）—— 这些 quote 都打了 `voice_certain: false`，引用克制。
+- **每条 quote 都 grep 得回原文**，由 `scripts/verify_quotes.py` 字节级校验。
+- **这是 corpus-grounded persona，不是 Kaiming 本人。** disclaimer 在每个 session 的第一次激活时自动出现。**不要把 skill 的话当成 Kaiming 真实观点引用。**
 
 ---
 
@@ -169,18 +171,18 @@ See [`scripts/README.md`](scripts/README.md) for the full DAG.
 
 MIT. See [`LICENSE`](LICENSE).
 
-## 🙏 Acknowledgements
+## 🙏 致谢 / Acknowledgements
 
-- Modelled on the [`alchaincyf/karpathy-skill`](https://github.com/alchaincyf/karpathy-skill) template.
-- Anthropic skill spec: [`anthropics/skills`](https://github.com/anthropics/skills).
-- All credit for the *ideas* belongs to Kaiming He and his collaborators. This repo is just a structured index.
+- 仓库结构参考自 [`alchaincyf/karpathy-skill`](https://github.com/alchaincyf/karpathy-skill)。
+- Skill 规范来自 [`anthropics/skills`](https://github.com/anthropics/skills)。
+- 所有 *idea* 的功劳归 Kaiming He 和他的合作者们。这个 repo 只是一个结构化的索引。
 
 ---
 
 <div align="center">
 
-**If this helped your writing, drop a ⭐ — it's the only feedback signal I get.**
-*如果这个 skill 帮到你写论文了，给个 star 吧 ⭐ — 这是我唯一能收到的反馈。*
+**觉得有用就给个 ⭐ 吧 —— 这是我唯一能收到的反馈。**
+*If this helped your writing, drop a star — it's the only feedback signal I get.*
 
 [![Star on GitHub](https://img.shields.io/github/stars/shu-king/kaiming-skill?style=social)](https://github.com/shu-king/kaiming-skill/stargazers)
 
