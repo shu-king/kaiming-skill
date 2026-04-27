@@ -22,71 +22,9 @@
 521 条 byte-exact 校验的 verbatim 引用，<br>
 提炼 6 个核心 mental model、8 条决策启发式和完整的 Expression DNA。
 
-[看效果](#效果示例) · [安装](#安装) · [蒸馏了什么](#蒸馏了什么) · [调研来源](#调研来源)
+[安装](#安装) · [蒸馏了什么](#蒸馏了什么) · [调研来源](#调研来源)
 
 </div>
-
----
-
-## 效果示例
-
-### 问：我要不要在 residual block 里加一个 learnable gate？
-
-```
-Kaiming  ❯  加 gate 之前先问一句：你有什么观察告诉你
-            identity shortcut 不够？
-
-            ResNet 里的 identity 是刻意的——"identity shortcut
-            connections add neither extra parameter nor
-            computational complexity" (ResNet, §1)。当时的
-            对照组是 Highway Networks，data-dependent gating
-            带参数。我们没有一个反向的观察来 justify 那个 cost。
-
-            如果你现在有这样的观察——把它做成一个
-            single-variable ablation，跟 pure identity 比。
-            如果没有——你是在给一个不需要解决的问题加参数。
-```
-
-### 问：我的 abstract 怎么改才像 Kaiming 风？
-
-```
-Kaiming  ❯  两个问题。
-
-            (1) 字数。ResNet、MAE、SimSiam 的 abstract
-                都在 150–190 词之间。形容词压缩到最少。
-
-            (2) 是不是用一个 observation 开头。"Deeper
-                neural networks are more difficult to train"
-                是 ResNet 的开头，因为 degradation 是真正
-                让人意外的东西。
-
-            如果你的 abstract 是从「我们 propose 了 X」
-            开始的——你把 method 放到了 observation 之前。
-
-            试试这个顺序：assumption → counter-observation
-            → simple proposal → headline number。四段 intro，
-            每段一句话，删完形容词再交。
-```
-
-### 问：要不要追下一个 SOTA？
-
-```
-Kaiming  ❯  Less is More。Future is the Real Test Set。
-            (NeurIPS 2024, New-in-ML)
-
-            一个方法是不是有效，不在于今天比 baseline 多 1 个点，
-            在于一年后它还在不在被人用。ResNet 还在被用，
-            Faster R-CNN 还在被用。但同时期发的 90% 的 trick——
-            包括我们自己的——已经没有人提了。
-
-            所以我做项目的时候，不问「能不能 SOTA 一下」，
-            问「这个 idea 一年后还会有人 care 吗」。
-            如果答案不肯定，我先去想别的。
-```
-
-> 完整对话 + 18 个触发测试见 [`examples/`](examples/) 目录。
-
-这不是 Claude 套了一层 Kaiming 的语气。每段回应都在调用具体的 mental model——「subtraction over addition」「observation precedes formalism」「future is the real test set」——而且每条带引号的引用都能 grep 回原 paper 的某一行（见 `scripts/verify_quotes.py`）。
 
 ---
 
@@ -96,16 +34,7 @@ Kaiming  ❯  Less is More。Future is the Real Test Set。
 git clone https://github.com/shu-king/kaiming-skill ~/kaiming-skill && bash ~/kaiming-skill/install.sh
 ```
 
-把 skill 软链到 `~/.claude/skills/`，附带 ⭐ star（`NO_STAR=1` 可跳过）。
-
-然后在 Claude Code 里：
-
-```
-> 用 Kaiming 的视角 review 一下我的 abstract
-> 这个 ablation 表怎么设计才像 MAE？
-> Kaiming 会怎么看在 transformer 里加一层 cross-attention？
-> rewrite this paragraph in Kaiming's voice
-```
+把 skill 软链到 `~/.claude/skills/`，附带 ⭐ star（`NO_STAR=1` 可跳过）。装完在 Claude Code 里直接对话即可激活——触发词在 `SKILL.md` 的 frontmatter 里，skill 会在第一次匹配时自动 surface。完整对话样例见 [`examples/demo-conversation-2026-04-27.md`](examples/demo-conversation-2026-04-27.md)。
 
 ---
 
@@ -179,14 +108,6 @@ Yann LeCun 关于 ResNet legacy 的公开评论 · Saining Xie / Xinlei Chen / T
 
 ---
 
-## 这个 Skill 是怎么造出来的
-
-46 个 arXiv ID + 9 个演讲 URL → `fetch_arxiv.py`（html→ar5iv→pdf cascade）+ `fetch_talks.sh`（slides + auto-caption）→ `extract_text.py` 切到 Abstract / Method / Ablation / Discussion 段 → 7 个 Sonnet subagent 并行从 26 篇深度蒸馏出 section-level patterns 与 Expression DNA → 1 个 Opus agent 合成 SKILL.md → `verify_quotes.py` 校验 → push。
-
-完整 pipeline 在 [`scripts/README.md`](scripts/README.md)，复现一遍约 75 分钟、5–8 美元 API spend。
-
----
-
 ## 仓库结构
 
 ```
@@ -232,14 +153,3 @@ MIT — 随便用，随便改。原 paper 引用须按原作者 citation。
 - Skill 规范来自 [`anthropics/skills`](https://github.com/anthropics/skills)。
 - 所有 *idea* 的功劳归 Kaiming He 和他的合作者们。这个 repo 只是一个结构化的索引。
 
----
-
-<div align="center">
-
-*"Without bells and whistles."*
-
-<br>
-
-[![Star on GitHub](https://img.shields.io/github/stars/shu-king/kaiming-skill?style=social)](https://github.com/shu-king/kaiming-skill/stargazers)
-
-</div>
