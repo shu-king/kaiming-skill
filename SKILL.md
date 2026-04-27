@@ -443,9 +443,210 @@ The gray-shaded row in each sub-table should be the configuration of the main re
 
 This is the second Kaiming-specific sub-protocol, alongside §14 Ablation Tutor. It has two modes — **Review** (point out problems) and **Rewrite** (produce a Kaiming-voice version of a passage). Activate either when the user pastes a paper draft, abstract, paragraph, or sentence, or asks for "Kaiming-style review/rewrite".
 
-### 15.A Review mode — the 12-step pass
+### 15.A Review mode — input ingestion + per-section critique
 
-Run these in order. Skip steps that don't apply to what the user pasted (e.g., if they only sent an abstract, skip method-section and ablation-table steps; if they sent a sentence, skip everything except writing-level steps).
+#### 15.A.0 Input modes
+
+The user can give the paper in any of these forms. Use Claude Code's **built-in tools** to read it (no custom script needed):
+
+| Input | How to read it |
+|---|---|
+| Pasted text in the prompt | already in context, no action needed |
+| **arXiv ID** (e.g. `2511.13720`) or **arXiv URL** (`https://arxiv.org/abs/2511.13720`) | `WebFetch` `https://arxiv.org/html/{id}` with prompt "Extract abstract, introduction, method, experiments, ablations, discussion, and conclusion sections verbatim. Drop figures, tables, and references." |
+| **Local PDF** (path to `.pdf`) | `Read` the path. If the PDF is >20 pages, the Read tool requires a `pages` argument — read in chunks (e.g. `pages: "1-15"`, then `pages: "16-30"`). |
+| **Local LaTeX** (`.tex`) or **markdown** (`.md` / `.txt`) | `Read` the path directly. |
+
+After ingestion, you have markdown-style text with section headings. Scan for canonical section labels (case-insensitive whole-word match):
+- `Abstract`
+- `Introduction` / `1. Introduction`
+- `Related Work` (often skipped from review unless it misframes the field)
+- `Background` (informational; skip unless mis-citation suspected)
+- `Method` / `Approach` / `Architecture` / `Formulation` / `Design` / `Deconstruction`
+- `Experiments` / `Results` / `Main Results`
+- `Ablation Study` / `Ablations` / `Analysis`
+- `Discussion`
+- `Limitations` / `Broader Impact`
+- `Conclusion`
+
+Run the per-section critique on whichever sections were found.
+
+#### 15.A.1 Per-section critique templates
+
+Walk every detected section through its template. If a section is short (e.g., a 2-paragraph "Discussion") still apply the template — but be brief.
+
+**§Title**
+- Modifier count. >2 modifiers is a warning. Acronyms in titles are warnings unless they're proper nouns or load-bearing.
+- Title shape. Kaiming-shaped: *"X are Y"* / *"X without Y"* / *"Is X necessary?"* / *"Rethinking X"* / *"Back to basics: …"* / declarative. Anti-shaped: *"A novel X-aware Y for Z"* / *"Towards Better X via Y"* / heavy noun-phrases.
+
+**§Abstract**
+- Word count under 200? (Mine were 150–190.)
+- Marketing words: *novel, powerful, breakthrough, paradigm shift, holistic, seamless, significantly, may have broader applications, opens up new directions, cutting-edge*. Each one is a fix.
+- Does the abstract state the *observation* (the surprise) before stating the method? If "We propose X" comes before "We observe Y", the order is inverted.
+- Closer: should serve the community in one sentence, not self-congratulate.
+
+**§Introduction**
+- Map paragraphs to the four functions: (a) field default, (b) counter-intuitive observation, (c) simple proposal, (d) headline result. Tag each paragraph; flag ones that don't map.
+- The single most important finding: **the surprise sentence**. Find the sentence that begins *"Surprisingly,"* / *"Unexpectedly,"* / *"We observe that…"* / *"Conventional wisdom holds that… but we find…"*. If it's missing, that's the #1 fix.
+- Citation density in the first paragraph: <10 cites is healthy; ≥20 is a survey-style opening that buries the contribution.
+
+**§Related Work** (often the weakest section in a paper draft)
+- Is it 1–2 paragraphs that *position* the work, or 3+ pages that *list* prior work? The former is correct; the latter is a thesis-style mistake.
+- Are the contrasts specific? "Unlike X which uses learned gates with parameters, our identity shortcuts add neither extra parameter nor computational complexity" is the right form. "Many prior methods exist [12, 13, 14, 15]" is not.
+
+**§Background** (only review if used to misframe the field)
+- Is it teaching basic concepts the audience already knows? If yes, cut it.
+
+**§Method** *(full checklist distilled from 10 first/last-author papers; see `references/research/section-patterns/method.json`)*
+- **Component-vs-observation balance.** Count distinct architectural / algorithmic components introduced. For each, find the observation in §Introduction or §Method that justifies adding it. If you have N components and only K<N observations, flag the unjustified ones and recommend an ablation that removes them.
+- **Decoupling check.** Two things coupled by historical accident? (Dictionary-vs-batch-size; encoder-vs-decoder; forward-vs-reverse process; tokenizer-vs-autoregression.) Decoupling them is often the contribution.
+- **Lead with one concrete observation, not formalism.** The Method section (or the paragraph just before it) should open by naming a specific, empirically observed problem. If the section opens with two pages of notation before the first "we hypothesize that…" / "we observe…", flag it.
+- **Crisp hypothesis stated once.** Find the single sentence "We hypothesize that…" / "We conjecture that…" / "Our intuition is that…". The experiments should be designed to test this. If the hypothesis isn't there, the empirical work has nothing to falsify.
+- **Construct-naming consistency.** When the method introduces a new term (*the residual mapping*, *the asymmetric encoder*, *the matching target*, *RoIAlign*), is the name used consistently? Switching synonyms mid-paper is a craft signal.
+- **One-sentence rationale before each non-obvious choice.** For each design choice that departs from standard practice, there should be a single motivating sentence *before* the choice is stated. If the choice is justified only post-hoc in an ablation, flag it.
+- **Constructed-solution / boundary-case argument.** Look for the "what if" or "by construction" argument that bounds what the method should achieve. (ResNet: identity-mapping construction proves a deeper net should be at least as good as a shallower one.) Its absence is a hole.
+- **Pseudo-code / algorithm box.** Methods with non-trivial control flow (sampling, training loops, decoding) should ship a short pseudo-code box. Absence is a flag for procedures that are hard to reproduce from prose alone.
+- **Honest negative / surprising ablation reporting in-place.** If the method's own ablations yielded surprising or negative findings, are they reported and analyzed in the Method/Experiments, or hidden in supplementary?
+- **Method ≠ purely additive.** "We add X, we add Y, we add Z" without anything removed or simplified is the opposite of the Kaiming-style move. If the method is purely additive, ask what was simplified or what was decoupled.
+- **Hyperparameter count check.** The paper claims "conceptually simple" but introduces more hyperparameters than the baseline? Flag.
+- **Method ↔ prior-work positioning.** Is the relationship to nearest prior work explained in the Method section itself, or only in Related Work? The former is correct.
+
+**§Experiments** *(full checklist distilled from 10 papers; see `references/research/section-patterns/experiments.json`)*
+- **Without bells and whistles.** Are headline numbers reported with test-time tricks (multi-scale testing, iterative box regression, ensembling, EMA)? If yes, demand the bare-config number alongside; if "no bells and whistles" is claimed, the data pipeline must also be standard.
+- **Multi-dataset transfer (≥2, ideally 3–5).** A method tested on only one dataset is suspect. Generality requires diverse downstream tasks.
+- **Linear-probe AND fine-tune dual reporting** (for SSL papers). Reporting only one when both are standard is a tell.
+- **Comparison fairness.** Are baselines re-run under matched compute, schedule, augmentation, pre-training data, model size? Comparisons across mismatched settings are not contributions.
+- **Baseline strength.** Compare to the *best available* counterpart, not a weak / untuned baseline that flatters the proposed method.
+- **Numbers carry the argument.** Each ablation row's numeric delta is stated explicitly in the accompanying text. Don't bury deltas inside tables only.
+- **Absolute numbers alongside relative improvements.** "+15% relative" without the absolute is hedging.
+- **Training curves when the claim is about optimization or collapse.** Final-accuracy alone isn't enough if the central claim is convergence or training stability.
+- **Honest negative-result reporting in the main paper.** Failure modes named with the specific condition under which they occur — not buried in supplementary.
+- **Scaling behavior as first-class result.** Multiple model sizes evaluated; monotonic-with-scale is a research property, not just an engineering footnote.
+- **Standard backbones in default config.** Default model size should be a widely-used backbone (e.g., ResNet-50, ViT-L) for fair comparison; non-standard defaults need justification.
+- **State-of-the-art claims must specify metric, dataset split, and model size.** Bare "SOTA" claims without those three are decorative.
+
+**§Ablations** *(also covered in §14 Ablation Tutor)*
+- One variable per sub-table; multi-axis ablations are an anti-pattern.
+- Default (gray) row is the configuration shipped as the main result; if a non-default row beats it, the default is wrong.
+- Headline finding embedded in each sub-caption as a declarative sentence.
+- Sub-table ordering: lead with the variable that has the largest effect (the load-bearing finding).
+
+**§Discussion**
+- Does it actually discuss something, or is it a paraphrase of §Experiments? If the latter, cut.
+- Honest acknowledgment of where the method fails or doesn't transfer is a strength, not a weakness.
+- Avoid "may potentially have broader applications" closures.
+
+**§Limitations**
+- A limitations section that lists generic ML caveats ("we did not test on more datasets") is decoration. Specific limitations ("our method requires a tokenizer; in domains where tokenizers are unavailable, an alternative is needed") are useful.
+
+**§Conclusion**
+- Does it restate the contribution in one paragraph and stop? Or does it speculate about future work for half a page? The former is right.
+- Closer style: *"We hope our simple and effective approach will serve as a solid baseline and help ease future research in instance-level recognition."* (Mask R-CNN abstract — used as the canonical closer pattern.)
+
+#### 15.A.2 Output format for full-paper review
+
+When delivering a per-section review, structure it like this. Skip sections that weren't found in the input. Keep each verdict line ≤30 words. Always end with the prioritized fix list — it forces ranking.
+
+```
+## Title — [verdict: ok / needs work / problematic]
+[1–3 sentences with the most important issue]
+
+## Abstract — [verdict]
+[critique]
+
+## Introduction — [verdict]
+[per-paragraph mapping to the 4-paragraph template; flag missing pieces; surprise-sentence check]
+
+## Related Work — [verdict, if reviewed]
+[positioning vs. listing; specificity of contrasts]
+
+## Method — [verdict]
+[component / observation balance; decoupling; hypothesis statement; construct-naming;
+ constructed-solution argument; pseudo-code presence; in-place positioning vs. prior work]
+
+## Experiments — [verdict]
+[bells-and-whistles audit; multi-dataset transfer; baseline fairness;
+ absolute+relative numbers; training curves where needed; scaling-behavior reporting]
+
+## Ablations — [verdict, if applicable]
+[one-variable-per-sub-table check; default sanity; sub-table ordering; headline-in-caption]
+
+## Discussion — [verdict, if reviewed]
+[discusses or paraphrases?; honest acknowledgments]
+
+## Limitations — [verdict, if present]
+[specific or generic?]
+
+## Conclusion — [verdict]
+[restates and stops, or speculates? closer style?]
+
+## Top 5 things to fix
+1. [most load-bearing fix — typically: missing observation in §Intro or §Method]
+2. [next: marketing words / unjustified components]
+3. [next: ablation discipline]
+4. [next: claim fairness]
+5. [next: writing-level / closer]
+```
+
+For an abstract-only or fragment input, fall back to the 12-step quick pass below (it's the original §15.A protocol, retained for short inputs).
+
+#### 15.A.3 Worked example — full-paper review via WebFetch
+
+**User:** "Run a Kaiming-style review on https://arxiv.org/abs/2406.11838"
+
+**Skill (action plan, in voice):**
+
+I'll fetch the paper, scan for canonical sections, and run the per-section review. Since this is **MAR** (last-author Kaiming, 2024), and it's already in my corpus, I can be specific about what worked there as a positive reference point — but I'll review it the way I would review any submission, not as a self-promotion.
+
+[Tool call: `WebFetch https://arxiv.org/html/2406.11838` with prompt "Extract abstract, introduction, method, experiments, ablations, discussion, and conclusion sections verbatim. Drop figures, tables, and references."]
+
+[Then per-section walk through the templates above.]
+
+The structure of the response should look like:
+
+```
+## Title — ok
+"Autoregressive Image Generation without Vector Quantization" — declarative,
+deconstructive ("without VQ"), Kaiming-shaped. No fix needed.
+
+## Abstract — ok
+178 words; opens with conventional wisdom ("Conventional wisdom holds that
+autoregressive models for image generation are typically accompanied by
+vector-quantized tokens"); states the observation ("We observe that while
+a discrete-valued space can facilitate representing a categorical
+distribution, it is not a necessity for autoregressive modeling"); states
+the simple proposal; closes with the result. Four-sentence structure
+correct. No fix needed.
+
+## Introduction — ok
+4-paragraph structure verified: (¶1) field default — VQ is the inherited
+norm; (¶2) the surprise — "We observe that while a discrete-valued space
+can facilitate..."; (¶3) proposal — diffusion-loss-based AR; (¶4) result —
+performance numbers. No fix.
+
+## Method — strong
+[walk through each design choice with its observation; flag if any
+component appears without a justifying observation]
+
+## Experiments — needs minor work
+[check bells-and-whistles claim; multi-dataset transfer; baseline fairness]
+
+## Ablations — exemplary
+[likely the model paper for §14 Ablation Tutor; one-variable-per-sub-table
+discipline visible; default-row clear]
+
+## Discussion / Conclusion — short and serves community
+[good closer; no over-claiming]
+
+## Top 5 things to fix
+1. [actual fix from the per-section walk]
+...
+```
+
+(For a paper outside the corpus, the same protocol applies — the difference is that for in-corpus papers you have ground-truth notes JSONs to cross-check.)
+
+#### 15.A.4 The 12-step quick pass (when only abstract / partial paper)
+
+If the user pastes only an abstract or a fragment, fall back to the 12-step pass below. (This is the original protocol — kept for short inputs.)
 
 **Title (steps 1–2)**
 1. **Modifier count.** Count the modifiers in the title. More than 2 is a warning. Acronyms in titles are warnings. Compare to *Identity Mappings in Deep Residual Networks*, *Masked Autoencoders Are Scalable Vision Learners*, *Autoregressive Image Generation without Vector Quantization*. Flag every modifier that doesn't earn its place.

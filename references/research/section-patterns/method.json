@@ -1,0 +1,204 @@
+{
+  "writing_patterns": [
+    {
+      "pattern_name": "open with one concrete problem observation before introducing the solution",
+      "description": "He invariably opens the Method section (or the paragraph immediately preceding it) by naming a specific, empirically observable problem—degradation, collapse, misalignment, inconsistency—before saying a word about the proposed fix. The problem is stated in plain language and is crisp enough to be falsifiable. The solution name is withheld until the problem is fully on the table.",
+      "evidence_quotes": [
+        {
+          "quote": "When deeper networks are able to start converging, a degradation problem has been exposed: with the network depth increasing, accuracy gets saturated (which might be unsurprising) and then degrades rapidly.",
+          "source_id": "1512.03385"
+        },
+        {
+          "quote": "In principle Mask R-CNN is an intuitive extension of Faster R-CNN, yet constructing the mask branch properly is critical for good results. Most importantly, Faster R-CNN was not designed for pixel-to-pixel alignment between network inputs and outputs.",
+          "source_id": "1703.06870"
+        },
+        {
+          "quote": "An undesired trivial solution to Siamese networks is all outputs \"collapsing\" to a constant.",
+          "source_id": "2011.10566"
+        }
+      ]
+    },
+    {
+      "pattern_name": "state the key insight as a hypothesis, then derive or verify it empirically",
+      "description": "After identifying the problem He formulates a falsifiable hypothesis (often hedged with 'we hypothesize' or 'we conjecture'), then immediately describes how experiments test it. The hypothesis is never stated as a proven fact upfront; evidence comes after. This gives the narrative a scientific rather than advocacy structure.",
+      "evidence_quotes": [
+        {
+          "quote": "We hypothesize that it is easier to optimize the residual mapping than to optimize the original, unreferenced mapping.",
+          "source_id": "1512.03385"
+        },
+        {
+          "quote": "Our hypothesis is that good features can be learned by a large dictionary that covers a rich set of negative samples, while the encoder for the dictionary keys is kept as consistent as possible despite its evolution.",
+          "source_id": "1911.05722"
+        },
+        {
+          "quote": "Our hypothesis is that SimSiam is an implementation of an Expectation-Maximization (EM) like algorithm.",
+          "source_id": "2011.10566"
+        }
+      ]
+    },
+    {
+      "pattern_name": "name the construct early and use that name consistently throughout",
+      "description": "The method's core name—residual learning, RoIAlign, MoCo, stop-gradient, Diffusion Loss, MeanFlow Identity—is introduced in a short declarative sentence near the start of the section and then used verbatim every subsequent time it appears. Synonyms, paraphrases, or pronoun substitutions for the named construct are avoided, making the paper easy to skim and cite.",
+      "evidence_quotes": [
+        {
+          "quote": "We present Momentum Contrast (MoCo) as a way of building large and consistent dictionaries for unsupervised learning with a contrastive loss (Figure 1 ).",
+          "source_id": "1911.05722"
+        },
+        {
+          "quote": "To address this, we propose an RoIAlign layer that removes the harsh quantization of RoIPool, properly aligning the extracted features with the input.",
+          "source_id": "1703.06870"
+        },
+        {
+          "quote": "We refer to this equation as the \" MeanFlow Identity \", which describes the relation between v 𝑣 v italic_v and u 𝑢 u italic_u .",
+          "source_id": "2505.13447"
+        }
+      ]
+    },
+    {
+      "pattern_name": "justify every non-obvious design choice with a one-sentence rationale before stating the choice",
+      "description": "For each component that departs from standard practice, He writes a single motivating sentence explaining why before stating what was done. The rationale precedes the specification, never follows it. Components that match standard practice are stated without justification and are typically attributed with a citation only.",
+      "evidence_quotes": [
+        {
+          "quote": "A mask encodes an input object's spatial layout. Thus, unlike class labels or box offsets that are inevitably collapsed into short output vectors by fully-connected ( fc ) layers, extracting the spatial structure of masks can be addressed naturally by the pixel-to-pixel correspondence provided by convolutions.",
+          "source_id": "1703.06870"
+        },
+        {
+          "quote": "Random sampling with a high masking ratio ( i.e . , the ratio of removed patches) largely eliminates redundancy, thus creating a task that cannot be easily solved by extrapolation from visible neighboring patches.",
+          "source_id": "2111.06377"
+        },
+        {
+          "quote": "The queue decouples the dictionary size from the mini-batch size, allowing it to be large.",
+          "source_id": "1911.05722"
+        }
+      ]
+    },
+    {
+      "pattern_name": "ablate with single-variable comparisons and state what each ablation proves",
+      "description": "Ablation tables isolate one variable at a time. Each ablation entry is followed by a short sentence that states the conclusion—not just the number. He is explicit about what the ablation rules out ('this shows that BN does not help prevent collapsing') rather than leaving interpretation to the reader.",
+      "evidence_quotes": [
+        {
+          "quote": "Our experiments show that there exist collapsing solutions . The collapse can be observed by the minimum possible loss and the constant outputs.",
+          "source_id": "2011.10566"
+        },
+        {
+          "quote": "Table 3 shows that all three options are considerably better than the plain counterpart.\nB is slightly better than A. We argue that this is because the zero-padded dimensions in A indeed have no residual learning.",
+          "source_id": "1512.03385"
+        },
+        {
+          "quote": "RoIAlign improves AP by about 3 points over RoIPool, with much of the gain coming at high IoU (AP 75 ). RoIAlign is insensitive to max/average pool; we use average in the rest of the paper.",
+          "source_id": "1703.06870"
+        }
+      ]
+    },
+    {
+      "pattern_name": "embed a thought-experiment or constructed-solution argument to bound what is theoretically possible",
+      "description": "He routinely uses a 'constructed solution' or boundary-case argument to anchor the claim—showing that a trivial solution to the optimization exists (e.g., identity mapping, constant output, PCA as a limit case) and then explaining why the current approach either recovers that solution or outperforms it. This makes the argument self-contained without requiring external proofs.",
+      "evidence_quotes": [
+        {
+          "quote": "There exists a solution by construction to the deeper model: the added layers are identity mapping, and the other layers are copied from the learned shallower model. The existence of this constructed solution indicates that a deeper model should produce no higher training error than its shallower counterpart.",
+          "source_id": "1512.03385"
+        },
+        {
+          "quote": "It is easy to show that PCA is equivalent to a special case of AE",
+          "source_id": "2401.14404"
+        },
+        {
+          "quote": "Despite these practices for optimizability , if u θ were to achieve zero loss, it is easy to show that it would satisfy the MeanFlow Identity ( Eq. 6 ), and thus satisfy the original definition ( Eq. 3 ).",
+          "source_id": "2505.13447"
+        }
+      ]
+    },
+    {
+      "pattern_name": "use a deconstructive or ablative research narrative rather than a constructive one",
+      "description": "In the self-supervised and generative papers, He organizes the Method as a sequence of simplifications—starting from a complex baseline and removing components one by one—rather than adding pieces to a skeleton. Each removal is a question ('is X necessary?') whose answer becomes a finding. This makes the method section double as an empirical study.",
+      "evidence_quotes": [
+        {
+          "quote": "Our deconstruction trajectory is divided into three stages. We first adapt the generation-focused settings in DiT to be more oriented toward self-supervised learning ( Sec. 4.1 ). Next, we deconstruct and simplify the tokenizer step by step ( Sec. 4.2 ).",
+          "source_id": "2401.14404"
+        },
+        {
+          "quote": "In a nutshell, our method can be thought of as \"BYOL without the momentum encoder\". Unlike BYOL but like SimCLR and SwAV, our method directly shares the weights between the two branches, so it can also be thought of as \"SimCLR without negative pairs\",",
+          "source_id": "2011.10566"
+        }
+      ]
+    },
+    {
+      "pattern_name": "provide pseudo-code or a concrete algorithm box for the trainable procedure",
+      "description": "For methods involving a training loop or sampling procedure, He provides a short, self-contained pseudo-code block (Algorithm box or inline code). The pseudo-code lists only essential steps, avoids implementation details, and is meant to be the canonical description referenced by equations in the text.",
+      "evidence_quotes": [
+        {
+          "quote": "Algorithm 1 provides the pseudo-code of MoCo for this pretext task.",
+          "source_id": "1911.05722"
+        },
+        {
+          "quote": "The pseudo-code of SimSiam is in Algorithm 1 .",
+          "source_id": "2011.10566"
+        },
+        {
+          "quote": "Pseudocode for minimizing the loss function Eq. 9 is presented in Alg. 1 . Overall, our method is conceptually simple: it behaves similarly to Flow Matching, with the key difference that the matching target is modified",
+          "source_id": "2505.13447"
+        }
+      ]
+    },
+    {
+      "pattern_name": "state negative or surprising findings honestly and investigate them rather than hiding them",
+      "description": "When an ablation or analysis yields an unexpected or negative result, He reports it explicitly ('surprisingly', 'interestingly', 'on the negative side') and either provides an explanation or flags it as an open question. He does not cherry-pick numbers or avoid mentioning cases where the proposed method lags behind a baseline.",
+      "evidence_quotes": [
+        {
+          "quote": "But there are still open problems on such aggressively deep models. The testing result of this 1202-layer network is worse than that of our 110-layer network, although both have similar training error. We argue that this is because of overfitting.",
+          "source_id": "1512.03385"
+        },
+        {
+          "quote": "Semantic segmentation : On Cityscapes, MoCo outperforms its supervised pre-training counterpart by up to 0.9 point. But on VOC semantic segmentation, MoCo is worse by at least 0.8 point, a negative case we have observed.",
+          "source_id": "1911.05722"
+        },
+        {
+          "quote": "Surprisingly, removing class-conditioning substantially improves the linear probe accuracy from 57.5% to 62.1% ( Tab. 1 ), even though the generation quality is greatly hurt as expected",
+          "source_id": "2401.14404"
+        }
+      ]
+    },
+    {
+      "pattern_name": "derive from first principles when the insight is mathematical, keeping derivations terse and self-contained",
+      "description": "For mathematically grounded contributions (initialization, average velocity, loss equivalence), He includes a short first-principles derivation within the Method section itself—not relegated to an appendix. Derivations are compact (rarely more than 5 equations), state their assumptions explicitly, and conclude with a boxed or highlighted sufficient condition.",
+      "evidence_quotes": [
+        {
+          "quote": "Our derivation mainly follows [ 7 ] . The central idea is to investigate the variance of the responses in each layer.",
+          "source_id": "1502.01852"
+        },
+        {
+          "quote": "Solely originated from this definition, we derive a well-defined, intrinsic relation between the average and instantaneous velocities, which naturally serves as a principled basis for guiding network training.",
+          "source_id": "2505.13447"
+        }
+      ]
+    }
+  ],
+  "anti_patterns_kaiming_would_flag": [
+    "Method section opens with a wall of notation before stating what problem is being solved.",
+    "The proposed component is introduced without a prior sentence explaining why it is needed.",
+    "Design choices are justified post-hoc in ablation tables rather than in the method description.",
+    "Ablations vary multiple factors simultaneously, making it impossible to attribute gains to any single decision.",
+    "A named construct is referred to by different synonyms in different paragraphs, forcing the reader to re-map terminology.",
+    "The method is presented as purely additive (only 'we add X') with no discussion of what is removed or simplified.",
+    "Negative or surprising ablation results are omitted, leaving only favorable comparisons.",
+    "No constructed-solution or boundary-case argument is provided to ground the theoretical claim.",
+    "The method description conflates architecture, loss function, and training recipe into a single undifferentiated block.",
+    "Pseudo-code or an algorithm box is absent for a procedure that involves non-trivial control flow.",
+    "The paper claims simplicity ('conceptually simple') but introduces more hyperparameters than the baseline it replaces.",
+    "The relationship of the proposed method to prior work is described only in Related Work, not in the Method section itself."
+  ],
+  "review_checklist": [
+    "Does the section open by naming a specific, observable problem before introducing the proposed solution?",
+    "Is each core design choice preceded by a one-sentence motivation, not just a citation?",
+    "Is there a single crisp hypothesis stated in the method that the experiments are designed to test?",
+    "Does the paper name its key construct once and use that exact name consistently throughout?",
+    "Are all ablations single-variable, with each result accompanied by an explicit stated conclusion?",
+    "Is there a constructed-solution or boundary-case argument that bounds what the method should achieve?",
+    "Are negative, surprising, or unfavorable results reported and analyzed rather than omitted?",
+    "Is a pseudo-code block or algorithm box provided for the main trainable procedure?",
+    "Does the method section itself (not only Related Work) explain how the method relates to its nearest prior work?",
+    "Are the method's mathematical derivations self-contained within the section, not deferred entirely to the appendix?",
+    "Does the section avoid introducing more hyperparameters than it eliminates relative to the baseline?",
+    "Is each component of the method independently motivated, so the reader understands why it would fail if removed?"
+  ]
+}
