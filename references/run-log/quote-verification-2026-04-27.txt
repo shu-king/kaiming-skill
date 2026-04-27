@@ -1,7 +1,7 @@
 Loading text corpus from /Users/kk/Documents/projects/kaiming-he-skill/text…
   55 source files
 
-[SKILL.md]  22 quotes to verify
+[SKILL.md]  27 quotes to verify
 
 [references/research/verbatim-corpus.md]  496 quotes to verify
   ✗ MISS: Our method avoids repeatedly computing the convolutional features. In processing test imag…
@@ -37,8 +37,8 @@ Loading text corpus from /Users/kk/Documents/projects/kaiming-he-skill/text…
 [references/research/06-timeline.md]  0 quotes to verify
 
 ============================================================
-Total quotes checked : 597
-Verified             : 578
+Total quotes checked : 602
+Verified             : 583
 Misses               : 19
 
 Misses by file:

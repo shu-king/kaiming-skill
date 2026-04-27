@@ -272,7 +272,7 @@ Eight rules-of-thumb extracted from his published methodology. Each can be used 
 
 ## 7. Expression DNA
 
-This is how the writing actually works, sentence by sentence.
+This is how the writing actually works, sentence by sentence. Distilled from **26 first/last-author papers**; full pattern dictionary at `references/research/section-patterns/expression_dna.json` (16 sentence templates, 10 opening phrases, 8 transitions, 6 closings, 22-word vocabulary, 14-word avoid-list, 10 rewrite recipes).
 
 ### 7.1 The canonical four-paragraph introduction
 
@@ -285,19 +285,73 @@ Every major Kaiming He paper instantiates this template:
 
 ResNet, MoCo, MAE, l-DAE, MAR, MeanFlow, JiT all instantiate this template. When critiquing a paper draft, check whether each paragraph in the intro corresponds to one of these four functions.
 
-### 7.2 Sentence-level patterns
+### 7.2 Sentence templates (16 empirically-recurring shapes)
 
-Recurring grammatical moves, with examples:
+Each template is a sentence shape that appears across ≥3 of his papers. Use these to recognize Kaiming-style writing or to generate it.
 
-- **Short declaratives.** *"Deeper neural networks are more difficult to train"* (ResNet, abstract).
-- **"We hypothesize" / "We observe" as the bridge from observation to mechanism.** *"We hypothesize that it is easier to optimize the residual mapping than to optimize the original, unreferenced mapping"* (ResNet, §1).
-- **Anti-marketing: "without bells and whistles".** *"Without bells and whistles, Mask R-CNN outperforms all existing, single-model entries on every task"* (Mask R-CNN, abstract). *"even without any bells and whistles, our non-local models can compete or outperform current competition winners"* (Non-local NN, abstract).
-- **"Conceptually simple, flexible, and general."** Used as the positioning sentence in Mask R-CNN abstract. The triple is recurring.
-- **Surprise as observation.** *"To our (and many of our initial readers') surprise, modern neural networks can achieve excellent accuracy on such a dataset classification task."* (Decade's Battle on Dataset Bias, §Introduction)
-- **"In a nutshell, our method can be thought of as X without Y, like-but-unlike Z."** *"In a nutshell, our method can be thought of as 'BYOL without the momentum encoder'."* (MoCo v3, §Method-comparable position)
-- **Result-driven justifications.** *"This choice is purely result-driven."* (MAE, footnote 1 — this style note recurs across his papers.)
+| Template | Shape | Function |
+|---|---|---|
+| **X adds neither Y nor Z** | *"Identity shortcut connections add neither extra parameter nor computational complexity"* (ResNet) | Cost-free claim — proves the move is free of overhead |
+| **Surprisingly, [finding]** | *"Surprisingly, we observe: (i) it is sufficient to build a simple feature pyramid…"* (ViTDet); *"To our (and many of our initial readers') surprise, modern neural networks can achieve excellent accuracy"* (Decade's Battle) | Surprise sentence — load-bearing observation |
+| **Conventional wisdom holds that X. We observe that…** | *"Conventional wisdom holds that autoregressive models for image generation are typically accompanied by vector-quantized tokens. We observe that while a discrete-valued space can facilitate representing a categorical distribution, it is not a necessity for autoregressive modeling."* (MAR) | Field-default-then-challenge opener |
+| **Our [method] is simple: [mechanism]** | *"Our method is simple: we randomly mask out spacetime patches in videos and learn an autoencoder to reconstruct them."* (ST-MAE) | Method statement — strips buildup |
+| **Without [trick], our method [verb] [result]** | *"Without bells and whistles, Mask R-CNN outperforms all existing single-model entries on every task"* (Mask R-CNN); *"even without any bells and whistles, our non-local models can compete or outperform current competition winners"* (Non-local NN) | Anti-marketing — bare-config result |
+| **Is X necessary for Y?** | *"Is Noise Conditioning Necessary for Denoising Generative Models?"* | Question-as-title; deconstructive frame |
+| **We show by experiments that [conclusion]** | *"we report surprising empirical results that simple Siamese networks can learn meaningful representations even using none of the following…"* (SimSiam) | Empirical-claim opener |
+| **The gap between X and Y has been largely closed** | *"the gap between … pre-training-then-fine-tuning … and … from-scratch …"* (Rethinking ImageNet) | Trajectory framing |
+| **This [observation] suggests that [implication]** | *"This implies that recognition, i.e., classification, is the main challenge for current methods."* (Panoptic Seg.) | Hypothesis-from-data |
+| **We observe [phenomenon]. We hypothesize [explanation].** | Sequential observation→hypothesis structure across many papers | Empirical-then-mechanistic bridge |
+| **Our method is self-contained and requires no [X], no [Y], no [Z]** | *"Our method, termed the MeanFlow model, is self-contained and requires no pre-training, distillation, or curriculum learning."* (MeanFlow); *"Our approach is self-contained and does not rely on any pre-training or auxiliary loss"* (JiT) | Subtraction list — the negations are the contribution |
+| **We show that: 1) X; 2) Y; 3) Z.** | Numbered-claim list (frequent in MoCo, MAE) | Result enumeration |
+| **This [problem] is not caused by [expected culprit]** | *"Unexpectedly, such degradation is not caused by overfitting, and adding more layers to a suitably deep model leads to higher training error"* (ResNet) | Negate-the-obvious explanation |
+| **We hope our [adjective] approach will serve as a [strong/solid] baseline** | *"We hope our simple and effective approach will serve as a solid baseline and help ease future research in instance-level recognition."* (Mask R-CNN abstract) | Canonical closer |
+| **We present a conceptually simple, flexible, and general [framework]** | *"We present a conceptually simple, flexible, and general framework for object instance segmentation."* (Mask R-CNN); *"RCG is conceptually simple, flexible, yet highly effective for unconditional generation."* (RCG) | The "triple" — positioning move |
+| **Our philosophy is to [deconstruct / transform] X step-by-step** | *"Our philosophy is to deconstruct a DDM, gradually transforming it into a classical Denoising Autoencoder"* (l-DAE) | Deconstructive narrative — characterizes recent papers |
 
-### 7.3 The Kaiming ablation table
+### 7.3 Opening phrases (by section)
+
+For Introduction openers, the canonical phrasings (each appears in ≥3 papers):
+
+- **"Conventional wisdom holds that…"** → opens by naming a field-wide assumption to challenge.
+- **"In this paper, we…"** → first-person ownership of the contribution.
+- **"We present [method] for [task]."** → minimal declarative method-naming.
+- **"Deeper [/larger/more capable] [X] are more [difficult/beneficial], but…"** → tension opener.
+- **"This paper shows / studies / examines"** → empirical framing.
+- **"We revisit / We take a renewed look at"** → re-examination signal.
+- **"Despite [simple design / minimal inductive bias], [strong empirical result]"** → tension between simplicity and strength.
+- **"Motivated by [observation / analysis], we…"** → anchored-contribution opener.
+
+### 7.4 Transition phrases (within and between paragraphs)
+
+- **"However, we find that…"** — set up a counter-observation.
+- **"To our surprise / Interestingly,…"** — empirical surprise marker.
+- **"In contrast,…"** — sharp comparison.
+- **"Based on [this observation], we…"** — bridge from data to design.
+- **"This is not only [practical virtue] but also [scientific virtue]."** — the dual-claim sentence.
+- **"It is noteworthy / It is worth noticing that…"** — flag a nontrivial subordinate finding.
+- **"More importantly,…"** — promote a sub-result.
+- **"Despite [limitation], [positive result]"** — concession-then-claim.
+
+### 7.5 Closing phrases — the canonical "We hope ..." closer
+
+**Empirical evidence:** the *"We hope ..."* closer appears in **16 of 26** Kaiming first/last-author papers we distilled. It is THE canonical closing verb.
+
+Recurring shapes:
+- *"We hope our [findings / work / method] will [motivate / inspire / encourage] the [community] to [verb]"*
+- *"We hope our [data points / experience / results] will be useful for [community / future-work goal]"*
+- *"We hope this [work / framework / study] could open a new paradigm / provide a step toward [goal]"*
+- *"We expect that [principle] is applicable in other [domains / tasks]"*
+- *"Code [has been / will be] made available at [URL]"* (often paired with the "We hope" sentence).
+- *"We invite the [community / field] to [study / explore / consider]"*
+
+Verbatim instances (sample of 16):
+> "We hope our simple and effective approach will serve as a solid baseline and help ease future research in instance-level recognition." — Mask R-CNN
+> "We hope our discovery will reignite interest in denoising-based methods in the context of today's self-supervised learning." — l-DAE
+> "We hope this perspective will inspire future work." — MAE
+> "We hope our work will motivate the research community to explore sequence models with continuous-valued representations in other domains." — MAR
+> "We hope that our work will bridge research in generative modeling, simulation, and dynamical systems." — MeanFlow
+
+### 7.6 The Kaiming ablation table
 
 Famously crisp; canonical examples are Mask R-CNN Table 2 (a–e) and MAE Table 1 (a–f). Conventions:
 
@@ -309,13 +363,19 @@ Famously crisp; canonical examples are Mask R-CNN Table 2 (a–e) and MAE Table 
 
 If you're designing your own ablation table and want to be in this lineage, follow the conventions in §14 (Ablation Tutor sub-protocol).
 
-### 7.4 Vocabulary
+### 7.7 Vocabulary — empirically validated use vs. avoid lists
 
-**Use:** *simple*, *general*, *flexible*, *natural*, *self-contained*, *minimalist*, *we observe*, *we hypothesize*, *unexpectedly*, *surprisingly*, *without bells and whistles*, *purely result-driven*, *back to basics*, *deconstruct*, *effective*, *strong baseline*.
+**USE (frequency from 26-paper corpus):**
 
-**Avoid:** *novel* (unless the surprise really merits it), *powerful*, *breakthrough*, *cutting-edge*, *paradigm shift*, *holistic*, *seamless*, *intuitive* (use *natural*).
+| High frequency | Medium frequency | Low frequency |
+|---|---|---|
+| *simple*, *conceptually simple*, *general/generic*, *self-contained*, *we observe*, *we hypothesize*, *surprisingly*, *competitive results*, *flexible*, *the key [to / insight / component]* | *principled*, *intriguing*, *encouraging*, *nontrivial*, *non-trivial margins*, *go back to basics*, *bells and whistles*, *minimalist*, *we verify / we validate*, *orthogonal*, *as expected* | *plug-and-play*, *proof-of-concept* |
 
-### 7.5 Title patterns
+**AVOID** (these words are conspicuously absent or rare in the Kaiming corpus, despite being common in the field):
+
+*novel* (as a standalone modifier), *powerful*, *breakthrough*, *revolutionary*, *state-of-the-art* (as a standalone adjective), *outperforms* (as primary claim without a number), *cutting-edge*, *unprecedented* (without quantitative justification), *synergy*, *holistic*, *paradigm-shifting*, *robust* (without specifying conditions), *seamlessly*, *significantly* (as filler — use a number).
+
+### 7.8 Title patterns
 
 The deconstruction reflex shows in titles:
 - *Identity Mappings in Deep Residual Networks* (not "Improving ResNet")
@@ -327,6 +387,21 @@ The deconstruction reflex shows in titles:
 - *Transformers without Normalization* (DyT, where Kaiming is middle author)
 
 The recurring frame is "without X" or "is X necessary?" or "back to basics".
+
+### 7.9 Rewrite recipes (for §15.B Rewrite mode)
+
+When rewriting a passage in Kaiming style, the canonical transformations:
+
+1. **Replace generic novelty-claim opener with tension-then-observation.** "We propose a novel X" → "Conventional wisdom holds that Y. We observe that..." (anchors claim in specific empirical signal).
+2. **Replace 'leverages' with cost-free claim.** "Our method leverages X" → "X adds neither extra parameter nor computational complexity" (proves the move is free of overhead).
+3. **Turn vague effectiveness into mechanistic claim.** "Significantly improves" → cite the decisive ablation and derive the principle.
+4. **State 'empirical study' explicitly when that's what it is.** Don't dress an empirical study as a method paper.
+5. **Pair every design choice with a cost-elimination statement.** "We add X" → "X requires neither Y nor Z; with X, performance improves by N%."
+6. **Replace abstract generality claims with concrete instantiations.** "Our method generalizes broadly" → "We instantiate our method on tasks A, B, C."
+7. **Closing hope statements should name specific downstream benefit + commit to reproducibility.** "Opens up new directions" → "We hope this work motivates [specific community goal]. Code at [URL]."
+8. **Surprise sentences must be followed immediately by mechanistic interpretation.** Never let "surprisingly X" stand alone without a "we hypothesize Y because Z" follow-up.
+9. **Simplicity claims must enumerate eliminated dependencies.** "Easy to implement" → "self-contained: requires no pre-training, no distillation, no auxiliary loss".
+10. **Replace "extensive experiments" with the actual benchmarks and what each one reveals.**
 
 ---
 
@@ -496,33 +571,45 @@ Walk every detected section through its template. If a section is short (e.g., a
 **§Background** (only review if used to misframe the field)
 - Is it teaching basic concepts the audience already knows? If yes, cut it.
 
-**§Method** *(full checklist distilled from 10 first/last-author papers; see `references/research/section-patterns/method.json`)*
-- **Component-vs-observation balance.** Count distinct architectural / algorithmic components introduced. For each, find the observation in §Introduction or §Method that justifies adding it. If you have N components and only K<N observations, flag the unjustified ones and recommend an ablation that removes them.
+**§Method** *(distilled from **26 first/last-author papers**; full checklist in `references/research/section-patterns/method.json` — 24 patterns, 27 anti-patterns, 28 checklist items)*
+- **Component-vs-observation balance.** Count distinct architectural / algorithmic components introduced. For each, find the observation in §Introduction or §Method that justifies adding it. If N components and only K<N observations, flag the unjustified ones and recommend an ablation that removes them.
 - **Decoupling check.** Two things coupled by historical accident? (Dictionary-vs-batch-size; encoder-vs-decoder; forward-vs-reverse process; tokenizer-vs-autoregression.) Decoupling them is often the contribution.
-- **Lead with one concrete observation, not formalism.** The Method section (or the paragraph just before it) should open by naming a specific, empirically observed problem. If the section opens with two pages of notation before the first "we hypothesize that…" / "we observe…", flag it.
-- **Crisp hypothesis stated once.** Find the single sentence "We hypothesize that…" / "We conjecture that…" / "Our intuition is that…". The experiments should be designed to test this. If the hypothesis isn't there, the empirical work has nothing to falsify.
+- **Lead with one concrete observation, not formalism.** The Method section (or the paragraph just before it) should open by naming a specific, empirically observed problem. If it opens with two pages of notation before the first "we hypothesize that…" / "we observe…", flag it.
+- **Crisp hypothesis stated once.** Find the single sentence "We hypothesize that…" / "We conjecture that…" / "Our intuition is that…". Experiments should be designed to test this. If the hypothesis isn't there, the empirical work has nothing to falsify.
 - **Construct-naming consistency.** When the method introduces a new term (*the residual mapping*, *the asymmetric encoder*, *the matching target*, *RoIAlign*), is the name used consistently? Switching synonyms mid-paper is a craft signal.
 - **One-sentence rationale before each non-obvious choice.** For each design choice that departs from standard practice, there should be a single motivating sentence *before* the choice is stated. If the choice is justified only post-hoc in an ablation, flag it.
-- **Constructed-solution / boundary-case argument.** Look for the "what if" or "by construction" argument that bounds what the method should achieve. (ResNet: identity-mapping construction proves a deeper net should be at least as good as a shallower one.) Its absence is a hole.
-- **Pseudo-code / algorithm box.** Methods with non-trivial control flow (sampling, training loops, decoding) should ship a short pseudo-code box. Absence is a flag for procedures that are hard to reproduce from prose alone.
-- **Honest negative / surprising ablation reporting in-place.** If the method's own ablations yielded surprising or negative findings, are they reported and analyzed in the Method/Experiments, or hidden in supplementary?
+- **Constructed-solution / boundary-case argument.** Look for the "what if" or "by construction" argument that bounds what the method should achieve. (ResNet: identity-mapping construction proves a deeper net should be at least as good as a shallower one. l-DAE / *Is Noise Conditioning Necessary*: setting hyperparameters to extreme values to reveal mechanism.) Its absence is a hole.
+- **Pseudo-code / algorithm box.** Methods with non-trivial control flow (sampling, training loops, decoding, stop-gradient placement) should ship a short pseudo-code box. Absence is a flag for procedures that are hard to reproduce from prose alone.
+- **Two design rules / numbered invariants.** When the method has named invariants (e.g., MAE's two design rules; ResNet's two depth-stride conventions), are they codified as numbered, named invariants — not buried as throwaway sentences?
+- **Honest negative / surprising ablation reporting in-place.** Report failures, surprising degradations, and limitations with exact numbers in the Method or in-line Experiments — not hidden in supplementary.
 - **Method ≠ purely additive.** "We add X, we add Y, we add Z" without anything removed or simplified is the opposite of the Kaiming-style move. If the method is purely additive, ask what was simplified or what was decoupled.
-- **Hyperparameter count check.** The paper claims "conceptually simple" but introduces more hyperparameters than the baseline? Flag.
+- **Hyperparameter introduction discipline.** Each hyperparameter introduced exactly once at the point of its first explanation, with default value AND ablation reference. Don't reintroduce 30 pages later.
+- **Hyperparameter robustness evidence.** When the method has free hyperparameters, is robustness across a sweep shown? Optimal-only single-value reporting is hedging.
+- **Math derivation depth.** Derivations should stop the moment the practical recipe is reached. Display math for its own sake — without a derived practical consequence — is decoration.
+- **Prior work as incomplete, not wrong.** Position prior work as "did Y but not Z" or "left X open", not as "wrong" or "naive". The contribution sits in the gap, not the criticism.
 - **Method ↔ prior-work positioning.** Is the relationship to nearest prior work explained in the Method section itself, or only in Related Work? The former is correct.
+- **Hyperparameter count check.** Paper claims "conceptually simple" but introduces more hyperparameters than the baseline? Flag.
+- **Recursive / fractal generalization (when applicable).** For methods that generalize an existing primitive (FractalGen, MAR's continuous-token AR), is the generalization argument explicit and bounded?
 
-**§Experiments** *(full checklist distilled from 10 papers; see `references/research/section-patterns/experiments.json`)*
-- **Without bells and whistles.** Are headline numbers reported with test-time tricks (multi-scale testing, iterative box regression, ensembling, EMA)? If yes, demand the bare-config number alongside; if "no bells and whistles" is claimed, the data pipeline must also be standard.
-- **Multi-dataset transfer (≥2, ideally 3–5).** A method tested on only one dataset is suspect. Generality requires diverse downstream tasks.
+**§Experiments** *(distilled from **26 first/last-author papers**; full checklist in `references/research/section-patterns/experiments.json` — 24 writing + 15 ablation patterns, 30 anti-patterns, 30 checklist items)*
+- **Without bells and whistles.** Are headline numbers reported with test-time tricks (multi-scale testing, iterative box regression, ensembling, EMA)? If yes, demand the bare-config number alongside. If "no bells and whistles" is claimed, the data pipeline must also be standard.
+- **Multi-dataset / multi-task transfer (≥2, ideally 3–5).** A method tested on only one dataset is suspect. Generality requires diverse downstream tasks (detection, segmentation, classification, robustness).
 - **Linear-probe AND fine-tune dual reporting** (for SSL papers). Reporting only one when both are standard is a tell.
-- **Comparison fairness.** Are baselines re-run under matched compute, schedule, augmentation, pre-training data, model size? Comparisons across mismatched settings are not contributions.
+- **Hypothesis-first experiment structure.** Each experiment should test a specific hypothesis stated in the Method or Introduction. Experiments framed as "we tried these variations" without a guiding hypothesis are exploratory, not confirmatory.
+- **Comparison fairness via matched conditions.** Baselines re-run under matched compute, schedule, augmentation, pre-training data, model size. Mismatched settings invalidate the comparison.
+- **Fair comparison via controlled re-implementation.** When prior numbers can't be matched directly, the paper re-implements baselines from scratch and reports both — own and copied-from-paper — numbers.
 - **Baseline strength.** Compare to the *best available* counterpart, not a weak / untuned baseline that flatters the proposed method.
-- **Numbers carry the argument.** Each ablation row's numeric delta is stated explicitly in the accompanying text. Don't bury deltas inside tables only.
-- **Absolute numbers alongside relative improvements.** "+15% relative" without the absolute is hedging.
-- **Training curves when the claim is about optimization or collapse.** Final-accuracy alone isn't enough if the central claim is convergence or training stability.
+- **Numbers carry the argument.** Each ablation row's numeric delta is stated explicitly in the accompanying prose. Don't bury deltas inside tables only.
+- **Absolute numbers alongside relative improvements.** "+15% relative" without the absolute is hedging. "+1.4 mAP from 38.6 to 40.0" is the right form.
+- **Training curves when the claim is about optimization or collapse.** Final-accuracy alone isn't enough if the central claim is convergence stability or non-collapse (SimSiam stop-gradient; ResNet degradation).
+- **Computational cost alongside accuracy.** Wall-clock time, GFLOPs, parameters reported next to accuracy gains — especially for "efficient" or "scalable" claims.
+- **Robustness sweep across architectures / scales.** A method tested on one model size that doesn't generalize across scales hasn't proven the claim.
+- **Quantitative correlation before qualitative conclusion.** Show the curve / scatter plot that supports the qualitative claim. Qualitative-only conclusions are weak.
+- **Complementarity, not just improvement.** When combining the method with existing improvements, show whether gains are orthogonal (complementary) or overlap. Pure stacking is suspicious.
 - **Honest negative-result reporting in the main paper.** Failure modes named with the specific condition under which they occur — not buried in supplementary.
-- **Scaling behavior as first-class result.** Multiple model sizes evaluated; monotonic-with-scale is a research property, not just an engineering footnote.
+- **Scaling behavior as first-class result, often a standalone subsection.** Multiple model sizes evaluated; monotonic-with-scale is a research property, not just an engineering footnote.
 - **Standard backbones in default config.** Default model size should be a widely-used backbone (e.g., ResNet-50, ViT-L) for fair comparison; non-standard defaults need justification.
-- **State-of-the-art claims must specify metric, dataset split, and model size.** Bare "SOTA" claims without those three are decorative.
+- **State-of-the-art claims with specified constraints.** Bare "SOTA" without metric, dataset split, model size, and pre-training data is decorative.
 
 **§Ablations** *(also covered in §14 Ablation Tutor)*
 - One variable per sub-table; multi-axis ablations are an anti-pattern.
@@ -530,17 +617,36 @@ Walk every detected section through its template. If a section is short (e.g., a
 - Headline finding embedded in each sub-caption as a declarative sentence.
 - Sub-table ordering: lead with the variable that has the largest effect (the load-bearing finding).
 
-**§Discussion**
-- Does it actually discuss something, or is it a paraphrase of §Experiments? If the latter, cut.
-- Honest acknowledgment of where the method fails or doesn't transfer is a strength, not a weakness.
-- Avoid "may potentially have broader applications" closures.
+**§Discussion** *(distilled from **26 papers**; see `references/research/section-patterns/discussion.json` — 16 patterns, 27 anti-patterns, 29 checklist items)*
+- **Discusses, doesn't paraphrase.** Real Kaiming Discussions interpret findings, raise hypotheses, name surprises. They do NOT re-list experimental numbers from §Experiments. If yours paraphrases, cut and rewrite.
+- **Hypothesis-rich language.** Look for "we hypothesize", "we suspect", "we conjecture", "this may be due to", "this suggests that". Discussion should be rich in interpretive hypotheses, not declarative claims of victory.
+- **Honest negatives in-line.** Where does the method fail? Where doesn't it transfer? Specific in-line acknowledgments are a strength, not a weakness. (E.g., MAE: discusses linear-probe gap; SimSiam: discusses why it works without negatives.)
+- **Provisional epistemic stance.** Use "evidence" not "proof"; "signals" not "settled science". Even strong findings are framed as "providing evidence that" rather than "demonstrating".
+- **Cross-domain analogy as interpretive lens.** Image↔language; recognition↔generation; layer-wise-training↔end-to-end. Analogies that situate the work in a larger arc are characteristic.
+- **Reconnect to classical theory.** When applicable, draw the line back to a classical method or insight (l-DAE → classical denoising autoencoder; SimSiam → EM; PReLU → He init derivation). The work is positioned as continuing a line, not breaking from it.
+- **Open questions posited explicitly.** Name the specific unsolved sub-problems your work surfaces. Don't say "future work could explore many directions"; say "the open question is X".
+- **Minimalism framed as virtue.** Minimal domain knowledge / minimal inductive bias is presented as a desirable property of the method, not a limitation.
 
-**§Limitations**
-- A limitations section that lists generic ML caveats ("we did not test on more datasets") is decoration. Specific limitations ("our method requires a tokenizer; in domains where tokenizers are unavailable, an alternative is needed") are useful.
+**§Limitations** *(11 patterns; key insight: older papers have no explicit Limitations — negatives live inline)*
+- **Specific > generic.** "We did not test on more datasets" is generic and useless. "Our method requires a tokenizer; in domains where tokenizers are unavailable, an alternative is needed" is specific and useful.
+- **Open problems, not disclaimers.** Frame unresolved issues as invitations to the community: "the open question is …" rather than "we acknowledge that …".
+- **Exact-number gap acknowledgment.** When the method underperforms a baseline on some axis, state the gap as a number. Don't rationalize it away.
+- **Older Kaiming papers have NO explicit Limitations section.** Negatives appear inline in Discussion or Experiments. This is itself a defensible choice — only add a Limitations section if it would house specific, technical content.
+- **Don't conflate Limitations with Broader Impact.** They are different sections.
 
-**§Conclusion**
-- Does it restate the contribution in one paragraph and stop? Or does it speculate about future work for half a page? The former is right.
-- Closer style: *"We hope our simple and effective approach will serve as a solid baseline and help ease future research in instance-level recognition."* (Mask R-CNN abstract — used as the canonical closer pattern.)
+**§Conclusion** *(distilled from **26 papers**; 16 patterns)*
+- **Concise, single-paragraph restatement, then stop.** Restate → key finding → closer. Don't speculate for half a page about future work.
+- **The "We hope ..." closer is the canonical Kaiming closing verb** — empirically present in 16/26 papers we distilled. Use it.
+- **Community-serving, not self-congratulatory.** Compare:
+    - ✅ *"We hope our simple and effective approach will serve as a solid baseline and help ease future research in instance-level recognition."* (Mask R-CNN)
+    - ✅ *"We hope this perspective will inspire future work."* (MAE)
+    - ✅ *"We hope our discovery will reignite interest in denoising-based methods in the context of today's self-supervised learning."* (l-DAE)
+    - ❌ *"This work opens up new directions and is expected to have broad impact."*
+- **Method as one step, not a solution.** Position the contribution as one step in a longer program, not as the final answer. ("We hope this work can serve as a step toward …")
+- **Forward pointer to next unsolved problem.** A good closer points to a specific next question — not generic "many directions for future work".
+- **Bridge to adjacent field when relevant.** "We hope that our work will bridge research in generative modeling, simulation, and dynamical systems" (MeanFlow). Naming the adjacent field is more useful than "broader applications".
+- **Broader impact: minimized or dismissed.** When required, broader-impact statements are short and factual (MAE has 2 sentences). Resist the temptation to perform broader-impact narrative.
+- **Narrow claim, broad implication.** State exactly what was shown; let the implication be obvious from the work, not asserted.
 
 #### 15.A.2 Output format for full-paper review
 

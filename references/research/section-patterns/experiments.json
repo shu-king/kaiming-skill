@@ -1,16 +1,60 @@
 {
+  "_meta": {
+    "papers_distilled": 26,
+    "batches": [
+      "experiments_batch_a (13 papers)",
+      "experiments_batch_b (13 papers)"
+    ],
+    "version": "v2 (refined from v1's 10 papers to 26 papers)"
+  },
   "writing_patterns": [
     {
-      "pattern_name": "without_bells_and_whistles_pre_emption",
-      "description": "Before presenting numbers, He explicitly states that no extra tricks, multi-scale test-time augmentation, or special engineering are used. This inoculates the reader against dismissing results as cherry-picked and frames the contribution as a clean, principled improvement. The phrase appears verbatim in multiple papers.",
+      "pattern_name": "absolute_and_relative_improvement_both_stated",
+      "description": "He states both the absolute gap and the relative improvement when a result is significant. This dual reporting prevents cherry-picking: a large relative gain on a small absolute base, or a large absolute gain that is small relative to the total range, is harder to misread.",
       "evidence_quotes": [
         {
-          "quote": "Without bells and whistles, Mask R-CNN outperforms all existing, single-model entries on every task, including the COCO 2016 challenge winners.",
-          "source_id": "1703.06870"
+          "quote": "on the challenging COCO dataset we obtain a 6.0% increase in COCO's standard metric (mAP@[.5, .95]), which is a 28% relative improvement.",
+          "source_id": "1512.03385"
         },
         {
-          "quote": "Without bells and whistles, Mask R-CNN with ResNet-101-FPN backbone outperforms FCIS+++, which includes multi-scale train/test, horizontal flip test, and online hard example mining (OHEM).",
-          "source_id": "1703.06870"
+          "quote": "Our result is 1.7% better than the ILSVRC 2014 winner (GoogLeNet, 6.66%), which represents a ~26% relative improvement.",
+          "source_id": "1502.01852"
+        },
+        {
+          "quote": "it increases the accuracy of ViT-Large by absolute 13% vs. training from scratch",
+          "source_id": "2205.09113"
+        }
+      ]
+    },
+    {
+      "pattern_name": "absolute_plus_relative_numbers_with_framing",
+      "description": "He always reports both absolute metric values and relative improvements in the same sentence, then frames the relative gain against a meaningful reference (e.g., chance level, previous SOTA, multi-step counterpart). This avoids reporting relative gains from a weak baseline.",
+      "evidence_quotes": [
+        {
+          "quote": "it achieves an FID of 3.43 using 1-NFE (Number of Function Evaluations) generation. This result significantly outperforms previous state-of-the-art methods in its class by a relative margin of 50% to 70%",
+          "source_id": "2505.13447"
+        },
+        {
+          "quote": "our iMF-XL/2 model achieves a 1-NFE FID of 1.72, representing a 50% relative reduction compared to MF-XL/2's 3.43.",
+          "source_id": "2512.02012"
+        },
+        {
+          "quote": "The mean is 45.4% and the median is 44%… The human performance is higher than the chance-level guess (33.3%), suggesting that there exist patterns that humans can discover… However, the human performance is much lower than the neural network's 84.7%.",
+          "source_id": "2403.08632"
+        }
+      ]
+    },
+    {
+      "pattern_name": "bells_and_whistles_disclaimer_before_sota_comparison",
+      "description": "Before listing SOTA numbers, He explicitly names which evaluation tricks are absent (optical flow, multi-scale testing, rejection sampling, distillation), framing the comparison as a clean baseline result. This prevents reviewers from attributing gains to unacknowledged engineering. The phrase 'without any bells and whistles' recurs verbatim.",
+      "evidence_quotes": [
+        {
+          "quote": "Without using optical flow and without any bells and whistles, our method is on par with the heavily engineered results of the 2017 competition winner.",
+          "source_id": "1711.07971"
+        },
+        {
+          "quote": "we generate images from text prompts without rejection sampling",
+          "source_id": "2410.13863"
         },
         {
           "quote": "Our approach does not use extra losses or pre-training, which may lead to further gains (an example is in appendix). These directions are left for future work.",
@@ -19,88 +63,30 @@
       ]
     },
     {
-      "pattern_name": "numbers_carry_argument_minimal_prose_under_tables",
-      "description": "He rarely writes interpretive paragraphs under tables; instead, key numbers are cited directly in the text with delta values, letting the table speak. Where prose does appear it is a single sentence identifying the takeaway, not a re-narration of every row.",
+      "pattern_name": "bells_and_whistles_preemption",
+      "description": "Before stating results, He explicitly declares that no extra tricks, ensembles, or post-hoc enhancements were used. This pre-empts reviewer skepticism and ensures the comparison is purely structural, not engineering. The phrase appears verbatim in the abstract or opening of the results section.",
       "evidence_quotes": [
         {
-          "quote": "B is slightly better than A. We argue that this is because the zero-padded dimensions in A indeed have no residual learning. C is marginally better than B, and we attribute this to the extra parameters introduced by many (thirteen) projection shortcuts.",
-          "source_id": "1512.03385"
-        },
-        {
-          "quote": "RoIAlign improves AP by about 3 points over RoIPool, with much of the gain coming at high IoU (AP 75). RoIAlign is insensitive to max/average pool; we use average in the rest of the paper.",
+          "quote": "Without bells and whistles, Mask R-CNN outperforms all existing, single-model entries on every task, including the COCO 2016 challenge winners.",
           "source_id": "1703.06870"
         },
         {
-          "quote": "Diffusion Loss consistently outperforms the cross-entropy counterpart in all cases. Specifically, in MAR (e.g., the default), using Diffusion Loss can reduce FID by relatively ~50%-60%.",
-          "source_id": "2406.11838"
+          "quote": "Without bells and whistles, Mask R-CNN with ResNet-101-FPN backbone outperforms FCIS+++, which includes multi-scale train/test, horizontal flip test, and online hard example mining (OHEM).",
+          "source_id": "1703.06870"
         }
       ]
     },
     {
-      "pattern_name": "multi_dataset_transfer_as_proof_of_generality",
-      "description": "After establishing a main result on one benchmark, He systematically runs the same model on multiple downstream tasks and datasets to demonstrate that the learned representations are generic. Transfer results are presented in a dedicated subsection, often sweeping 5–10 datasets, and the conclusion counts how many tasks were beaten.",
+      "pattern_name": "comparison_fairness_explicit_matching",
+      "description": "He explicitly specifies that compared methods use identical schedules, backbone sizes, augmentations, and hardware in ablation contexts, and flags when his method is placed at a deliberate disadvantage. Unfair comparisons are proactively disclosed.",
       "evidence_quotes": [
         {
-          "quote": "In sum, MoCo can outperform its ImageNet supervised pre-training counterpart in 7 detection or segmentation tasks.",
+          "quote": "Put together, our fine-tuning uses the same setting as the supervised pre-training counterpart. This may place MoCo at a disadvantage. Even so, MoCo is competitive.",
           "source_id": "1911.05722"
         },
         {
-          "quote": "Our MAE performs better under all configurations (Table 4). With the smaller ViT-B, our MAE is 2.4 points higher than supervised pre-training (50.3 vs. 47.9, AP box). More significantly, with the larger ViT-L, our MAE pre-training outperforms supervised pre-training by 4.0 points (53.3 vs. 49.3).",
-          "source_id": "2111.06377"
-        },
-        {
-          "quote": "Most remarkably, on the challenging COCO dataset we obtain a 6.0% increase in COCO's standard metric (mAP@[.5, .95]), which is a 28% relative improvement. This gain is solely due to the learned representations.",
-          "source_id": "1512.03385"
-        }
-      ]
-    },
-    {
-      "pattern_name": "linear_probe_and_fine_tune_dual_reporting",
-      "description": "For self-supervised learning papers He always reports both linear probing accuracy (frozen features) and end-to-end fine-tuning accuracy side-by-side, treating them as complementary metrics. He also explicitly notes when they disagree and explains why they measure different properties of the representation.",
-      "evidence_quotes": [
-        {
-          "quote": "We do self-supervised pre-training on the ImageNet-1K (IN1K) training set. Then we do supervised training to evaluate the representations with (i) end-to-end fine-tuning or (ii) linear probing.",
-          "source_id": "2111.06377"
-        },
-        {
-          "quote": "Table 1 shows that linear probing and fine-tuning results are largely uncorrelated. Linear probing has been a popular protocol in the past few years; however, it misses the opportunity of pursuing strong but non-linear features.",
-          "source_id": "2111.06377"
-        },
-        {
-          "quote": "The quality of the pre-trained representations is evaluated by training a supervised linear classifier on frozen representations in the training set, and then testing it in the validation set, which is a common protocol.",
+          "quote": "For fair comparisons, all competitors are based on our reproduction, and '+' denotes improved reproduction vs. the original papers.",
           "source_id": "2011.10566"
-        }
-      ]
-    },
-    {
-      "pattern_name": "training_curve_evidence_over_final_number_alone",
-      "description": "He frequently supplements a final accuracy number with training curves (loss or accuracy vs. iteration plots) to show convergence behaviour and preclude cherry-picked checkpoints. This is especially used when the central claim is about optimization difficulty, speed-up, or collapse.",
-      "evidence_quotes": [
-        {
-          "quote": "To reveal the reasons, in Fig. 4 (left) we compare their training/validation errors during the training procedure. We have observed the degradation problem - the 34-layer plain net has higher training error throughout the whole training procedure.",
-          "source_id": "1512.03385"
-        },
-        {
-          "quote": "Figure 2 (left) shows the training loss. Without stop-gradient, the optimizer quickly finds a degenerated solution and reaches the minimum possible loss of −1.",
-          "source_id": "2011.10566"
-        },
-        {
-          "quote": "The accuracy improves steadily with longer training. Indeed, we have not observed saturation of linear probing accuracy even at 1600 epochs.",
-          "source_id": "2111.06377"
-        }
-      ]
-    },
-    {
-      "pattern_name": "controlled_isolation_of_one_variable_per_comparison",
-      "description": "Every ablation comparison changes exactly one factor while holding all else constant, and He states this constraint explicitly. This prevents confounds and is often reinforced by a sentence like 'the only difference is X' or 'all hyper-parameters are kept unchanged'.",
-      "evidence_quotes": [
-        {
-          "quote": "The architectures and all hyper-parameters are kept unchanged, and stop-gradient is the only difference.",
-          "source_id": "2011.10566"
-        },
-        {
-          "quote": "To focus on the effect of contrastive loss mechanisms, we implement all of them in the same pretext task as described in Sec. 3.3. We also use the same form of InfoNCE as the contrastive loss function. As such, the comparison is solely on the three mechanisms.",
-          "source_id": "1911.05722"
         },
         {
           "quote": "For fair comparisons, the tokenizers ('VQ-16' and 'KL-16') are both downloaded from the LDM codebase. These are popularly used tokenizers.",
@@ -109,51 +95,269 @@
       ]
     },
     {
-      "pattern_name": "honest_negative_result_reporting",
-      "description": "He consistently reports failure cases and negative results alongside positive ones, naming the exact condition under which his method underperforms. This builds credibility and is usually framed as an observation rather than buried in an appendix.",
+      "pattern_name": "complementarity_not_just_improvement",
+      "description": "He argues that a new component is complementary to an existing axis of improvement (depth, capacity, data scale), backing it with an experiment that shows the gain persists even when the baseline is already strong. This prevents the objection that the method simply substitutes for more compute.",
       "evidence_quotes": [
         {
-          "quote": "The testing result of this 1202-layer network is worse than that of our 110-layer network, although both have similar training error. We argue that this is because of overfitting.",
-          "source_id": "1512.03385"
+          "quote": "This comparison shows that the improvement due to non-local blocks is complementary to going deeper in standard ways.",
+          "source_id": "1711.07971"
         },
         {
-          "quote": "On VOC semantic segmentation, MoCo is worse by at least 0.8 point, a negative case we have observed.",
-          "source_id": "1911.05722"
+          "quote": "Our non-local block is complementary to increasing the model capacity, even when the model is upgraded from R50/101 to X152. This comparison suggests that non-local dependency has not been sufficiently captured by existing models despite increased depth/capacity.",
+          "source_id": "1711.07971"
         },
         {
-          "quote": "On the other hand, our results fall short of baseline contrastive learning methods (e.g., [7]) and masking-based methods (e.g., [21]), but the gap is reduced.",
-          "source_id": "2401.14404"
-        }
-      ]
-    },
-    {
-      "pattern_name": "self_contained_baseline_established_before_ablating",
-      "description": "He always defines a single 'default' or 'baseline' configuration before the ablation table begins, states its number explicitly, and marks it (often with gray shading) in every sub-table. This row serves as the reference so every delta is unambiguous.",
-      "evidence_quotes": [
-        {
-          "quote": "Overall, our default MAE decoder is lightweight. It has 8 blocks and a width of 512-d (gray in Table 1).",
-          "source_id": "2111.06377"
-        },
-        {
-          "quote": "Unless specified, our explorations use the following settings for unsupervised pre-training … We use ResNet-50 as the default backbone. Other implementation details are in supplement. We perform 100-epoch pre-training in ablation experiments.",
-          "source_id": "2011.10566"
-        },
-        {
-          "quote": "In our ablation study, we use the ViT-B/4 architecture (namely, 'Base' size with a patch size of 4) as developed in [34], trained for 80 epochs (400K iterations). As a reference, DiT-B/4 in [34] has 68.4 FID.",
+          "quote": "Orthogonal improvements, such as REPA, are applicable, which are left for future work.",
           "source_id": "2505.13447"
         }
       ]
     },
     {
-      "pattern_name": "scaling_behavior_as_first_class_result",
-      "description": "He consistently evaluates multiple model sizes and reports whether performance improves monotonically with scale, treating scaling as a fundamental property rather than an afterthought. When scaling is strong it is foregrounded as evidence of the method's generality.",
+      "pattern_name": "computational_cost_reported_alongside_accuracy",
+      "description": "Training time, FLOPs, memory, or wall-clock speedup are reported in direct proximity to accuracy numbers, so accuracy gains cannot be evaluated without knowing their computational cost. Speed–accuracy tradeoffs are plotted or tabulated explicitly.",
       "evidence_quotes": [
         {
-          "quote": "Our MAE can scale up easily and has shown steady improvement from bigger models. We obtain 86.9% accuracy using ViT-H (224 size). By fine-tuning with a 448 size, we achieve 87.8% accuracy, using only IN1K data.",
+          "quote": "we accelerate training (by 3× or more) and improve accuracy.",
           "source_id": "2111.06377"
         },
         {
-          "quote": "We observe a good scaling behavior w.r.t. model size: scaling from ViT-B to ViT-L has a large gain of 10.6%.",
+          "quote": "Our MAR model with Diffusion Loss can generate at a rate of <0.3 second per image while achieving a strong FID of <2.0 on ImageNet 256×256.",
+          "source_id": "2406.11838"
+        },
+        {
+          "quote": "Our models can run at about 200ms per frame on a GPU, and training on COCO takes one to two days on a single 8-GPU machine.",
+          "source_id": "1703.06870"
+        }
+      ]
+    },
+    {
+      "pattern_name": "default_gray_row_sanity_anchor",
+      "description": "Ablation tables include a clearly marked default configuration (often noted in the caption as 'gray') that serves as the sanity anchor. All other rows vary a single component against this default, making the table a controlled experiment rather than a sweep.",
+      "evidence_quotes": [
+        {
+          "quote": "The entries marked in gray are the same, which specify the default settings. This table format follows [31].",
+          "source_id": "2205.09113"
+        },
+        {
+          "quote": "Our default MAE decoder is lightweight. It has 8 blocks and a width of 512-d (gray in Table 1).",
+          "source_id": "2111.06377"
+        }
+      ]
+    },
+    {
+      "pattern_name": "fair_comparison_via_controlled_re_implementation",
+      "description": "When comparing methods, He either re-implements all baselines in the same codebase with the same hyperparameters, or explicitly justifies why the comparison is fair. He flags any asymmetry (extra compute, external data, pre-training) in a dedicated note or table column.",
+      "evidence_quotes": [
+        {
+          "quote": "For fair comparisons, in this paper the fine-tuned models (with pre-training) are also tuned with GN or SyncBN, rather than freezing them.",
+          "source_id": "1811.08883"
+        },
+        {
+          "quote": "For a fair comparison, both the additional computational overhead and the external sources of information should be taken into account, summarized in Table 6.",
+          "source_id": "2506.09027"
+        },
+        {
+          "quote": "To avoid doubling training epochs due to two-view sampling, we only apply the denoising loss to the first view, for fair comparisons with both the baseline and our method.",
+          "source_id": "2506.09027"
+        }
+      ]
+    },
+    {
+      "pattern_name": "honest_negative_and_breakdown_reporting",
+      "description": "He dedicates an explicit subsection or paragraph to the regime where the proposed method fails or degrades, calling it a 'breakdown regime' or noting catastrophic failure. This preempts cherry-picking accusations and builds trust for positive claims.",
+      "evidence_quotes": [
+        {
+          "quote": "Breakdown regime: 1k COCO training images. That training from scratch in 10k images is comparably accurate is surprising. But it is not reasonable to expect this trend will last for arbitrarily small target data, as we report next.",
+          "source_id": "1811.08883"
+        },
+        {
+          "quote": "Among all variants we investigate, only 'DDIM w/ ODE sampler' results in a catastrophic failure (red), with FID significantly worsened to 40.90.",
+          "source_id": "2502.13129"
+        },
+        {
+          "quote": "However, its FID and Recall are relatively weaker, suggesting that the generated samples are less diverse compared to other methods. We hypothesize that this is due to the significant challenge of modeling nearly 200,000 pixels in a pixel-by-pixel way.",
+          "source_id": "2502.17437"
+        }
+      ]
+    },
+    {
+      "pattern_name": "honest_negative_result_in_main_paper",
+      "description": "Negative results—cases where the proposed method fails, lags behind a baseline, or shows a caveat—are reported directly in the main paper, often with an explicit section or labeled discussion. They are not buried in supplementary material.",
+      "evidence_quotes": [
+        {
+          "quote": "But on VOC semantic segmentation, MoCo is worse by at least 0.8 point, a negative case we have observed.",
+          "source_id": "1911.05722"
+        },
+        {
+          "quote": "The testing result of this 1202-layer network is worse than that of our 110-layer network, although both have similar training error. We argue that this is because of overfitting.",
+          "source_id": "1512.03385"
+        },
+        {
+          "quote": "our results fall short of baseline contrastive learning methods (e.g., [7]) and masking-based methods (e.g., [21]), but the gap is reduced. Our study suggests more room for further research.",
+          "source_id": "2401.14404"
+        }
+      ]
+    },
+    {
+      "pattern_name": "hypothesis_first_then_experiment_structure",
+      "description": "He explicitly states a hypothesis (often as a sentence beginning with 'We hypothesize') before presenting the experiment that tests it, creating a falsifiable prediction. If the experiment confirms it, confidence is higher; if not, the hypothesis is revised openly.",
+      "evidence_quotes": [
+        {
+          "quote": "We hypothesize that this phenomenon can be explained by error propagation dynamics.",
+          "source_id": "2502.13129"
+        },
+        {
+          "quote": "We hypothesize that this is partially because FM's regression target is independent on t",
+          "source_id": "2502.13129"
+        },
+        {
+          "quote": "We hypothesize that when the model has more capacity, it can better leverage the capacity to learn vθ by uθ(zt,t,t), and therefore benefits more from this formulation.",
+          "source_id": "2512.02012"
+        }
+      ]
+    },
+    {
+      "pattern_name": "linear_probe_vs_finetune_dual_reporting",
+      "description": "SSL papers always report both linear probing accuracy and end-to-end fine-tuning accuracy, and explicitly note when the two metrics dissociate. The dissociation is treated as a finding, not a flaw, and is interpreted to reveal the nature of the learned representation.",
+      "evidence_quotes": [
+        {
+          "quote": "Table 1 shows that linear probing and fine-tuning results are largely uncorrelated. Linear probing has been a popular protocol in the past few years; however, it misses the opportunity of pursuing strong but non-linear features.",
+          "source_id": "2111.06377"
+        },
+        {
+          "quote": "Interestingly, its detection accuracy is higher than that of using the MLP alone, Table 1 (b) vs. (a), despite much lower linear classification accuracy (63.4% vs. 66.2%). This indicates that linear classification accuracy is not monotonically related to transfer performance in detection.",
+          "source_id": "2003.04297"
+        }
+      ]
+    },
+    {
+      "pattern_name": "multi_dataset_and_multi_task_transfer_as_generalization_proof",
+      "description": "He evaluates a single model on at least three distinct benchmarks or tasks (e.g., detection, segmentation, video, keypoints) to argue generality. Each task tests a different capability and a separate table or figure row is provided per task.",
+      "evidence_quotes": [
+        {
+          "quote": "The improvement of GN on detection, segmentation, and video classification demonstrates that GN is a strong alternative to the powerful and currently dominant BN technique in these tasks.",
+          "source_id": "1803.08494"
+        },
+        {
+          "quote": "Table 5 shows the box and mask AP on COCO. We see that a single non-local block improves all R50/101 and X152 baselines, on all metrics involving detection and segmentation.",
+          "source_id": "1711.07971"
+        },
+        {
+          "quote": "To show the generalizability of our findings, we further evaluate class-unconditional generation on ImageNet 32×32, FFHQ 64×64, and class-conditional generation on CIFAR-10.",
+          "source_id": "2502.13129"
+        }
+      ]
+    },
+    {
+      "pattern_name": "multi_dataset_transfer_as_primary_evidence",
+      "description": "For representation learning papers, ImageNet accuracy is presented but transfer to diverse downstream tasks—detection, segmentation, keypoints across multiple benchmarks—is the main evidence of generality. A method that only wins on ImageNet is treated as insufficient.",
+      "evidence_quotes": [
+        {
+          "quote": "MoCo can outperform its supervised pre-training counterpart in 7 detection/segmentation tasks on PASCAL VOC, COCO, and other datasets, sometimes surpassing it by large margins.",
+          "source_id": "1911.05722"
+        },
+        {
+          "quote": "Transfer performance in downstream tasks outperforms supervised pre-training and shows promising scaling behavior.",
+          "source_id": "2111.06377"
+        },
+        {
+          "quote": "Our method achieves strong results while enjoying the speed advantage of sequence modeling.",
+          "source_id": "2406.11838"
+        }
+      ]
+    },
+    {
+      "pattern_name": "numbers_carry_argument_minimal_prose",
+      "description": "In ablation sections, the text makes exactly one interpretive claim per row/sub-table, then stops. Sentences are typically one to two lines. There is no hedging, no rephrasing the same finding in multiple paragraphs. The number is the sentence.",
+      "evidence_quotes": [
+        {
+          "quote": "B is slightly better than A. We argue that this is because the zero-padded dimensions in A indeed have no residual learning. C is marginally better than B, and we attribute this to the extra parameters introduced by many (thirteen) projection shortcuts.",
+          "source_id": "1512.03385"
+        },
+        {
+          "quote": "With the MLP, the extra augmentation boosts ImageNet accuracy to 67.3%, Table 1 (c).",
+          "source_id": "2003.04297"
+        }
+      ]
+    },
+    {
+      "pattern_name": "one_variable_at_a_time_ablation_discipline",
+      "description": "Each ablation row varies exactly one factor while holding everything else at the established default. He names the default explicitly and traces the gain from that default row forward. This forces the reader to attribute each improvement to one cause.",
+      "evidence_quotes": [
+        {
+          "quote": "In our ablation experiments, unless specified, we train the models for 80 epochs and without classifier-free guidance (CFG). By default, the weight scale λ is 0.5, and the temperature τ is 0.5.",
+          "source_id": "2506.09027"
+        },
+        {
+          "quote": "In our ablations, we use the MeanFlow-B/2 model. The ablation models are trained for 240 epochs. Our setting is exactly the same as that of MeanFlow-B/2 in [mf], which has a 1-NFE FID of 6.17 (with CFG). This model is our starting point.",
+          "source_id": "2512.02012"
+        },
+        {
+          "quote": "For a fair comparison, all methods are based on our re-implementation as faithful as possible: with and without noise conditioning are run in the same implementation for each method.",
+          "source_id": "2502.13129"
+        }
+      ]
+    },
+    {
+      "pattern_name": "quantitative_correlation_before_qualitative_conclusion",
+      "description": "He computes a numeric correlation coefficient or orders-of-magnitude comparison to support a qualitative claim, rather than making the qualitative claim on eyeballing alone. This turns a visual impression into a defensible statement.",
+      "evidence_quotes": [
+        {
+          "quote": "The Pearson correlation coefficients for FID and GenEval scores are 0.917 and -0.931, respectively, indicating a nearly linear relationship between validation loss and these evaluation metrics",
+          "source_id": "2410.13863"
+        },
+        {
+          "quote": "Fig. 4 shows a strong correlation between the theoretical bound and the empirical behavior. Specifically, DDIM's catastrophic failure can be explained by its error bound that is orders of magnitudes higher.",
+          "source_id": "2502.13129"
+        }
+      ]
+    },
+    {
+      "pattern_name": "robustness_sweep_across_architectures_and_scales",
+      "description": "He validates a key finding across multiple model families, sizes, and generations rather than a single instance, then summarizes 'this is robust over X settings.' The sweep is exhaustive and the summary sentence names the exact scope.",
+      "evidence_quotes": [
+        {
+          "quote": "This observation is robust across different settings… We observe that all architectures can solve the task excellently: 4 out of the 5 networks achieve excellent accuracy of >80%",
+          "source_id": "2403.08632"
+        },
+        {
+          "quote": "Dispersive Loss consistently improves performance over the baseline in all scenarios… both the relative and even absolute improvements tend to be larger when the baseline is stronger",
+          "source_id": "2506.09027"
+        },
+        {
+          "quote": "GN's computation is independent of batch sizes, and its accuracy is stable in a wide range of batch sizes.",
+          "source_id": "1803.08494"
+        }
+      ]
+    },
+    {
+      "pattern_name": "scaling_behavior_as_a_standalone_section",
+      "description": "He devotes an explicit subsection to scaling (parameters, compute, or data), reporting whether improvements are consistent across scales and noting any plateau or diminishing returns. This separates the scaling story from main ablations.",
+      "evidence_quotes": [
+        {
+          "quote": "We observe consistent improvements in both validation loss and evaluation performance with increased training steps and compute. However, the benefits from additional training steps saturate around 1M steps",
+          "source_id": "2410.13863"
+        },
+        {
+          "quote": "In Fig. 8, we show ViTs with varying depths and widths. In this regime, our method demonstrates good scalability: increasing depth and/or width leads to higher accuracy as a result of better fitting.",
+          "source_id": "2511.14761"
+        },
+        {
+          "quote": "We further observe a promising scaling trend: increasing the model size from 186M to 848M parameters substantially improves the FID from 11.80 to 6.15",
+          "source_id": "2502.17437"
+        }
+      ]
+    },
+    {
+      "pattern_name": "scaling_behavior_as_explicit_finding",
+      "description": "He reports how accuracy changes monotonically with model size, training epochs, or data scale, and explicitly calls this a 'scaling behavior'. The scaling trend itself is treated as validation of the approach's health, distinct from peak performance.",
+      "evidence_quotes": [
+        {
+          "quote": "Our MAE can scale up easily and has shown steady improvement from bigger models.",
+          "source_id": "2111.06377"
+        },
+        {
+          "quote": "We observe a good scaling behavior w.r.t. model size: scaling from ViT-B to ViT-L has a large gain of 10.6%. A similar scaling behavior is also observed in MAE, which has a 7.8% gain from ViT-B to ViT-L.",
           "source_id": "2401.14404"
         },
         {
@@ -161,132 +365,360 @@
           "source_id": "2406.11838"
         }
       ]
-    }
-  ],
-  "ablation_specific_patterns": [
-    {
-      "pattern_name": "sub_table_per_factor_with_inline_headline",
-      "description": "Each ablation factor gets its own lettered sub-table (e.g., Table 2a, 2b, 2c) rather than mixing factors in a single large table. The finding is named in a bold or italic heading directly above the sub-table, so the reader knows the conclusion before reading the numbers.",
-      "evidence_quotes": [
-        {
-          "quote": "Architecture: Table 2a shows Mask R-CNN with various backbones. It benefits from deeper networks (50 vs. 101) and advanced designs including FPN and ResNeXt.",
-          "source_id": "1703.06870"
-        },
-        {
-          "quote": "Multinomial vs. Independent Masks: Mask R-CNN decouples mask and class prediction … In Table 2b, we compare this to using a per-pixel softmax and a multinomial loss.",
-          "source_id": "1703.06870"
-        },
-        {
-          "quote": "Mask token: An important design of our MAE is to skip the mask token [M] in the encoder and apply it later in the lightweight decoder. Table [tab:mask_token] studies this design.",
-          "source_id": "2111.06377"
-        }
-      ]
     },
     {
-      "pattern_name": "gray_default_row_as_reference_anchor",
-      "description": "The default configuration row is visually marked (gray shading) in every ablation sub-table so readers can instantly see the delta of any variant. He explicitly calls it out in the caption or text so its role as the reference is unambiguous.",
+      "pattern_name": "soTA_claim_with_specified_constraints",
+      "description": "State-of-the-art claims always specify the exact metric, dataset, model size, and data regime (e.g., 'only ImageNet-1K data'). Claims without these qualifiers are not made. This disciplines the comparison and avoids misleading readers.",
       "evidence_quotes": [
         {
-          "quote": "Overall, our default MAE decoder is lightweight. It has 8 blocks and a width of 512-d (gray in Table 1). It only has 9% FLOPs per token vs. ViT-L.",
+          "quote": "a vanilla ViT-Huge model achieves the best accuracy (87.8%) among methods that use only ImageNet-1K data.",
           "source_id": "2111.06377"
         },
         {
-          "quote": "To obtain a healthy baseline, we redo grid search for hyper-parameters on the models that are with ImageNet pre-training. The gray curve in Figure 7 (middle) shows the results.",
-          "source_id": "1811.08883"
+          "quote": "Our 152-layer ResNet has a single-model top-5 validation error of 4.49%. This single-model result outperforms all previous ensemble results.",
+          "source_id": "1512.03385"
+        },
+        {
+          "quote": "it achieves a new state-of-the-art FID of 2.15 on ImageNet 256×256, largely reducing the previous best of 5.91 by a relative 64%.",
+          "source_id": "2312.03701"
         }
       ]
     },
     {
-      "pattern_name": "progressive_deconstruction_table",
-      "description": "For mechanistic studies, He builds an ablation table that starts from a complex baseline and removes or replaces one component at a time, with the accuracy at each step forming a monotonic trajectory. The table reads top-to-bottom as a story, and the summary conclusion appears after the last row.",
+      "pattern_name": "training_curve_as_optimization_evidence",
+      "description": "When the core claim is about optimization difficulty or instability, He always presents training curves (loss curves or kNN accuracy curves during training), not just final numbers. The curve is the argument; numbers alone would miss the collapse/degradation phenomenon.",
       "evidence_quotes": [
         {
-          "quote": "Our deconstruction trajectory is divided into three stages. We first adapt the generation-focused settings in DiT to be more oriented toward self-supervised learning (Sec. 4.1). Next, we deconstruct and simplify the tokenizer step by step (Sec. 4.2). Finally, we attempt to reverse as many DDM-motivated designs as possible.",
-          "source_id": "2401.14404"
+          "quote": "To reveal the reasons, in Fig. 4 (left) we compare their training/validation errors during the training procedure. We have observed the degradation problem - the 34-layer plain net has higher training error throughout the whole training procedure.",
+          "source_id": "1512.03385"
         },
         {
-          "quote": "The results in Tab. 1 reveal that self-supervised learning performance is not correlated to generation quality. The representation capability of a DDM is not necessarily the outcome of its generation capability.",
-          "source_id": "2401.14404"
+          "quote": "The curve of a 4k batch becomes noticeably unstable: see the 'dips' in Fig. 1. It has 72.2% linear probing accuracy. Although this seems to be a marginal decrease vs. the 2k batch, its accuracy is harmed by the instability, as we will show in the next subsection.",
+          "source_id": "2104.02057"
         },
         {
-          "quote": "First, replacing the raster order in AR with random order has a significant gain, e.g., reducing FID from 19.23 to 13.07 (w/o CFG). Next, replacing the causal attention with the bidirectional counterpart leads to another massive gain.",
-          "source_id": "2406.11838"
-        }
-      ]
-    },
-    {
-      "pattern_name": "all_variants_traceable_to_same_model_family",
-      "description": "Ablation entries always share the same backbone, dataset, and training recipe; the only variation is the factor being studied. He explicitly flags when an exception is made (e.g., a different backbone to ensure fair comparison for a specific sub-test) to signal that he is aware of and controlling for confounds.",
-      "evidence_quotes": [
-        {
-          "quote": "We note that we choose this backbone so that the conv layers of the FCN head are not pre-trained, for a fair comparison with MLP.",
-          "source_id": "1703.06870"
-        },
-        {
-          "quote": "For each individual method, we follow the hyper-parameter and augmentation recipes in its original paper. All entries are based on a standard ResNet-50, with two 224×224 views used during pre-training.",
+          "quote": "Figure 2 (left) shows the training loss. Without stop-gradient, the optimizer quickly finds a degenerated solution and reaches the minimum possible loss of −1.",
           "source_id": "2011.10566"
         }
       ]
     },
     {
-      "pattern_name": "quantitative_delta_stated_in_ablation_prose",
-      "description": "After each ablation sub-table He states the numeric gain or loss in the immediately following sentence, typically as 'X points' or a percentage. He does not just say 'better' or 'worse'; the exact delta is always named so the reader need not do subtraction.",
+      "pattern_name": "training_curve_as_primary_evidence",
+      "description": "He shows training and validation curves over the full schedule rather than final numbers alone, particularly when the argument is about convergence speed versus final accuracy. The curve is the argument, not a supplementary figure.",
       "evidence_quotes": [
         {
-          "quote": "This alternative couples the tasks of mask and class prediction, and results in a severe loss in mask AP (5.5 points).",
+          "quote": "Figure 4 shows the curves of the training procedure of a ResNet-50 C2D baseline vs. a non-local C2D with 5 blocks. Our non-local C2D model is consistently better than the C2D baseline throughout the training procedure, in both training and validation error.",
+          "source_id": "1711.07971"
+        },
+        {
+          "quote": "ImageNet pre-training speeds up convergence, especially early on in training, but training from random initialization can catch up after training for a duration that is roughly comparable to the total ImageNet pre-training plus fine-tuning computation",
+          "source_id": "1811.08883"
+        },
+        {
+          "quote": "FID curves during training are in Fig. 6.",
+          "source_id": "2512.02012"
+        }
+      ]
+    }
+  ],
+  "ablation_specific_patterns": [
+    {
+      "pattern_name": "ablation_ordering_by_logical_not_alphabetical_sequence",
+      "description": "Ablation rows are ordered to tell a causal story—from baseline to full model—not alphabetically or by metric value. Each step either adds one component or removes one variable, building cumulative intuition about what matters most.",
+      "evidence_quotes": [
+        {
+          "quote": "In Tab. 1 (a) and (b), we ablate the iMF designs discussed in Sec. 4.1 and Sec. 4.2. The architectural improvements are in Tab. 1 (c).",
+          "source_id": "2512.02012"
+        },
+        {
+          "quote": "Fig. 7 summarizes the effects of visual priors, starting from a baseline (a) without the other components in this figure. These priors jointly have a gain of 27.7 points",
+          "source_id": "2511.14761"
+        },
+        {
+          "quote": "We begin by evaluating our method on unconditional ImageNet 64×64 generation to assess its likelihood estimation capability. To examine the effectiveness of our fractal framework, we compare the likelihood estimation performance of our framework with different numbers of fractal levels",
+          "source_id": "2502.17437"
+        }
+      ]
+    },
+    {
+      "pattern_name": "ablation_proof_of_concept_experiments",
+      "description": "When a hypothesis is proposed to explain an ablation result, He designs additional 'proof-of-concept' experiments—not full benchmarks—to test the hypothesis directly. These are small, controlled, and placed immediately after the hypothesis.",
+      "evidence_quotes": [
+        {
+          "quote": "We design a series of proof-of-concept experiments that stem from our hypothesis. They are methods different with SimSiam, and they are designed to verify our hypothesis.",
+          "source_id": "2011.10566"
+        },
+        {
+          "quote": "Fig. 7 shows the standard deviations (std) of the layer responses... This analysis reveals the response strength of the residual functions... ResNets have generally smaller responses than their plain counterparts. These results support our basic motivation.",
+          "source_id": "1512.03385"
+        }
+      ]
+    },
+    {
+      "pattern_name": "architecture_variant_sweep_with_consistent_backbone",
+      "description": "When demonstrating generality, He evaluates the proposed method with multiple backbone sizes (e.g., ResNet-50/101, ViT-S/B/L/H) all in the same table, using the identical training protocol. This shows the method is not tuned to one model size.",
+      "evidence_quotes": [
+        {
+          "quote": "Table 2 summarizes the ViT configurations we study. ViT-B/L/H follow [16], and ViT-S is similar to that in [42]. We use ViT-B by default in our ablations.",
+          "source_id": "2104.02057"
+        },
+        {
+          "quote": "Table 2a shows Mask R-CNN with various backbones. It benefits from deeper networks (50 vs. 101) and advanced designs including FPN and ResNeXt.",
+          "source_id": "1703.06870"
+        }
+      ]
+    },
+    {
+      "pattern_name": "component_gain_attributed_to_mechanism_not_just_reported",
+      "description": "After reporting a numeric gain in an ablation, He provides a mechanistic explanation for why the component helps, connecting the observed delta to the theoretical motivation. Numbers without mechanism are treated as incomplete results.",
+      "evidence_quotes": [
+        {
+          "quote": "Notably, our regularizer yields a larger representation norm at Block 3 and propagates this effect to all other blocks, even though it is not directly applied to them. This helps explain the consistent gains observed in Table 4 wherever Dispersive Loss is applied.",
+          "source_id": "2506.09027"
+        },
+        {
+          "quote": "BN's mean and variance computation introduces uncertainty caused by the stochastic batch sampling, which helps regularization. This uncertainty is missing in GN (and LN/IN).",
+          "source_id": "1803.08494"
+        },
+        {
+          "quote": "This is because Ω-conditioning enables CFG interval at inference time, and CFG interval is highly effective even for multi-step methods.",
+          "source_id": "2512.02012"
+        }
+      ]
+    },
+    {
+      "pattern_name": "deconstructive_trajectory_ablation",
+      "description": "In papers studying design choices, ablations are organized as a stepwise deconstruction: start from a complex reference method and remove/simplify one component at a time, tracking accuracy at each step. This reveals which components are load-bearing versus incidental.",
+      "evidence_quotes": [
+        {
+          "quote": "Our deconstruction trajectory is divided into three stages. We first adapt the generation-focused settings in DiT to be more oriented toward self-supervised learning. Next, we deconstruct and simplify the tokenizer step by step. Finally, we attempt to reverse as many DDM-motivated designs as possible.",
+          "source_id": "2401.14404"
+        },
+        {
+          "quote": "Overall, the results in Tab. 1 reveal that self-supervised learning performance is not correlated to generation quality. The representation capability of a DDM is not necessarily the outcome of its generation capability.",
+          "source_id": "2401.14404"
+        }
+      ]
+    },
+    {
+      "pattern_name": "default_row_explicitly_labeled_and_isolated",
+      "description": "The ablation table has one row marked as 'default' or 'our final' which serves as the anchor for all comparisons. He never reports a delta without stating the absolute default-row number in the text, so gains cannot be cherry-picked from a favorable starting point.",
+      "evidence_quotes": [
+        {
+          "quote": "By default, the weight scale λ is 0.5, and the temperature τ is 0.5.",
+          "source_id": "2506.09027"
+        },
+        {
+          "quote": "By default, we use a 50-step Heun. … By default, G=32.",
+          "source_id": "1803.08494"
+        },
+        {
+          "quote": "In our ablation experiments, unless specified, we train the models for 80 epochs.",
+          "source_id": "2506.09027"
+        }
+      ]
+    },
+    {
+      "pattern_name": "destructive_ablation_to_isolate_essential_components",
+      "description": "He performs a 'destructive' control that intentionally corrupts or removes a component to verify it is load-bearing, rather than only showing progressive add-ons. The corrupted variant's failure confirms the component's necessity.",
+      "evidence_quotes": [
+        {
+          "quote": "we conduct a destructive comparison in which incorrect JVP computation is intentionally performed. It shows that meaningful results are achieved only when the JVP computation is correct.",
+          "source_id": "2505.13447"
+        },
+        {
+          "quote": "We have also tried to add standard residual blocks, instead of non-local blocks, to the baseline models. The accuracy is not increased. This again shows that the improvement of non-local blocks is not just because they add depth.",
+          "source_id": "1711.07971"
+        },
+        {
+          "quote": "To demonstrate this effect on a stronger baseline, we replace the 2D RoPE in Fig. 7(f) with a 1D RoPE and observe a degradation of 3.5 points, from 54.5 to 51.0.",
+          "source_id": "2511.14761"
+        }
+      ]
+    },
+    {
+      "pattern_name": "headline_finding_in_sub_caption_or_lead_sentence",
+      "description": "Each ablation sub-section opens with a single declarative sentence that states the headline finding before showing the numbers. This sentence is often almost identical to what would appear in an abstract, making the table self-contained.",
+      "evidence_quotes": [
+        {
+          "quote": "An evaluation of our proposed RoIAlign layer is shown in Table 2c. For this experiment we use the ResNet-50-C4 backbone, which has stride 16. RoIAlign improves AP by about 3 points over RoIPool, with much of the gain coming at high IoU (AP75).",
           "source_id": "1703.06870"
         },
         {
-          "quote": "RoIAlign improves AP by about 3 points over RoIPool, with much of the gain coming at high IoU (AP 75).",
+          "quote": "Segmentation is a pixel-to-pixel task and we exploit the spatial layout of masks by using an FCN. In Table 2e, we compare multi-layer perceptrons (MLP) and FCNs... Using FCNs gives a 2.1 mask AP gain over MLPs.",
           "source_id": "1703.06870"
+        }
+      ]
+    },
+    {
+      "pattern_name": "hyper_parameter_sensitivity_sweep_with_robustness_summary",
+      "description": "He systematically varies each hyperparameter over a wide range (temperature, guidance scale, loss weight) and reports whether the conclusion holds across the range or collapses at extremes. A sentence explicitly characterizing robustness (or sensitivity) is always provided.",
+      "evidence_quotes": [
+        {
+          "quote": "all configurations studied improve upon the baseline (FID 36.49), further suggesting that the regularizer is broadly effective. Notably, we compare a wide range of temperature values τ and find that the results are surprisingly robust: this is in contrary to contrastive self-supervised learning, where performance degrades significantly when deviating from the optimal temperature",
+          "source_id": "2506.09027"
         },
         {
-          "quote": "If the encoder uses mask tokens, it performs worse: its accuracy drops by 14% in linear probing.",
+          "quote": "We conduct a sweep over the guidance scale ω and temperature τ to determine the optimal combination for each model variant.",
+          "source_id": "2410.13863"
+        },
+        {
+          "quote": "Fig. 4(e) shows that p=1 achieves the best result, whereas p=0.5 (similar to Pseudo-Huber loss) also performs competitively. The standard squared L2 loss (here, p=0) underperforms compared to other settings, but still produces meaningful results",
+          "source_id": "2505.13447"
+        }
+      ]
+    },
+    {
+      "pattern_name": "momentum_and_hyperparameter_sensitivity_reported",
+      "description": "For methods with key hyperparameters (momentum coefficient, temperature, masking ratio), He ablates the sensitivity with a short inline table or figure, and reports the full range of tested values including failures, not just the optimal.",
+      "evidence_quotes": [
+        {
+          "quote": "The table below shows ResNet-50 accuracy with different MoCo momentum values... It performs reasonably well when m is in 0.99~0.9999. When m is too small (e.g., 0.9), the accuracy drops considerably; at the extreme of no momentum (m is 0), the training loss oscillates and fails to converge.",
+          "source_id": "1911.05722"
+        },
+        {
+          "quote": "Figure 5 shows the influence of the masking ratio. The optimal ratios are surprisingly high. The ratio of 75% is good for both linear probing and fine-tuning.",
           "source_id": "2111.06377"
         }
       ]
     },
     {
-      "pattern_name": "two_protocol_columns_in_single_ablation_table",
-      "description": "Where both linear-probe (lin) and fine-tune (ft) evaluations are relevant, He puts both as separate columns in the same ablation table rather than splitting into two tables, making it easy to see which design choices affect the two protocols differently.",
+      "pattern_name": "negative_ablation_reported_without_apology",
+      "description": "When an ablation variant is worse than the default, the text states it plainly without apologetic hedging. The degradation is quantified with the exact number, and a concise mechanistic explanation is offered. No variant is omitted because it looks bad.",
       "evidence_quotes": [
         {
-          "quote": "Table [tab:decoder_depth] varies the decoder depth. A sufficiently deep decoder is important for linear probing … However, if fine-tuning is used, the last layers of the encoder can be tuned … The decoder depth is less influential for improving fine-tuning (Table [tab:decoder_depth], 'ft').",
+          "quote": "BN after addition... The results become considerably worse than the baseline (Table 2). Unlike the original design, now the BN layer alters the signal that passes through the shortcut and impedes information propagation.",
+          "source_id": "1603.05027"
+        },
+        {
+          "quote": "Adding BN to the output of the prediction MLP h does not work well (Table 3d). We find that this is not about collapsing. The training is unstable and the loss oscillates.",
+          "source_id": "2011.10566"
+        }
+      ]
+    },
+    {
+      "pattern_name": "one_variable_per_sub_table",
+      "description": "Each sub-table or sub-figure in an ablation section varies exactly one component while holding all others at the default. Multiple components are never co-varied in a single table row. The sub-table header or bold label names the single variable under study.",
+      "evidence_quotes": [
+        {
+          "quote": "Table 2a shows Mask R-CNN with various backbones... Table 2b, we compare this to using a per-pixel softmax and a multinomial loss... Table 2c... RoIAlign improves AP by about 3 points over RoIPool.",
+          "source_id": "1703.06870"
+        },
+        {
+          "quote": "We run a number of ablations to analyze Mask R-CNN. Results are shown in Table 2 and discussed in detail next. Architecture... Multinomial vs. Independent Masks... Class-Specific vs. Class-Agnostic Masks... RoIAlign... Mask Branch.",
+          "source_id": "1703.06870"
+        }
+      ]
+    },
+    {
+      "pattern_name": "pseudo_experiment_as_negative_control",
+      "description": "He constructs a deliberately invalid or randomized version of the experiment as a sanity check, then shows it fails in the expected way. This negative control establishes that positive results are not artefacts of the protocol.",
+      "evidence_quotes": [
+        {
+          "quote": "We consider a pseudo-dataset classification task. In this scenario, we manually create multiple pseudo-datasets, all of which are sampled without replacement from the same source dataset. We expect this process to give us multiple pseudo-datasets that are truly unbiased.",
+          "source_id": "2403.08632"
+        },
+        {
+          "quote": "Table 6 reports the training accuracy of a model trained for this pseudo-dataset classification task… the model fails to converge, as reflected by unstable, non-decreasing loss curves.",
+          "source_id": "2403.08632"
+        }
+      ]
+    },
+    {
+      "pattern_name": "sub_caption_contains_headline_finding",
+      "description": "The descriptive heading above or beside each ablation group (a bold phrase or short sentence) states the specific conclusion, not just the variable name. A reader skimming sub-captions can reconstruct the full argument without reading the body text.",
+      "evidence_quotes": [
+        {
+          "quote": "x-prediction is critical.",
+          "source_id": "2511.13720"
+        },
+        {
+          "quote": "Loss weighting is not sufficient.",
+          "source_id": "2511.13720"
+        },
+        {
+          "quote": "Noise-level shift is not sufficient.",
+          "source_id": "2511.13720"
+        }
+      ]
+    },
+    {
+      "pattern_name": "training_length_and_schedule_ablated_explicitly",
+      "description": "He always includes a sub-table or figure ablating the effect of training length (epochs) on the final metric, because many SSL claims depend on convergence behavior that can differ substantially between methods.",
+      "evidence_quotes": [
+        {
+          "quote": "Figure 7 shows the influence of the training schedule length. The accuracy improves steadily with longer training. Indeed, we have not observed saturation of linear probing accuracy even at 1600 epochs.",
           "source_id": "2111.06377"
         },
         {
-          "quote": "The optimal ratios are surprisingly high. The ratio of 75% is good for both linear probing and fine-tuning. … For linear probing, the accuracy increases steadily with the masking ratio … For fine-tuning, the results are less sensitive to the ratios.",
-          "source_id": "2111.06377"
+          "quote": "In the following table we report ViT-S/B + MoCo v3 vs. training length... The smaller ViT-S enjoys the benefit of training longer, and improves by 0.9% when extending to 600 epochs... But the gain of training longer is diminishing on ViT-B.",
+          "source_id": "2104.02057"
         }
       ]
     }
   ],
   "anti_patterns_kaiming_would_flag": [
-    "Comparing to a weak or untuned baseline instead of the best available counterpart.",
-    "Reporting only final accuracy without showing convergence curves when the claim is about optimization.",
-    "Mixing multiple changed variables in a single ablation row.",
-    "Claiming 'state of the art' without specifying the exact metric, dataset split, and model size.",
-    "Using test-time augmentation or ensembles in the main table without clearly labeling them.",
-    "Omitting the linear-probe result when fine-tuning accuracy is reported for a self-supervised method.",
-    "Attributing gains to the proposed method when the comparison uses different pre-training data or longer schedules.",
-    "Reporting transfer learning on only one downstream task; generality requires multiple diverse tasks.",
-    "Burying negative results or failure modes in supplementary material instead of the main paper.",
-    "Citing relative improvement percentages without also stating the absolute numbers.",
-    "Having ablation tables with no fixed default row, making every delta ambiguous.",
-    "Claiming 'no bells and whistles' while using a heavily engineered data pipeline that is not disclosed."
+    "Do not apply hyper-parameters that were grid-searched for the stronger model (pre-training, larger capacity) to the weaker baseline without also grid-searching the weaker one separately, then clearly noting the bias.",
+    "Do not bury a negative result (a regime where your method fails) in supplementary material; report it in the main paper with a mechanistic explanation.",
+    "Do not claim a method is 'complementary' without an experiment showing the gain persists on top of an already-strong baseline (e.g., larger model, stronger augmentation).",
+    "Do not claim generality from a single dataset or single architecture; sweep at least three tasks, model sizes, or datasets before asserting the method is general.",
+    "Do not compare against baselines without verifying they are run under the same compute budget, normalization strategy, and augmentation protocol.",
+    "Do not compare methods with mismatched training schedules, augmentation pipelines, or compute budgets without explicitly declaring the mismatch and adjusting for it.",
+    "Do not conflate generation quality (FID) with representation quality (linear probe accuracy)—the two can be anti-correlated and must be reported separately.",
+    "Do not conflate validation loss improvements with downstream metric improvements without explicitly testing both and noting where they decouple.",
+    "Do not describe a proposed method as 'simple' without substantiating the claim—simplicity claims must be backed by a comparison to the complexity of prior methods in the same table.",
+    "Do not label ablation sub-headers with the variable name alone (e.g., 'Effect of learning rate'); write the conclusion (e.g., 'Standard learning rate scheduling is sufficient; cosine decay adds 0.2 AP').",
+    "Do not make a state-of-the-art claim without specifying the exact metric, dataset, model size, and data regime (e.g., 'only IN1K data').",
+    "Do not omit linear-probe results when reporting SSL fine-tuning performance, or vice versa—both must be reported and their dissociation explicitly discussed if present.",
+    "Do not omit the negative control or pseudo-experiment that proves positive results are not an artifact of the experimental protocol.",
+    "Do not place computational cost (training time, FLOPs, memory) only in an appendix when accuracy-vs-efficiency is a core claim of the paper.",
+    "Do not present ablation tables whose rows are sorted by metric value; order them to tell a causal, cumulative story from baseline to full model.",
+    "Do not present proof-of-concept experiments only informally in text; they must be structured as controlled ablations with quantified outcomes.",
+    "Do not report only final accuracy numbers when the paper's claim is about optimization or training stability—always include training curves.",
+    "Do not report only peak performance at one model size—show scaling behavior across at least two or three model sizes with the same protocol.",
+    "Do not report only relative improvement percentages without also stating the absolute numbers; and do not report only absolute numbers without the relative change for significant gains.",
+    "Do not report only relative improvements; always pair them with the absolute baseline number and the reference metric.",
+    "Do not report SOTA comparisons without specifying which tricks (optical flow, multi-scale, ensemble, rejection sampling, distillation, pre-training) are or are not used.",
+    "Do not show final metric numbers only; show training curves when the argument involves convergence speed or stability.",
+    "Do not skip the 'breakdown' or failure regime; if the method collapses under some condition (e.g., small data, high dimensionality, ODE sampler), report it explicitly.",
+    "Do not skip the default (gray) row in ablation tables; every deviation must be measured against an anchor that runs with all default settings.",
+    "Do not skip transfer-learning experiments when the claim is about representation quality; ImageNet accuracy alone is not sufficient evidence of generality.",
+    "Do not treat a negative result or null result as non-publishable; include it as evidence that a simpler approach works or that a prior belief was wrong.",
+    "Do not use 'bells and whistles' that are not reported as such—if you use ensembles, multi-scale testing, or extra data, declare it explicitly in the results section header.",
+    "Do not use 'we believe' or 'intuitively' as a substitute for an experiment; if a mechanism is hypothesized, run a targeted ablation to support or refute it.",
+    "Do not vary multiple components simultaneously in a single ablation row—ablation tables must be controlled experiments with exactly one variable per row.",
+    "Do not vary two or more factors simultaneously in a single ablation row without an explicit justification for why they cannot be disentangled."
   ],
   "review_checklist": [
-    "Does each ablation sub-table change exactly one variable, with all others frozen?",
-    "Is there a clearly marked default/baseline row (e.g., gray) in every ablation table?",
-    "Does the paper include both linear-probe and fine-tune accuracy for any self-supervised method?",
-    "Are transfer results shown on at least 3–5 diverse downstream tasks, not just one?",
-    "Does the paper state 'without bells and whistles' or equivalent, and is this actually verified?",
-    "Is the numeric delta for every ablation row stated explicitly in the accompanying text?",
-    "Are training curves provided when the central claim involves convergence or collapse behavior?",
-    "Are negative results or failure cases reported in the main paper, not hidden in supplementary?",
-    "Is each comparison made under identical pre-training data, model size, and training duration?",
-    "Does the paper report absolute numbers alongside relative improvements?",
-    "Is the default model size a standard, widely-used backbone (e.g., ResNet-50, ViT-L) for fair comparison?",
-    "Does the paper distinguish between what helps accuracy versus what prevents catastrophic failure?"
+    "Are 'bells and whistles' (ensembles, multi-scale testing, OHEM, extra data) explicitly declared if used, and are clean single-model results provided as well?",
+    "Are all baselines reproduced under the same setting (same schedule, augmentation, compute) as the proposed method, with any deviations explicitly declared?",
+    "Are all compared baselines trained under the same normalization, augmentation, and compute schedule, or is any asymmetry explicitly disclosed in a table column or footnote?",
+    "Are all evaluation tricks (ensembles, multi-scale, rejection sampling, guidance, distillation, external pre-training) explicitly disclosed in the comparison table or footnote?",
+    "Are both absolute metric values AND relative improvements reported in the same sentence for each key result?",
+    "Are negative results—cases where the method underperforms or fails—reported in the main paper with a mechanistic explanation?",
+    "Are scaling curves (model size, compute, data) reported as a standalone experiment, and do they explicitly note any plateau or diminishing returns?",
+    "Are the ablation sub-headings conclusion statements (e.g., 'x-prediction is critical') rather than variable names (e.g., 'prediction type')?",
+    "Are training/validation curves included wherever convergence speed or stability is the central claim?",
+    "Are transfer-learning results on at least two diverse downstream tasks (e.g., detection + segmentation) included in the main paper, not just supplementary?",
+    "Does every ablation row change exactly one variable (unless structural constraints prevent it, and those constraints are explained)?",
+    "Does every core claim about optimization difficulty or instability have a training curve (not just a final number) in the main paper?",
+    "Does the ablation section have a headline finding sentence at the start of each sub-section that states the conclusion before the numbers?",
+    "Does the paper include a sub-table or figure showing how the method scales with model size or training length?",
+    "For every ablation table, does each row vary exactly one component against the clearly marked default (gray) configuration?",
+    "For hyperparameter sweeps, is there a sentence explicitly characterizing whether the result is robust across the range or sensitive near the optimum?",
+    "For methods with hyperparameters, is there an inline table showing the full sensitivity range including off-optimal values and failures?",
+    "For SSL papers: are both linear-probe accuracy and end-to-end fine-tuning accuracy reported, and is their dissociation explicitly discussed?",
+    "Is any destructive ablation (intentionally incorrect or removed component) included to confirm that the positive result depends on the claimed mechanism?",
+    "Is both absolute improvement and relative improvement stated for all headline quantitative claims?",
+    "Is each numeric gain paired with a mechanistic explanation that connects back to the theoretical motivation of that component?",
+    "Is every state-of-the-art claim qualified with the metric name, dataset name, model size, and data regime (e.g., 'only ImageNet-1K')?",
+    "Is the claim of 'complementarity' supported by an experiment showing gains persist on top of an already-strong (larger/better-trained) baseline?",
+    "Is the method evaluated on at least three distinct datasets, tasks, or model sizes to support any claim of generality?",
+    "Is the proof-of-concept experiment (if a hypothesis is proposed) structured as a controlled experiment with quantified outcomes, not just a qualitative discussion?",
+    "Is there a clearly labeled 'default' row in each ablation table, and is the absolute metric of that row stated in the main text?",
+    "Is there a hyperparameter sensitivity ablation (e.g., masking ratio, momentum, temperature) reporting the full sweep including failure modes?",
+    "Is there a negative control or pseudo-experiment that demonstrates positive results are not artifacts of the protocol?",
+    "Is there at least one subsection or paragraph reporting where the method fails, degrades gracefully, or hits a breakdown regime?",
+    "Is training cost (wall-clock time, FLOPs, or memory) reported in direct proximity to the accuracy numbers it enables?"
   ]
 }

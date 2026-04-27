@@ -1,0 +1,760 @@
+{
+  "_meta": {
+    "papers_distilled": 26,
+    "batches": [
+      "discussion_batch_a (13 papers)",
+      "discussion_batch_b (13 papers)"
+    ],
+    "version": "v1 (new in v1.3)"
+  },
+  "discussion_patterns": [
+    {
+      "pattern_name": "bullet_list_summary_before_interpretation",
+      "description": "He sometimes opens a discussion/conclusions section with a terse enumerated list of raw observations, then interprets them afterward. This separates fact from inference and lets readers evaluate the evidence before seeing his reading of it.",
+      "evidence_quotes": [
+        {
+          "quote": "We summarize the main observations from our experiments as follows: Training from scratch on target tasks is possible without architectural changes. Training from scratch requires more iterations to sufficiently converge. ImageNet pre-training speeds up convergence on the target task.",
+          "source_id": "1811.08883"
+        }
+      ]
+    },
+    {
+      "pattern_name": "challenge_conventional_wisdom_by_name",
+      "description": "He explicitly names the 'conventional wisdom' or 'long-held constraint' before dismantling it. Naming the prior belief makes the contribution legible as a true conceptual shift, not merely a quantitative improvement.",
+      "evidence_quotes": [
+        {
+          "quote": "We challenge the conventional wisdom that the reverse process must be the exact analytic inverse of the forward process, and demonstrate that the long-held constraint is unnecessary.",
+          "source_id": "2512.10953"
+        },
+        {
+          "quote": "noise conditioning has been predominant in modern denoising-based generative models and related approaches. We encourage the community to explore new models that are not constrained by this design.",
+          "source_id": "2502.13129"
+        }
+      ]
+    },
+    {
+      "pattern_name": "cross_domain_analogy_as_interpretation",
+      "description": "To interpret a finding He draws an analogy to a well-understood phenomenon in a different domain (dataset bias as semantic classification, generative modeling as physics simulation, AR generation as language modeling). The analogy both explains the result and claims a broader scope.",
+      "evidence_quotes": [
+        {
+          "quote": "we have a series of observations that are analogous to those observed in semantic classification tasks (e.g., object classification). For example, we observe that training the dataset classifier on more samples, or using stronger data augmentation, can improve accuracy on held-out validation data.",
+          "source_id": "2403.08632"
+        },
+        {
+          "quote": "Our formulation involves describing the underlying quantity at coarsened levels of granularity, a common theme that underlies many important applications in physics.",
+          "source_id": "2505.13447"
+        }
+      ]
+    },
+    {
+      "pattern_name": "decompose_discussion_as_qa",
+      "description": "In longer papers He structures the discussion as explicit Q&A pairs, posing important community questions and then answering them succinctly. This technique forces him to commit to clear positions rather than hedging, and signals to readers which questions the paper actually settles.",
+      "evidence_quotes": [
+        {
+          "quote": "Is ImageNet pre-training necessary? No—if we have enough target data (and computation). Our experiments show that ImageNet can help speed up convergence, but does not necessarily improve accuracy unless the target dataset is too small.",
+          "source_id": "1811.08883"
+        },
+        {
+          "quote": "Is ImageNet helpful? Yes. ImageNet pre-training has been a critical auxiliary task for the computer vision community to progress.",
+          "source_id": "1811.08883"
+        }
+      ]
+    },
+    {
+      "pattern_name": "honest_negative_inline",
+      "description": "Failure cases and negative results are reported in-place within the Discussion or Experiments, not deferred or minimized. The tone is matter-of-fact: 'the result is worse', 'this fails', 'we have not observed benefits'. No apology is offered and no spin is applied.",
+      "evidence_quotes": [
+        {
+          "quote": "But there are still open problems on such aggressively deep models. The testing result of this 1202-layer network is worse than that of our 110-layer network, although both have similar training error. We argue that this is because of overfitting.",
+          "source_id": "1512.03385"
+        },
+        {
+          "quote": "But on VOC semantic segmentation, MoCo is worse by at least 0.8 point, a negative case we have observed.",
+          "source_id": "1911.05722"
+        },
+        {
+          "quote": "our results fall short of baseline contrastive learning methods (e.g., [7]) and masking-based methods (e.g., [21]), but the gap is reduced.",
+          "source_id": "2401.14404"
+        }
+      ]
+    },
+    {
+      "pattern_name": "hypothesis_rich_interpretation",
+      "description": "Kaiming uses Discussion sections to explicitly state hypotheses about why something works, not merely restate results. The word 'we hypothesize' or 'we conjecture' appears in almost every Discussion block. These hypotheses are offered provisionally, framed as possible explanations rather than claims.",
+      "evidence_quotes": [
+        {
+          "quote": "We conjecture that the deep plain nets may have exponentially low convergence rates, which impact the reducing of the training error",
+          "source_id": "1512.03385"
+        },
+        {
+          "quote": "We hypothesize that such failure is caused by the rapidly changing encoder that reduces the key representations' consistency.",
+          "source_id": "1911.05722"
+        },
+        {
+          "quote": "We hypothesize that this reasoning-like behavior is linked to the learning of useful representations.",
+          "source_id": "2111.06377"
+        },
+        {
+          "quote": "We hypothesize that the instability happens earlier in the shallower layers.",
+          "source_id": "2104.02057"
+        }
+      ]
+    },
+    {
+      "pattern_name": "image_language_contrast_as_analytical_lens",
+      "description": "In the MAE-era papers, Kaiming explicitly contrasts image signal properties (spatial redundancy, no semantic decomposition) with language to explain architectural choices. This contrast is analytical, not rhetorical — it drives specific design decisions.",
+      "evidence_quotes": [
+        {
+          "quote": "Images are merely recorded light without a semantic decomposition into the visual analogue of words. Instead of attempting to remove objects, we remove random patches that most likely do not form a semantic segment.",
+          "source_id": "2111.06377"
+        },
+        {
+          "quote": "Information density is different between language and vision. Languages are human-generated signals that are highly semantic and information-dense.",
+          "source_id": "2111.06377"
+        }
+      ]
+    },
+    {
+      "pattern_name": "minimal_domain_knowledge_as_virtue",
+      "description": "In later papers Kaiming explicitly calls out what his method does NOT rely on (no inductive biases, no domain-specific tokenizers, no data augmentation, no labels) as a design virtue, framing simplicity and domain-agnosticism as the scientific contribution itself.",
+      "evidence_quotes": [
+        {
+          "quote": "Our method has minimal domain knowledge: the only spacetime-specific inductive bias is on embedding the patches and their positions; all other components are agnostic to the spacetime nature of the problem.",
+          "source_id": "2205.09113"
+        },
+        {
+          "quote": "Our study suggests that the general framework of masked autoencoding (BERT, MAE, etc.) can be a unified methodology for representation learning with minimal domain knowledge.",
+          "source_id": "2205.09113"
+        },
+        {
+          "quote": "Our pixel-based MAE is much simpler than tokenization.",
+          "source_id": "2111.06377"
+        }
+      ]
+    },
+    {
+      "pattern_name": "minimalism_framed_as_advantage_not_limitation",
+      "description": "He explicitly frames the deliberate absence of components (no pre-training, no extra parameters, no external data) as a design virtue that proves sufficiency of a core idea, rather than an unfortunate constraint. This prevents readers from asking 'why not just add X?'",
+      "evidence_quotes": [
+        {
+          "quote": "Without relying on additional pre-training, extra parameters, or external data, our approach demonstrates that representation regularization can effectively enhance generative modeling.",
+          "source_id": "2506.09027"
+        },
+        {
+          "quote": "Notably, our method is self-contained and trained entirely from scratch. It achieves the strong results without using any pre-training, distillation, or the curriculum learning.",
+          "source_id": "2505.13447"
+        }
+      ]
+    },
+    {
+      "pattern_name": "open_questions_posited",
+      "description": "Discussions end by naming specific open questions or unsolved problems rather than claiming completeness. Kaiming names what he does not know and what the community still needs to figure out, positioning the paper as one node in an ongoing program rather than a terminus.",
+      "evidence_quotes": [
+        {
+          "quote": "A few open questions are worth discussing. MoCo's improvement from IN-1M to IG-1B is consistently noticeable but relatively small, suggesting that the larger-scale data may not be fully exploited. We hope an advanced pretext task will improve this.",
+          "source_id": "1911.05722"
+        },
+        {
+          "quote": "The trick alleviates the issue, but does not solve it. The model can still be unstable if lr is too big. The first layer is unlikely the essential reason for the instability; instead, the issue concerns all layers. We hope to see a more fundamental solution in future work.",
+          "source_id": "2104.02057"
+        },
+        {
+          "quote": "open problems remain. The scale of data we have explored is orders of magnitudes smaller than the language counterparts",
+          "source_id": "2205.09113"
+        }
+      ]
+    },
+    {
+      "pattern_name": "partial_failure_disclosure",
+      "description": "Kaiming identifies and names intermediate failure modes that look like success — results that appear decent but are degraded by instability or partial collapse. He coins descriptors like 'partial failure' and warns readers that the degradation can be hidden.",
+      "evidence_quotes": [
+        {
+          "quote": "The curves suggest that the training can be 'partially successful', or in other words, 'partially failed'.",
+          "source_id": "2104.02057"
+        },
+        {
+          "quote": "This behavior is harmful to explorative research: unlike catastrophic failure that is easily noticeable, the small degradation can be fully hidden.",
+          "source_id": "2104.02057"
+        }
+      ]
+    },
+    {
+      "pattern_name": "reconnect_to_classical_theory",
+      "description": "Discussion sections situate the empirical finding inside a classical theoretical framework (EBM, normalizing flows, physics simulation) to show the work is not an isolated trick but an instance of a deeper principle. The classical link both explains the result and hints at further generalization.",
+      "evidence_quotes": [
+        {
+          "quote": "Our study suggests that it is possible to pursue a single energy function E(x), aligning with the goal of classical EBM.",
+          "source_id": "2502.13129"
+        },
+        {
+          "quote": "This work revisits one of the oldest, yet most principled, foundations of generative modeling — Normalizing Flows — and redefines its boundaries.",
+          "source_id": "2512.10953"
+        },
+        {
+          "quote": "Broadly speaking, the scenario considered in this work is related to multi-scale simulation problems in physics that may involve a range of scales, lengths, and resolution, in space or time.",
+          "source_id": "2505.13447"
+        }
+      ]
+    },
+    {
+      "pattern_name": "reframe_existing_problem_as_new_problem_class",
+      "description": "He closes discussion by reframing the task studied as a member of a broader problem class (ARC as vision problem, generative models as flow problems), opening a new research agenda without claiming to have solved the harder class.",
+      "evidence_quotes": [
+        {
+          "quote": "Our work explores a previously overlooked perspective in the ARC task by framing it as an image-to-image translation problem. This opens up a new possibility of treating ARC as a vision-centric problem, emphasizing abstraction and reasoning emerging directly from image pixels.",
+          "source_id": "2511.14761"
+        },
+        {
+          "quote": "It highlights the potential of dividing complex data distributions into manageable sub-problems and addressing them by abstracting existing generative models into modular units.",
+          "source_id": "2502.17437"
+        }
+      ]
+    },
+    {
+      "pattern_name": "retrospective_naturalness",
+      "description": "He reframes results that surprised reviewers as being, in hindsight, an obvious consequence of first principles. This move disarms the 'surprising' criticism by grounding the finding in a theoretical inevitability already latent in the literature, rather than claiming novelty for novelty's sake.",
+      "evidence_quotes": [
+        {
+          "quote": "neural networks are not infinitely capable, and they can better use their capacity to model data rather than noise. Under these perspectives, our findings on x-prediction are, in hindsight, a natural outcome.",
+          "source_id": "2511.13720"
+        }
+      ]
+    },
+    {
+      "pattern_name": "scale_and_trajectory_framing",
+      "description": "Discussion sections frequently situate the paper's contribution in a longer historical or scaling trajectory, often explicitly referencing NLP pre-training as the aspirational arc. Kaiming frames vision SSL as 'embarking on a similar trajectory' rather than as a solved problem.",
+      "evidence_quotes": [
+        {
+          "quote": "Self-supervised learning in vision may now be embarking on a similar trajectory as in NLP.",
+          "source_id": "2111.06377"
+        },
+        {
+          "quote": "Discussion. While the bigger self-supervised ViT can achieve better accuracy, the results are saturated. This is unlike the trend in NLP, where bigger Transformers learn better representations",
+          "source_id": "2104.02057"
+        },
+        {
+          "quote": "These observations are aligned with those witnessed in self-supervised pre-training in NLP and we hope that they will enable our field to explore a similar trajectory.",
+          "source_id": "2111.06377"
+        }
+      ]
+    },
+    {
+      "pattern_name": "signal_not_settled_science",
+      "description": "Rather than asserting strong conclusions, Discussion sections often close by framing results as 'signals' or 'evidence', explicitly acknowledging that more work is needed to confirm them. The epistemic stance is deliberately provisional.",
+      "evidence_quotes": [
+        {
+          "quote": "We report positive evidence as well as challenges, open questions, and opportunities.",
+          "source_id": "2104.02057"
+        },
+        {
+          "quote": "We believe this data point reveals both strengths and limitations of the current model.",
+          "source_id": "2104.02057"
+        },
+        {
+          "quote": "We hope this data point will draw attention to future study.",
+          "source_id": "2104.02057"
+        }
+      ]
+    }
+  ],
+  "limitations_patterns": [
+    {
+      "pattern_name": "acknowledged_gap_with_causal_hypothesis",
+      "description": "When a metric is weaker than alternatives He always pairs the acknowledgement with a specific causal hypothesis (too little data, tokenizer quality, autoregressive constraint). The hypothesis is not proven but transforms the limitation into a researchable question rather than a dead end.",
+      "evidence_quotes": [
+        {
+          "quote": "We hypothesize that this is due to the significant challenge of modeling nearly 200,000 pixels in a pixel-by-pixel way. Nonetheless, these results highlight our method's effectiveness in not only accurate likelihood estimation but also the generation of high-quality images.",
+          "source_id": "2502.17437"
+        },
+        {
+          "quote": "We suspect this issue is because the learned positional embedding for raster order generation struggles to capture the discontinuity between the end token of one line and the start token of the next. This could potentially be addressed by using 2D positional embeddings.",
+          "source_id": "2410.13863"
+        }
+      ]
+    },
+    {
+      "pattern_name": "architectural_limitation_with_out_of_scope_disclaimer",
+      "description": "When an observed performance bottleneck lies outside the scope of the paper's contribution He names it precisely and explicitly marks it as outside scope, signaling to future work without diluting the current paper's focus.",
+      "evidence_quotes": [
+        {
+          "quote": "due to the efficiency of BiFlow, the VAE decoder has become a dominant computational overhead, which is outside the scope of this work.",
+          "source_id": "2512.10953"
+        },
+        {
+          "quote": "While our work focuses on advancing fast-forward models and is orthogonal to tokenizer design, from a practical standpoint, reducing or removing the tokenizer is becoming increasingly valuable.",
+          "source_id": "2512.02012"
+        }
+      ]
+    },
+    {
+      "pattern_name": "baseline_entrenchment_as_limitation",
+      "description": "He names the practical limitation that current systems and hyperparameters were tuned for the dominant baseline (BN), so the proposed method may be undervalued until re-optimization. This is honest about the evaluation gap without conceding that the method is inferior.",
+      "evidence_quotes": [
+        {
+          "quote": "BN has been so influential that many state-of-the-art systems and their hyper-parameters have been designed for it, which may not be optimal for GN-based models. It is possible that re-designing the systems or searching new hyper-parameters for GN will give better results.",
+          "source_id": "1803.08494"
+        }
+      ]
+    },
+    {
+      "pattern_name": "convergence_fairness_caveat",
+      "description": "He explicitly frames slower convergence of his method as an unfair comparison condition rather than a true weakness, requiring equalized iteration counts or pixel-equivalent budgets before drawing conclusions. This challenges an implicit evaluation bias in the field.",
+      "evidence_quotes": [
+        {
+          "quote": "It is unrealistic and unfair to expect models trained from random initialization to converge similarly fast as those initialized from ImageNet pre-training. Overlooking this fact one can draw incomplete or incorrect conclusions about the true capability of models that are trained from scratch.",
+          "source_id": "1811.08883"
+        }
+      ]
+    },
+    {
+      "pattern_name": "in_place_negative_reporting_no_separate_section",
+      "description": "Limitations are embedded within the results section at the point where the weakness is most visible, rather than collected in a standalone 'Limitations' section. This prevents readers from skipping to a summary and forces the limitation into the context where it is most interpretable.",
+      "evidence_quotes": [
+        {
+          "quote": "its FID and Recall are relatively weaker, suggesting that the generated samples are less diverse compared to other methods. We hypothesize that this is due to the significant challenge of modeling nearly 200,000 pixels in a pixel-by-pixel way.",
+          "source_id": "2502.17437"
+        },
+        {
+          "quote": "This limitation is largely because of the discrete tokenizer, which introduces substantial information loss. For instance, even with 3B parameters, the discrete token models cannot generate an accurate Mona Lisa due to poor reconstruction quality of the tokenizer.",
+          "source_id": "2410.13863"
+        }
+      ]
+    },
+    {
+      "pattern_name": "no_explicit_limitations_section_in_older_papers",
+      "description": "ResNet (1512.03385), Identity Mappings (1603.05027), PReLU/init (1502.01852), and Mask R-CNN (1703.06870) have no dedicated Limitations section at all. Limitations in these papers are embedded inline within Experiments or Discussion, stated factually without a heading. This is characteristic of older CVPR/NeurIPS venue norms.",
+      "evidence_quotes": [
+        {
+          "quote": "But there are still open problems on such aggressively deep models.",
+          "source_id": "1512.03385"
+        },
+        {
+          "quote": "we have not observed the benefit from training extremely deep models",
+          "source_id": "1502.01852"
+        }
+      ]
+    },
+    {
+      "pattern_name": "open_problem_framing_replaces_disclaimer",
+      "description": "Rather than saying 'this is a limitation', Kaiming frames unresolved issues as interesting open problems worth pursuing. The framing shifts from apologetic disclosure to scientific invitation, turning a potential weakness into a research direction.",
+      "evidence_quotes": [
+        {
+          "quote": "The reason for such optimization difficulties will be studied in the future.",
+          "source_id": "1512.03385"
+        },
+        {
+          "quote": "We hope to see a more fundamental solution in future work.",
+          "source_id": "2104.02057"
+        }
+      ]
+    },
+    {
+      "pattern_name": "performance_gap_acknowledged_without_spin",
+      "description": "In l-DAE and related papers, when the proposed method falls short of the state of the art, Kaiming reports the exact gap without rationalizing it away. He states the comparison directly and says the gap is reduced, not closed.",
+      "evidence_quotes": [
+        {
+          "quote": "our results fall short of baseline contrastive learning methods (e.g., [7]) and masking-based methods (e.g., [21]), but the gap is reduced. Our study suggests more room for further research along the direction of DAE and DDM.",
+          "source_id": "2401.14404"
+        }
+      ]
+    },
+    {
+      "pattern_name": "scale_gap_acknowledged_honestly",
+      "description": "In newer papers, the gap between the paper's scale of experiments and what would be needed for full validation is acknowledged explicitly, particularly the gap between vision SSL and NLP in terms of data scale.",
+      "evidence_quotes": [
+        {
+          "quote": "The scale of data we have explored is orders of magnitudes smaller than the language counterparts",
+          "source_id": "2205.09113"
+        }
+      ]
+    },
+    {
+      "pattern_name": "scope_bound_limitation",
+      "description": "He restricts the claim of a limitation to the precise scope studied (specific dataset, single task, specific conditioning mode) rather than claiming a general weakness. This is methodologically honest while resisting overstatement.",
+      "evidence_quotes": [
+        {
+          "quote": "Thus far, our experiments have been on the CIFAR-10 class-unconditional task. To show the generalizability of our findings, we further evaluate class-unconditional generation on ImageNet 32x32, FFHQ 64x64, and class-conditional generation on CIFAR-10.",
+          "source_id": "2502.13129"
+        },
+        {
+          "quote": "the concrete forms of the bias captured by neural networks remain largely unclear. We have discovered that such bias may contain some generalizable and transferrable patterns, and that it may not be easily noticed by human beings.",
+          "source_id": "2403.08632"
+        }
+      ]
+    },
+    {
+      "pattern_name": "specific_technical_limitations_not_generic_caveats",
+      "description": "When Kaiming does note limitations, they are concrete and technical — naming the exact condition under which the method breaks down, the specific dataset where transfer fails, or the precise training instability pattern. Generic hedges like 'may not generalize to other tasks' are absent.",
+      "evidence_quotes": [
+        {
+          "quote": "But on VOC semantic segmentation, MoCo is worse by at least 0.8 point, a negative case we have observed.",
+          "source_id": "1911.05722"
+        },
+        {
+          "quote": "The trick alleviates the issue, but does not solve it. The model can still be unstable if lr is too big.",
+          "source_id": "2104.02057"
+        }
+      ]
+    }
+  ],
+  "conclusion_patterns": [
+    {
+      "pattern_name": "acknowledge_gap_then_invite",
+      "description": "When the method does not fully solve the problem (e.g., l-DAE falls short of MAE; 1202-layer net overfits), the conclusion acknowledges the gap and immediately reframes it as an invitation for future work. The closing note is forward-looking, not self-critical.",
+      "evidence_quotes": [
+        {
+          "quote": "We have reported that l-DAE, which largely resembles the classical DAE, can perform competitively in self-supervised learning. The critical component is a low-dimensional latent space on which noise is added. We hope our discovery will reignite interest in denoising-based methods in the context of today's self-supervised learning research.",
+          "source_id": "2401.14404"
+        }
+      ]
+    },
+    {
+      "pattern_name": "bridge_to_adjacent_field",
+      "description": "Conclusions end by claiming or hoping the work will connect two fields that have been separate, rather than just advancing one field. This positions the paper as infrastructure for cross-domain progress, increasing its perceived generality.",
+      "evidence_quotes": [
+        {
+          "quote": "We hope that our work will bridge research in generative modeling, simulation, and dynamical systems in related fields.",
+          "source_id": "2505.13447"
+        },
+        {
+          "quote": "We hope our work will help bridge the gap between generative modeling and representation learning.",
+          "source_id": "2506.09027"
+        }
+      ]
+    },
+    {
+      "pattern_name": "broader_impact_relegated_or_dismissed",
+      "description": "Broader impact statements are brief and formulaic, often acknowledging existence of potential harms while explicitly stating they are outside scope. He never performs elaborate societal reasoning in this section, keeping it below one sentence.",
+      "evidence_quotes": [
+        {
+          "quote": "This paper presents work whose goal is to advance the field of Machine Learning. There are many potential societal consequences of our work, none which we feel must be specifically highlighted here.",
+          "source_id": "2502.13129"
+        },
+        {
+          "quote": "Similar to all generative models, there are potential negative societal consequences if our approach is misused to produce disinformation or amplify biases. However, these considerations lie outside the scope of this paper.",
+          "source_id": "2502.17437"
+        }
+      ]
+    },
+    {
+      "pattern_name": "community_invitation_not_self_congratulation",
+      "description": "Closing sentences are directed at what the community can now do, not what the authors have done. The grammar is typically 'We hope our work will X' or 'We encourage the community to Y,' framing the paper as an enabler rather than a destination.",
+      "evidence_quotes": [
+        {
+          "quote": "We encourage the community to explore new models that are not constrained by this design.",
+          "source_id": "2502.13129"
+        },
+        {
+          "quote": "We hope our discovery will stimulate discussions in the community regarding dataset bias in this new era.",
+          "source_id": "2403.08632"
+        },
+        {
+          "quote": "We hope this work will encourage the community to leverage ARC not only as a symbolic reasoning problem, but also as a testbed for promoting the generalization capacity of visual methods.",
+          "source_id": "2511.14761"
+        }
+      ]
+    },
+    {
+      "pattern_name": "community_serving_closer",
+      "description": "The final sentence of a Conclusion very frequently takes the form 'we hope X will [benefit/motivate/serve] the community', positioning the paper as a gift or baseline to others rather than a monument. The framing is outward-facing and service-oriented.",
+      "evidence_quotes": [
+        {
+          "quote": "We hope our simple and effective approach will serve as a solid baseline and help ease future research in instance-level recognition.",
+          "source_id": "1703.06870"
+        },
+        {
+          "quote": "We hope our study will attract the community's attention to the fundamental role of Siamese networks in representation learning.",
+          "source_id": "2011.10566"
+        },
+        {
+          "quote": "We hope our empirical study will be useful for the community to close the gap of pre-training between vision and language.",
+          "source_id": "2104.02057"
+        },
+        {
+          "quote": "We hope our discovery will reignite interest in denoising-based methods in the context of today's self-supervised learning research.",
+          "source_id": "2401.14404"
+        }
+      ]
+    },
+    {
+      "pattern_name": "concise_restatement_then_stop",
+      "description": "Most conclusions are one short paragraph: one sentence restating what was done, one or two sentences on the key finding, then a closer sentence pointing to community benefit or future exploration. No bullet-point lists, no multi-paragraph summaries, no extensive related-work comparison.",
+      "evidence_quotes": [
+        {
+          "quote": "This paper investigates the propagation formulations behind the connection mechanisms of deep residual networks. Our derivations imply that identity shortcut connections and identity after-addition activation are essential for making information propagation smooth.",
+          "source_id": "1603.05027"
+        },
+        {
+          "quote": "We have explored Siamese networks with simple designs. The competitiveness of our minimalist method suggests that the Siamese shape of the recent methods can be a core reason for their effectiveness.",
+          "source_id": "2011.10566"
+        }
+      ]
+    },
+    {
+      "pattern_name": "forward_pointer_to_next_unsolved_problem",
+      "description": "Conclusions end by naming the next bottleneck that the paper's own success has surfaced, effectively passing the baton to future work. This converts the conclusion from a finish line into a starting line for the next paper.",
+      "evidence_quotes": [
+        {
+          "quote": "With the remarkable progress of 1-NFE generation, the use of a tokenizer begins to incur a non-negligible cost at inference time. We expect future research to explore efficient tokenizers or pixel-space generation.",
+          "source_id": "2512.02012"
+        },
+        {
+          "quote": "Future research may extend this direction through more expressive architectures, richer visual priors, or larger-scale image pre-training.",
+          "source_id": "2511.14761"
+        }
+      ]
+    },
+    {
+      "pattern_name": "hope_as_closing_verb",
+      "description": "The verb 'hope' is Kaiming's canonical closing move — 'we hope this will', 'we hope our work will'. It is modest (not 'this will'), collective (not 'I'), and community-oriented. It recurs in nearly every Conclusion across the entire corpus.",
+      "evidence_quotes": [
+        {
+          "quote": "We hope our simple and effective approach will serve as a solid baseline and help ease future research in instance-level recognition.",
+          "source_id": "1703.06870"
+        },
+        {
+          "quote": "We hope this will be helpful in other more complex tasks.",
+          "source_id": "1502.01852"
+        },
+        {
+          "quote": "We hope our data points and experience will be useful to push this frontier.",
+          "source_id": "2104.02057"
+        },
+        {
+          "quote": "We hope this work will motivate the research community to explore sequence models with continuous-valued representations in other domains.",
+          "source_id": "2406.11838"
+        }
+      ]
+    },
+    {
+      "pattern_name": "method_as_step_not_solution",
+      "description": "Conclusions frame the paper as 'one step' or 'initial signals' in a longer program. Kaiming avoids declaring that a problem is solved; instead, the conclusion positions the work as enabling the next stage of inquiry.",
+      "evidence_quotes": [
+        {
+          "quote": "These results show that MoCo largely closes the gap between unsupervised and supervised representation learning in many computer vision tasks, and can serve as an alternative to ImageNet supervised pre-training in several applications.",
+          "source_id": "1911.05722"
+        },
+        {
+          "quote": "We hope our study will provide initial signals for future research.",
+          "source_id": "2205.09113"
+        }
+      ]
+    },
+    {
+      "pattern_name": "multi_point_conclusion_in_later_papers",
+      "description": "Longer empirical papers (ST-MAE, MoCo v3) use a brief numbered or bulleted set of observations in the Conclusion to enumerate findings. This replaces the flowing narrative when there are several distinct empirical claims to record.",
+      "evidence_quotes": [
+        {
+          "quote": "(i) We find that it is possible to learn strong representations with minimal domain knowledge or inductive biases. This follows the spirit of the ViT paper. Similar to BERT and MAE, we show that self-supervised learning on videos can be tackled in a conceptually unified framework. (ii) We empirically show that the masking ratio is an important factor",
+          "source_id": "2205.09113"
+        }
+      ]
+    },
+    {
+      "pattern_name": "narrow_claim_broad_implication",
+      "description": "The conclusion states a narrow empirical claim precisely, then derives a broad implication one logical step away. He does not overstate the narrow claim but lets the implication do rhetorical work, keeping both statements individually defensible.",
+      "evidence_quotes": [
+        {
+          "quote": "We challenge the conventional wisdom that the reverse process must be the exact analytic inverse of the forward process, and demonstrate that the long-held constraint is unnecessary. By introducing a learnable reverse model, BiFlow pushes Normalizing Flows from analytically invertible mappings to trainable bidirectional systems.",
+          "source_id": "2512.10953"
+        },
+        {
+          "quote": "Our results show that random-order models with continuous tokens achieve the best performance and scaling behavior across various evaluation metrics. We hope that our findings and promising results could provide valuable insights into the scaling behavior of autoregressive models for image generation.",
+          "source_id": "2410.13863"
+        }
+      ]
+    },
+    {
+      "pattern_name": "no_broader_impact_embrace",
+      "description": "The only explicit Broader Impacts statement found across all 13 papers is two sentences in MAE (2111.06377), and it is perfunctory — listing bias/generation risks and noting they 'warrant further research'. Kaiming does not use Conclusions to moralize, advocate, or claim societal benefit.",
+      "evidence_quotes": [
+        {
+          "quote": "The proposed method predicts content based on learned statistics of the training dataset and as such will reflect biases in those data, including ones with negative societal impacts. The model may generate inexistent content. These issues warrant further research and consideration when building upon this work to generate images.",
+          "source_id": "2111.06377"
+        }
+      ]
+    },
+    {
+      "pattern_name": "restate_and_stop",
+      "description": "The conclusion sentence recaps the key empirical result in one sentence and then stops, with no hedging or qualifier. This creates a decisive final impression and avoids diluting the finding with caveats that belong in the limitations section.",
+      "evidence_quotes": [
+        {
+          "quote": "We presented a new class of neural networks which capture long-range dependencies via non-local operations. On all tasks, a simple addition of non-local blocks provides solid improvement over baselines. We hope non-local layers will become an important component of future network architectures.",
+          "source_id": "1711.07971"
+        },
+        {
+          "quote": "We have demonstrated that fastforward generative models, without pretraining, can achieve highly competitive performance. We hope this encouraging result represents a solid step towards stand-alone fastforward generation.",
+          "source_id": "2512.02012"
+        }
+      ]
+    },
+    {
+      "pattern_name": "simple_algorithm_scalable_framing",
+      "description": "Conclusions in the MAE era explicitly invoke the 'simple algorithms that scale well' framing, drawing a connection to NLP's BERT/GPT trajectory. The conclusion reframes simplicity as the most important property, not the highest number.",
+      "evidence_quotes": [
+        {
+          "quote": "Simple algorithms that scale well are the core of deep learning. In NLP, simple self-supervised learning methods (e.g., [47, 14, 48, 4]) enable benefits from exponentially scaling models.",
+          "source_id": "2111.06377"
+        }
+      ]
+    },
+    {
+      "pattern_name": "simplicity_as_legacy_claim",
+      "description": "He closes by attributing the work's expected impact to its simplicity rather than its peak performance numbers. This is a defensible and durable claim: if other methods surpass the numbers, simplicity still stands as a contribution.",
+      "evidence_quotes": [
+        {
+          "quote": "We hope that the simplicity and effectiveness of our method will inspire the research community to explore novel designs and applications of fractal generative models.",
+          "source_id": "2502.17437"
+        },
+        {
+          "quote": "We hope non-local layers will become an important component of future network architectures.",
+          "source_id": "1711.07971"
+        }
+      ]
+    },
+    {
+      "pattern_name": "single_declarative_opening_sentence",
+      "description": "Conclusion sections open with one short declarative sentence that restates the core claim in plain language, free of equations or hedges. Everything else in the conclusion elaborates from this anchor sentence, which is designed to be the quote that propagates into citations.",
+      "evidence_quotes": [
+        {
+          "quote": "We have presented MeanFlow, a principled and effective framework for one-step generation.",
+          "source_id": "2505.13447"
+        },
+        {
+          "quote": "We have proposed Dispersive Loss, an objective that regularizes the internal representations of diffusion models.",
+          "source_id": "2506.09027"
+        },
+        {
+          "quote": "We have demonstrated that fastforward generative models, without pretraining, can achieve highly competitive performance.",
+          "source_id": "2512.02012"
+        }
+      ]
+    }
+  ],
+  "closer_sentence_examples": [
+    {
+      "quote": "We hope our simple and effective approach will serve as a solid baseline and help ease future research in instance-level recognition.",
+      "source_id": "1703.06870"
+    },
+    {
+      "quote": "We hope non-local layers will become an important component of future network architectures.",
+      "source_id": "1711.07971"
+    },
+    {
+      "quote": "We will also investigate GN's performance on learning representations for reinforcement learning (RL) tasks, e.g., [54], where BN is playing an important role for training very deep models [20].",
+      "source_id": "1803.08494"
+    },
+    {
+      "quote": "In closing, ImageNet and its pre-training role have been incredibly influential in computer vision, and we hope that our new experimental evidence about ImageNet and its role will shed light into potential future directions for the community to move forward.",
+      "source_id": "1811.08883"
+    },
+    {
+      "quote": "We hope our study will attract the community's attention to the fundamental role of Siamese networks in representation learning.",
+      "source_id": "2011.10566"
+    },
+    {
+      "quote": "We hope this simple baseline will motivate people to rethink the roles of Siamese architectures for unsupervised representation learning.",
+      "source_id": "2011.10566"
+    },
+    {
+      "quote": "We hope our empirical study will be useful for the community to close the gap of pre-training between vision and language.",
+      "source_id": "2104.02057"
+    },
+    {
+      "quote": "We hope this perspective will inspire future work.",
+      "source_id": "2111.06377"
+    },
+    {
+      "quote": "We hope our study will provide initial signals for future research.",
+      "source_id": "2205.09113"
+    },
+    {
+      "quote": "We hope our discovery will reignite interest in denoising-based methods in the context of today's self-supervised learning research.",
+      "source_id": "2401.14404"
+    },
+    {
+      "quote": "We hope this work will motivate the research community to explore sequence models with continuous-valued representations in other domains.",
+      "source_id": "2406.11838"
+    },
+    {
+      "quote": "We encourage the community to explore new models that are not constrained by this design.",
+      "source_id": "2502.13129"
+    },
+    {
+      "quote": "We hope that our work will bridge research in generative modeling, simulation, and dynamical systems in related fields.",
+      "source_id": "2505.13447"
+    },
+    {
+      "quote": "We hope our regularizer will generalize to broader scenarios, a direction we leave for future exploration.",
+      "source_id": "2506.09027"
+    },
+    {
+      "quote": "We hope this work will encourage the community to leverage ARC not only as a symbolic reasoning problem, but also as a testbed for promoting the generalization capacity of visual methods.",
+      "source_id": "2511.14761"
+    },
+    {
+      "quote": "We hope this work can serve as a step toward rethinking and expanding the scope of Normalizing Flows, inspiring future research on direct, flexible, and efficient NF-based generation.",
+      "source_id": "2512.10953"
+    }
+  ],
+  "anti_patterns_kaiming_would_flag": [
+    "a discussion section that re-summarizes the paper rather than interpreting it. discussion in he's papers connects findings to broader theoretical frameworks or community implications that were not present in the abstract",
+    "Broader Impact section is used to claim societal benefit rather than to flag known risks in a factual, minimal way.",
+    "claiming the method solves or settles a problem class that the experiments do not cover. he bounds conclusion claims to the experimental setting while keeping implications one step wider",
+    "Closer sentence claims 'opens up new directions for future research' without specifying what those directions are.",
+    "Closer sentence is self-congratulatory ('our work establishes a new paradigm') rather than community-serving.",
+    "collecting all limitations into a standalone 'limitations' section at the end of the paper, divorced from the results that motivated them. he embeds limitations at the point in the results where the evidence for them appears",
+    "Conclusion asserts the problem is 'solved' rather than positioning the paper as one step in an ongoing program.",
+    "Conclusion introduces new results or numbers not discussed in the paper body.",
+    "Conclusion restates the abstract word-for-word instead of synthesizing what was actually learned.",
+    "Discussion explains a negative result by dismissing it as out-of-scope rather than acknowledging it as a genuine failure mode.",
+    "Discussion presents a single deterministic explanation for an observation when multiple competing hypotheses exist and none has been tested.",
+    "Discussion section is absent entirely in a paper with surprising or counter-intuitive findings that require interpretation.",
+    "Discussion section only paraphrases table numbers without offering any hypothesis about why the pattern exists.",
+    "ending with sentences like 'our method achieves state-of-the-art performance on all benchmarks.' he consistently redirects closing sentences toward community impact, not author accomplishment",
+    "ending with two or three sentences each trying to be the memorable closing takeaway. he writes one closing sentence per conclusion and stops",
+    "Failure cases are buried in an appendix or omitted rather than reported in-place.",
+    "framing the absence of bells and whistles (no pre-training, no extra components) as a 'current limitation' rather than a design choice that proves sufficiency. he explicitly names simplicity as a scientific virtue",
+    "introducing a challenge to conventional wisdom without naming the specific convention challenged. he consistently names the specific prior belief or method (e.g., bn, noise conditioning, analytic invertibility) before dismantling it",
+    "Limitations are framed positively as 'future work opportunities' without first honestly naming what the method cannot do.",
+    "Limitations section uses generic academic hedges ('may not generalize to all domains') instead of naming specific failure conditions.",
+    "reporting a worse metric without offering any hypothesis about why. he always pairs an acknowledged gap with a testable causal hypothesis, even if it is speculative",
+    "stating an interpretation as settled fact when it is an explanatory hypothesis. he marks causal explanations as hypotheses ('we hypothesize', 'we suspect') when they are not directly verified by the paper's experiments",
+    "telling readers 'this is an important problem' without specifying what the paper enables or what the blocking question now is. he pairs community calls-to-action with the specific design space opened by the paper's findings",
+    "The word 'we believe' is used to make performance claims rather than to flag provisional hypotheses.",
+    "using qualifiers like 'may potentially suggest the possibility that' when the evidence supports a direct statement. he uses 'we show', 'we demonstrate', 'our results indicate' without stacked hedges",
+    "writing 'future work will explore x' without specifying what is bottlenecking x or why x is the natural next step. he always names the specific constraint that makes x a future-work item rather than a present-work item",
+    "writing lengthy, performative broader-impact statements unconnected to the paper's technical content. he uses one-sentence disclaimers that honestly bound what is and is not addressed"
+  ],
+  "review_checklist": [
+    "are broader impact statements kept to one sentence and explicitly bounded to what the paper does and does not cover",
+    "Are failure cases and negative results reported in-place within the main text, not deferred to appendix?",
+    "are limitations reported in place within the results, at the moment the evidence is visible, rather than collected in a segregated section",
+    "Are performance gaps vs. prior art reported as exact numbers, without rationalization or spin?",
+    "does each 'future work' pointer name the specific bottleneck that makes it future work, not present work",
+    "does the conclusion avoid repeating numbers that already appear in tables and instead communicate the conceptual shift",
+    "Does the Conclusion avoid restating the abstract and instead synthesize what the paper actually adds to the community's understanding?",
+    "does the conclusion claim only one step of implication beyond the actual experimental scope, not two or three",
+    "does the conclusion open with a single short declarative sentence that commits to the core claim without hedging",
+    "Does the Discussion avoid cherry-picking the successful transfer tasks without acknowledging the unsuccessful ones?",
+    "does the discussion connect the work to an adjacent field or classical theory, rather than staying within the sub-field vocabulary of the experiments",
+    "Does the Discussion distinguish between what is empirically observed and what is conjectured or hypothesized?",
+    "Does the Discussion frame the paper as one step in a longer program, explicitly naming what remains unsolved?",
+    "Does the Discussion offer at least one explicit hypothesis (we hypothesize / we conjecture / we suspect) about a non-obvious observed phenomenon?",
+    "does the discussion section go beyond paraphrasing the abstract and interpret findings within a theoretical or historical framework",
+    "Does the final sentence of the Conclusion use outward-facing, community-serving language (we hope X will serve / motivate / benefit) rather than self-congratulatory framing?",
+    "Does the paper name specific open questions rather than vague 'future work' gestures?",
+    "if a metric is worse than a competitor, is an explicit explanation offered (tokenizer quality, autoregressive constraint, hyperparameter legacy) rather than silence",
+    "if a q&a structure is used in discussion, does each answer commit to a position (yes/no) rather than hedging",
+    "if conventional wisdom is challenged, is the specific prior belief named before it is dismantled",
+    "If the method is simple, does the Conclusion explicitly frame that simplicity as the scientific contribution?",
+    "If the paper underperforms vs. a baseline in any metric, is that gap stated plainly in the Conclusion rather than omitted?",
+    "If there is a Broader Impact statement, does it flag known risks factually in two sentences or fewer, without claiming societal benefit?",
+    "is each acknowledged limitation accompanied by a specific causal hypothesis or experimental bound, rather than a bare statement of failure",
+    "is the closer sentence verifiable as the literal last substantive sentence of the paper, not a penultimate sentence followed by an acknowledgement restatement",
+    "is the closing sentence directed at what the community can now do, not what the authors have achieved",
+    "Is the closing verb in the Conclusion 'hope' (modest, collective) rather than 'demonstrate', 'prove', or 'show' (assertive)?",
+    "Is the Limitations section (if present) specific and technical, naming exact conditions of failure rather than generic caveats?",
+    "is the work's contribution to simplicity or minimalism explicitly named as a scientific virtue, not apologized for as a limitation"
+  ]
+}
