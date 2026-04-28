@@ -2,6 +2,8 @@
 
 # kaiming-he-skill
 
+[English](README.md) · [简体中文](README.zh-CN.md)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-blueviolet)](https://claude.ai/code)
 [![Papers Distilled](https://img.shields.io/badge/papers%20distilled-46-orange.svg)](references/research/01-papers.md)
@@ -218,6 +220,7 @@ Quotes used directly in `SKILL.md` are grounded to source tags and checked again
 ```text
 kaiming-he-skill/
 ├── README.md
+├── README.zh-CN.md
 ├── SKILL.md                              # Installable skill body
 ├── install.sh                            # Symlink install + best-effort gh star
 ├── references/
