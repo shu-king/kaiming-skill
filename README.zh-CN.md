@@ -10,7 +10,7 @@
 
 <br>
 
-它不是“扮演 Kaiming He”，也不代表 Kaiming He 本人的观点。更准确地说，它是一个基于公开语料整理出来的 Kaiming-style 参考视角：帮助你检查论文想法、实验设计、ablation、abstract 和 claim 是否足够清楚、克制、可验证。
+这是一个基于Kaiming He的公开论文和演讲语料整理出来的的写作skill，它可以帮你检查你论文的每个子模块是否符合kaiming的科研写作理念然后给出初步审稿意见，并提供kaiming-style rewrite的版本。
 
 <br>
 
@@ -18,45 +18,33 @@
 
 <br>
 
-[为什么做这个](#为什么做这个) · [适合谁](#适合谁) · [能帮什么](#能帮什么) · [边界](#边界) · [安装](#安装) · [资料来源](#资料来源)
+[为什么需要这个skill](#为什么需要这个skill) · [适用人群](#适用人群) · [它能做什么](#它能做什么) · [限制](#限制) · [安装](#安装) · [资料来源](#资料来源)
 
 </div>
 
 ---
 
-## 为什么做这个
+## 为什么需要这个skill
 
-很多人刚开始做研究时，会读强论文，但不一定能看出真正有用的东西藏在哪里。
-
-比如：
-
-- 问题是怎么被框出来的；
-- 方法为什么能保持简单；
-- ablation 为什么这样排；
-- claim 为什么不显得用力过猛；
-- 一个结果为什么看起来像“可复用的研究贡献”，而不只是某个系统的堆料。
-
-Kaiming He 的公开论文很适合拿来研究这些习惯。这个 repo 把其中反复出现的写作结构、实验判断和方法设计模式整理成一个 Claude Code skill，方便你在写论文、改 abstract、设计实验或整理 baseline 时拿来对照。
-
-它的目标很实际：帮你看清自己的 draft 有没有一个明确的 observation，方法是不是被不必要的组件拖重了，实验是不是能支撑 claim。
+作为科研刚起步的研究生，我们的论文写作很多时候可能会面临无人指导的情况。有些老师会默认这些东西我们本来就会，或者期望我们自学成才，但是其实很多时候我们就像无头苍蝇一样，没有清晰的方向来指导自己的写作。个人认为kaiming在DL/CV领域是一个很好的学习对象，虽然我们无法拥有kaiming的最强大脑，但是我们可以从他paper的字里行间里感受到他优雅的科研理念，以及明晰的写作风格。所以我让claude学习了kaiming近50篇重要的paper来学习他的写作pattern，来帮助我们理清文章结构、逻辑，以及如何让每个句子表达更清晰、更reader friendly。
 
 ---
 
-## 适合谁
+## 适用人群
 
 这个 repo 比较适合：
 
 - 刚开始做研究、想学强论文怎么组织问题的学生；
 - 正在写第一篇 paper 的 PhD / master 学生；
-- 需要改 abstract、intro、method 或 ablation table 的研究者；
+- 需要改 abstract、intro、method 或 ablation table 的研究人员；
 - 想把 review 变得更具体的 mentor / advisor；
 - 想做 research-writing agent 的 LLM / agent builder。
 
-它最好用的场景不是“泛泛问怎么做研究”，而是你已经有一个初稿、想法、实验计划、表格或审稿回复，需要一个更具体的检查框架。
+它所擅长的场景不是从0生成一个idea，而是当你已经有一个初稿、想法、实验计划、表格或审稿回复，需要一个更具体的检查框架的情况。
 
 ---
 
-## 能帮什么
+## 它能做什么
 
 它主要帮你检查这些问题：
 
@@ -64,11 +52,11 @@ Kaiming He 的公开论文很适合拿来研究这些习惯。这个 repo 把其
 |---|---|
 | 问题定义 | 核心 observation 是否先于方法出现？ |
 | 论文结构 | abstract、intro、method、experiments 是否顺着一个清楚的逻辑展开？ |
-| claim 校准 | 结论是不是被数据支持，有没有过度包装？ |
+| claim 校准 | 结论有没有数据支持，有没有过度包装？ |
 | ablation 设计 | 是否一次只改变一个变量，结果是否能解释？ |
 | baseline 选择 | 对比对象是否简单、强、相关？ |
 | 实验计划 | 哪个实验应该先做，哪个结果才能真正支撑 claim？ |
-| 写作清理 | 是否能删掉空泛形容词、过长句子和膨胀的 contribution？ |
+| 写作清理 | 是否能删掉空泛形容词、过长句子和夸大的 contribution？ |
 
 你可以这样问：
 
@@ -87,18 +75,18 @@ Kaiming He 的公开论文很适合拿来研究这些习惯。这个 repo 把其
 
 ---
 
-## 边界
+## 限制
 
-请把它当作论文修改辅助，而不是权威来源。
+请把它当作论文修改辅助，而不是权威。
 
 几个明确边界：
 
-- 它不代表 Kaiming He 本人的私人观点；
+- 它不代表 Kaiming He 本人的观点；
 - 它不应该被引用为 Kaiming He 的个人意见；
 - 它不能保证技术正确、论文录用或长期影响力；
 - 它不能替代 advisor、peer review 或领域专家判断；
-- 覆盖最强的是 computer vision 和 visual representation learning；
-- 对 optimization theory、NLP、speech、RL 等方向覆盖较弱；
+- 最擅长的领域是 computer vision 和 visual representation learning；
+- 对 optimization theory、NLP、speech、RL 等方向覆盖力较弱；
 - cutoff 之后的新论文或新 talk 需要重新查源再判断。
 
 如果问题涉及私人动机、行业判断、对某个人的看法，skill 应该保持沉默，或者明确标注“这是从公开语料推出来的保守解释，不是 quote，也不是本人观点”。
@@ -117,7 +105,7 @@ git clone https://github.com/shu-king/kaiming-skill ~/kaiming-skill && bash ~/ka
 ~/.claude/skills/
 ```
 
-默认情况下，`install.sh` 还会尝试通过你本机已经登录的 `gh` CLI 给这个 repo 点一个 star。这个操作是 best-effort 的；如果没有安装或登录 `gh`，会自动跳过。
+默认情况下，`install.sh` 还会尝试通过你本机已经登录的 `gh` CLI 给这个 repo 点一个 star。如果没有安装或登录 `gh`，会自动跳过。
 
 如果你不想自动 star，可以这样安装：
 
