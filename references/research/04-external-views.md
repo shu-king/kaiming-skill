@@ -1,40 +1,40 @@
-# External Views
+# External Context
 
-Public commentary on Kaiming He's work from peers, students, and the broader CV/DL community. This file is meant to keep the persona-skill from flattening into self-promotion — it surfaces both the validations and the genuine critiques.
+Conservative external context around Kaiming He's public work. This file is meant to keep the skill from flattening into uncritical praise while avoiding unsourced claims about what specific people think.
 
-Most of this is paraphrased or reconstructed from public talks, papers, and interviews. Quotes here are NOT in `verbatim-corpus.md` and are not part of the gating verification — they are secondary corpus.
-
----
-
-## I. The "field-defining" framing
-
-ResNet's status in the literature is unusual. Multiple peer characterizations reflect it:
-
-- **Most-cited 21st-century paper** — Google Scholar ranking through late 2025. Citation count exceeds the next-most-cited paper by a wide margin.
-- **Yann LeCun** has cited ResNet repeatedly as a foundational architecture in his public talks; co-authored *Transformers without Normalization* (DyT, 2025) with Kaiming as middle author — a notable late-career collaboration between the two.
-- **Geoffrey Hinton's** Turing Lecture (2018) and various interviews have credited ResNet as one of the key enabling architectures of the deep-learning era.
-
-The pattern: ResNet is treated less like a paper and more like a *primitive of the field* — analogous to how dropout, batch norm, or attention are treated.
+Nothing in this file should be treated as a private view, endorsement, or direct quote unless a source is explicitly cited. Prefer phrasing these items as community-facing context or interpretation.
 
 ---
 
-## II. The "subtraction school"
+## I. Field-level status
 
-A small number of researchers explicitly identify with the Kaiming-style subtractive methodology. The clearest examples:
+ResNet's status in the literature is unusual and externally visible:
 
-### II.1 Saining Xie — *ConvNeXt* (CVPR 2022)
+- Kaiming He's MIT/CSAIL page describes ResNet as the most-cited paper of the twenty-first century, citing a Nature article.
+- Residual connections are now treated as a general deep-learning primitive across many architectures, not only as a computer-vision technique.
+- Several later vision papers use ResNet as a baseline, reference architecture, or object of ablation, which makes it useful for studying durable design patterns.
 
-Saining Xie's *ConvNeXt: A ConvNet for the 2020s* is openly framed as a Kaiming-style ablation paper. The abstract explicitly says the goal was to "modernize" a ResNet by ablation: change one design choice at a time, see which ones matter, end up with a CNN that matches ViT.
+Safe phrasing: "ResNet has field-level influence and is often treated as a primitive." Avoid attributing this judgment to a named researcher unless the relevant quote is sourced.
 
-In conference talks Xie has described the project as inspired by Kaiming's *"what if we removed all this stuff and rebuilt from primitives"* approach. ConvNeXt is the closest stylistic descendant of ResNet outside of FAIR.
+---
 
-### II.2 Lucas Beyer — recurring public commentary
+## II. Adjacent work that echoes similar patterns
 
-Lucas Beyer (Google DeepMind, then OpenAI) has on multiple occasions publicly praised the empirical rigor of FAIR-era CV papers (specifically: MoCo, MAE, l-DAE, *Rethinking ImageNet Pre-training*) for their willingness to challenge inherited assumptions. His framing in talks: *"Kaiming's lab actually runs the ablation that the rest of us assume the answer to."*
+Some adjacent work uses a similar empirical-ablation style. This is a resemblance claim, not evidence of direct influence unless the paper or author explicitly says so.
 
-### II.3 Andrej Karpathy — references to "the simplest thing that works"
+### II.1 ConvNeXt (CVPR 2022)
 
-Karpathy has cited Kaiming's methodology in interviews (Lex Fridman, Dwarkesh Patel) and in his *Recipe for Training Neural Networks* blog post, particularly the "minimal viable architecture first, then add complexity" pattern. The "minimal viable" framing has clear roots in Kaiming-style ResNet methodology.
+*ConvNeXt: A ConvNet for the 2020s* is a useful adjacent example because it modernizes a ResNet through stepwise design changes and ablations. It is safe to describe it as "ResNet-centered and ablation-driven."
+
+Avoid saying it is "Kaiming-style" as a factual attribution unless a sourced author statement is included.
+
+### II.2 MAE and MoCo follow-ups
+
+Many follow-up papers extend MAE, MoCo, or related self-supervised-learning recipes to new modalities and settings. These are useful community signals for which parts of the original methods became reusable.
+
+### II.3 MIT-era generative-modeling line
+
+RCG, MAR, FractalGen, JiT, MeanFlow, and related student-led papers share a visible deconstructive title and method pattern: remove a received component, test whether it was necessary, and report the resulting baseline carefully.
 
 ---
 
@@ -48,7 +48,7 @@ A common counterpoint, voiced loosely across the field: in some genuinely under-
 - DETR (Facebook AI, 2020 — different team, different project) added substantial complexity (transformer encoder/decoder, set prediction loss) to detection. It's a generative-style move that wouldn't pass a strict "without bells and whistles" filter.
 - Diffusion models in their original form (DDPM, Ho et al. 2020) added significant scheduling complexity. Kaiming's MIT-era response (l-DAE, MeanFlow, JiT) is to *deconstruct* them — but the original additive moves were necessary first.
 
-The persona-skill should acknowledge this tension explicitly (see SKILL.md §10 Internal Tensions).
+The skill should acknowledge this tension explicitly (see SKILL.md §10 Internal Tensions).
 
 ### III.2 "MAE-style masking has limits"
 
@@ -64,7 +64,7 @@ The MIT-era program — l-DAE, MAR, MeanFlow, JiT — argues that today's diffus
 - Diffusion's complexity may be load-bearing in ways that aren't apparent at small scale. Removing the noise schedule or the perceptual loss often *appears* to work at FID 2.0 but breaks at higher fidelity.
 - The rivalry-of-modes between deconstructive (MIT-Kaiming) and additive (Stability AI / Black Forest Labs / Google's Imagen) generative research is a productive tension, not a settled question.
 
-A fair persona response to "is diffusion overcomplicated?" is "I think so, but the question is empirical — I am not certain."
+A safe response to "is diffusion overcomplicated?" should keep the claim empirical: "The corpus leans toward deconstruction, but whether a component is unnecessary has to be tested."
 
 ### III.4 "Voice attribution is murky on multi-author papers"
 
@@ -76,12 +76,12 @@ Several reviewers have noted that the writing style of Faster R-CNN (2nd author)
 
 What is notable about Kaiming's public engagement compared to peers:
 
-- **No personal blog.** Unlike Karpathy, Sutton, Bengio, Goodfellow, Anthropic researchers, etc.
-- **No Twitter/X presence.** Doesn't post; doesn't reply.
-- **Minimal podcast appearances.** Has done very few long-form interviews. Lex Fridman and Dwarkesh Patel both have other CV researchers as guests; Kaiming is conspicuous in his absence from those rosters.
-- **MIT page is the public surface.** people.csail.mit.edu/kaiming/ is curated and minimal: papers, slides, students. No blog, no opinions section.
+- **No personal blog source in this corpus.** Compared with many public-facing ML researchers, there is little long-form personal commentary to draw on.
+- **No Twitter/X source is used in this corpus.** Do not infer private views from the absence of social-media material here.
+- **Minimal podcast/interview surface in the corpus.** The corpus contains very few long-form interviews or conversational sources.
+- **MIT page is the main public surface used here.** people.csail.mit.edu/kaiming/ is curated and minimal: papers, slides, teaching, students, and contact information.
 
-The implication for the persona-skill: there is *very little* private-opinion data to draw on. The persona should default to silence on personal-life or industry-strategy topics rather than fabricating views.
+The implication for the skill: there is *very little* private-opinion data to draw on. It should default to silence on personal-life or industry-strategy topics rather than fabricating views.
 
 ---
 
@@ -112,9 +112,9 @@ Papers that explicitly position themselves as "in the Kaiming style":
 
 ---
 
-## VII. Public personality (inference from corpus)
+## VII. Public-facing style (inference from corpus)
 
-What can be reasonably inferred about his public-facing personality from the writing alone:
+What can be reasonably inferred about the public-facing style from the writing alone:
 
 - **Disciplined.** Every sentence pulls weight. No throwaway claims.
 - **Empirically grounded.** The data is the argument; theory comes after.
@@ -128,7 +128,7 @@ What CAN'T be inferred from the corpus:
 - View of any specific other researcher.
 - Views on tooling, programming languages, infrastructure choices.
 
-The persona should be silent on these unless the user explicitly accepts an inferred-not-quoted answer.
+The skill should be silent on these unless the user explicitly accepts an inferred-not-quoted answer.
 
 ---
 

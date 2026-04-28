@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-blueviolet)](https://claude.ai/code)
 [![Papers Distilled](https://img.shields.io/badge/papers%20distilled-46-orange.svg)](references/research/01-papers.md)
-[![Verbatim Quotes](https://img.shields.io/badge/verbatim%20quotes-521-purple.svg)](references/research/verbatim-corpus.md)
+[![Verbatim Quotes](https://img.shields.io/badge/verbatim%20quotes-519-purple.svg)](references/research/verbatim-corpus.md)
 [![Cutoff](https://img.shields.io/badge/research%20cutoff-2026--04--27-lightgrey.svg)](#)
 
 <br>
@@ -14,7 +14,7 @@
 
 <br>
 
-Built from **46 first/last-author papers**, **9 public talks and tutorials**, and **521 verified verbatim quotes**.
+Built from **46 papers emphasizing first/last-author works**, **9 public talks and tutorials**, and a **519-entry collected verbatim quote corpus**. Quotes used directly in `SKILL.md` are verified against local source text.
 
 Designed for researchers who want concrete references for paper revision, ablation design, baseline comparison, and experiment planning.
 
@@ -120,6 +120,8 @@ git clone https://github.com/shu-king/kaiming-skill ~/kaiming-skill && bash ~/ka
 
 This symlinks the skill into `~/.claude/skills/`.
 
+By default, `install.sh` also tries to star this repo through your local authenticated `gh` CLI as a best-effort thank-you. To skip that step, run `NO_STAR=1 bash ~/kaiming-skill/install.sh`, or install manually by creating the symlink yourself.
+
 A complete usage transcript lives at [`examples/demo-conversation-2026-04-27.md`](examples/demo-conversation-2026-04-27.md).
 
 ---
@@ -171,13 +173,13 @@ The research notes live under [`references/research/`](references/research/):
 
 | File | Content | Size |
 |---|---|---|
-| `01-papers.md` | 46-paper corpus index and per-paper design notes | 5,840 words |
-| `02-talks.md` | 9 talks and tutorials with extracted points | 1,988 words |
-| `03-expression-dna.md` | Sentence patterns, intro templates, and ablation-table conventions | 2,713 words |
-| `04-external-views.md` | Public commentary from adjacent researchers | 1,358 words |
-| `05-decisions.md` | Career and research pivots from MSRA to FAIR to MIT | 1,603 words |
-| `06-timeline.md` | Biographical timeline and intellectual lineage | 1,174 words |
-| `verbatim-corpus.md` | 521 verified quotes grouped by theme | 19,542 words |
+| `01-papers.md` | 46-paper corpus index and per-paper design notes | 5,839 words |
+| `02-talks.md` | 9 talks and tutorials with extracted points | 2,003 words |
+| `03-expression-dna.md` | Sentence patterns, intro templates, and ablation-table conventions | 2,722 words |
+| `04-external-views.md` | Conservative external context and contested interpretations | 1,282 words |
+| `05-inferred-career-patterns.md` | Clearly labeled career-pattern inference, not personal motives | 603 words |
+| `06-timeline.md` | Biographical timeline and intellectual lineage | 1,194 words |
+| `verbatim-corpus.md` | 519 collected quotes grouped by theme; `SKILL.md` quotes are verified | 18,258 words |
 
 ### Primary material
 
@@ -188,12 +190,12 @@ The corpus includes:
 - NeurIPS 2024 New-in-ML talk;
 - NeurIPS 2025 Faster R-CNN Test-of-Time talk;
 - CVPR 2025 talk on end-to-end generative modeling;
-- MIT 6.S978 Deep Generative Models material;
+- MIT Deep Learning Bootcamp recording/captions;
 - ECCV, CVPR, and ICCV tutorial videos and captions.
 
 ### Secondary material
 
-The secondary material includes public commentary and adjacent work from researchers such as Yann LeCun, Andrej Karpathy, Saining Xie, Xinlei Chen, Tianhong Li, and Mingyang Deng.
+The secondary material includes conservative context from adjacent work and public-facing community signals. It should be treated as interpretation unless a source is explicitly cited.
 
 Excluded sources:
 
@@ -205,9 +207,9 @@ Excluded sources:
 
 ### Verification
 
-Every verbatim quote is grounded to a source tag and checked against the local paper text.
+Quotes used directly in `SKILL.md` are grounded to source tags and checked against local source text.
 
-`scripts/verify_quotes.py` is the gating artifact. The verified quotes in `SKILL.md` must match the source text before commit.
+`scripts/verify_quotes.py` is the gating artifact. The broader quote corpus is a collected reference corpus; `--strict` also reports auxiliary normalization or renderer misses that should be inspected before making stronger verification claims.
 
 ---
 
@@ -217,14 +219,14 @@ Every verbatim quote is grounded to a source tag and checked against the local p
 kaiming-he-skill/
 ├── README.md
 ├── SKILL.md                              # Installable skill body
-├── install.sh                            # Symlink install
+├── install.sh                            # Symlink install + best-effort gh star
 ├── references/
 │   └── research/
 │       ├── 01-papers.md
 │       ├── 02-talks.md
 │       ├── 03-expression-dna.md
 │       ├── 04-external-views.md
-│       ├── 05-decisions.md
+│       ├── 05-inferred-career-patterns.md
 │       ├── 06-timeline.md
 │       ├── verbatim-corpus.md
 │       └── section-patterns/

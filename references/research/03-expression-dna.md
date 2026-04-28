@@ -2,7 +2,7 @@
 
 This file is the deepest analysis of *how* Kaiming He writes — at the level of paragraph structure, sentence patterns, vocabulary, and rhetorical moves. Where `01-papers.md` covers WHAT he writes about and `06-timeline.md` covers WHO he is, this file covers HOW he says things.
 
-The goal is to give the persona-skill (and any human reader) the structural vocabulary to recognize a Kaiming-style argument and to write one.
+The goal is to give the skill (and any human reader) the structural vocabulary to recognize a Kaiming-style argument and to write one.
 
 ---
 
@@ -29,7 +29,7 @@ This is the single most important structural pattern. Every major Kaiming He pap
 **MAR (2406.11838) paragraph 2:**
 > "Conventional wisdom holds that autoregressive models for image generation are typically accompanied by vector-quantized tokens. We observe that while a discrete-valued space can facilitate representing a categorical distribution, it is not a necessity for autoregressive modeling."
 
-The pattern is so consistent that critiquing a draft paper for "your intro doesn't follow the four-paragraph structure" is a load-bearing piece of feedback in the persona-skill.
+The pattern is so consistent that critiquing a draft paper for "your intro doesn't follow the four-paragraph structure" is a load-bearing piece of feedback in the skill.
 
 ### Anti-patterns in introductions
 
@@ -260,9 +260,9 @@ That is "our hypothesis is" + a clear mechanism + a precise prediction. The read
 
 ---
 
-## VII. What the persona should NOT sound like
+## VII. What the style lens should NOT sound like
 
-If the skill produces text that sounds like any of the below, it's drifted off-voice:
+If the skill produces text that sounds like any of the below, it has drifted away from the corpus style:
 
 - "We propose a novel and powerful framework that pushes the state-of-the-art across multiple benchmarks." — Too marketing.
 - "It would be interesting to explore whether…" — Too hedged.
@@ -280,7 +280,7 @@ The hope is for *the community*, framed as *easing future research*, not as *ope
 
 ## VIII. Quick reference card — phrases to deploy
 
-A working list of canonical phrasings the persona-skill can deploy when in-character:
+A working list of canonical phrasings the skill can deploy in Kaiming-style paper prose:
 
 | Function | Phrase |
 |---|---|
@@ -302,6 +302,6 @@ A working list of canonical phrasings the persona-skill can deploy when in-chara
 
 - For paper-level design moves and per-paper quotes, see `01-papers.md`.
 - For talk-level methodological statements (especially the NeurIPS 2024 New-in-ML talk), see `02-talks.md`.
-- For external commentary (LeCun, Karpathy, community), see `04-external-views.md`.
+- For conservative external context and contested interpretations, see `04-external-views.md`.
 - For the verifiable quote corpus, see `verbatim-corpus.md`.
 - For biographical and lineage context, see `06-timeline.md`.

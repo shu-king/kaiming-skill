@@ -122,10 +122,10 @@ lines = [
     "",
     f"All {len(all_quotes)} verbatim quotes extracted from {len(list(NOTES.glob('*.json')))} primary sources, grouped by theme.",
     "",
-    "Every quote is a byte-exact substring of `text/{papers,talks}/<id>.md`. ",
-    "Verification gating: `python3 scripts/verify_quotes.py --strict`.",
+    "Quotes are intended to be grounded to `text/{papers,talks}/<id>.md`.",
+    "Run `python3 scripts/verify_quotes.py --strict` to inspect exact matches, fuzzy matches, and auxiliary misses before making stronger verification claims.",
     "",
-    "**voice_certain** = the quote can be confidently attributed to Kaiming's voice (1st/last-author papers and talks where he's primary speaker). False on middle-author papers unless the quote sounds clearly Kaiming-style ('without bells and whistles', 'we observe', 'simplest thing that works').",
+    "**voice_certain** = the quote comes from first/last-author papers or talks where Kaiming He is the primary speaker. False on middle-author papers unless the quote is clearly part of the Kaiming-style paper register ('without bells and whistles', 'we observe', 'simplest thing that works').",
     "",
 ]
 

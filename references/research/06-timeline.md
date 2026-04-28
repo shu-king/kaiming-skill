@@ -23,7 +23,7 @@ This file is one of the seven research dossiers backing `SKILL.md`. It traces Ka
 | 2022–2023 | Last-author ST-MAE, FLIP, ViTDet. RCG (NeurIPS 2024 Oral, last author). |
 | 2024 | Joins MIT EECS / CSAIL as tenured Associate Professor (Spring 2024). Last-author l-DAE (ICLR 2025), MAR (NeurIPS 2024 Spotlight), HPT (NeurIPS 2024 Spotlight), *A Decade's Battle on Dataset Bias* (ICLR 2025 Oral). Future Science Prize 2023 (with Sun, Ren, Zhang) presented. Teaches MIT 6.S978 *Deep Generative Models* (Fall 2024). |
 | 2025 | Last-author MeanFlow (NeurIPS 2025 Oral), JiT, ARC, Improved Mean Flows, Bidirectional Normalizing Flow, Diffuse and Disperse, Fractal Generative Models, *Is Noise Conditioning Necessary*. Receives **ICCV Helmholtz Test-of-Time** for *Delving Deep into Rectifiers* (PReLU/Kaiming init) and **NeurIPS Test-of-Time** for Faster R-CNN. Teaches MIT 6.7960 *Deep Learning* (Fall 2025). |
-| 2026 | First-author *One-step Latent-free Image Generation with Pixel Mean Flows* (Jan), *Generative Modeling via Drifting* (Feb). Teaches MIT 6.S058 *Introduction to Computer Vision* (Spring 2026). |
+| 2026 | First-author *One-step Latent-free Image Generation with Pixel Mean Flows* (Jan), *Generative Modeling via Drifting* (Feb). Teaches MIT 6.S058 *Introduction to Computer Vision* (Spring 2026). Public MIT page also lists part-time Distinguished Scientist, Google DeepMind. |
 
 ## II. Career-defining recognitions
 
@@ -38,7 +38,7 @@ This file is one of the seven research dossiers backing `SKILL.md`. It traces Ka
 
 ## III. Citation footprint
 
-ResNet alone is the most-cited 21st-century paper. Total Google Scholar count >800,000 by late 2025. Eight papers individually cited >25,000 times: ResNet, Faster R-CNN, Mask R-CNN, Focal Loss, FPN, MAE, MoCo, PReLU.
+ResNet alone is described on Kaiming He's public MIT page as the most-cited 21st-century paper, citing a Nature article. The same public page reports more than 700,000 publication citations as of May 2025. Avoid live exact citation counts in generated outputs unless rechecked.
 
 ## IV. Intellectual lineage — influences IN
 
@@ -85,9 +85,9 @@ Kaiming sits clearly in the **upper-left quadrant** — engineering-rigorous AND
 
 ## VII. Public profile
 
-- Largely private — no Twitter/X presence, no personal blog, no podcast appearances comparable to Karpathy or Sutskever.
-- Public communication channel is paper writing + slide decks at people.csail.mit.edu/kaiming/.
-- This is itself a Kaiming-style choice: signal through demonstrated work, not commentary on others'.
+- Largely paper- and talk-facing in this corpus; no personal blog or social-media source is used here.
+- Public communication channel used here is paper writing + slide decks + teaching links at people.csail.mit.edu/kaiming/.
+- Do not infer private preferences or views on other people from the absence of commentary sources.
 
 ---
 
@@ -97,4 +97,4 @@ Kaiming sits clearly in the **upper-left quadrant** — engineering-rigorous AND
 - For talk excerpts (esp. NeurIPS 2024 *ML Research, via the Lens of ML*), see `02-talks.md`.
 - For sentence-level voice patterns, see `03-expression-dna.md`.
 - For external commentary and contrast with peers, see `04-external-views.md`.
-- For the MSRA → FAIR → MIT pivots and their drivers, see `05-decisions.md`.
+- For cautious career-pattern inference, see `05-inferred-career-patterns.md`.

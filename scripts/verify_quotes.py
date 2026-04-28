@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Verify every verbatim quote in SKILL.md and references/research/verbatim-corpus.md
-is a byte-exact substring of some file in text/.
+Verify block quotes in SKILL.md and the collected reference corpus against text/.
 
-This is the gating artifact: must exit 0 before commit.
+This is the gating artifact: SKILL.md quotes must be clean before commit. Auxiliary
+reference misses are reported for inspection.
 
 Usage:
     python3 scripts/verify_quotes.py              # check default files
@@ -194,7 +194,8 @@ def main():
             print(f"  {f}: {q[:120]}")
 
     # Gating logic: SKILL.md must be 100% clean. Auxiliary files may have
-    # notation drift on real Kaiming text — emit warning but exit 0.
+    # auxiliary files include collected quotes with occasional renderer or notation
+    # drift; emit warnings but keep SKILL.md as the hard gate.
     skill_path = REPO / "SKILL.md"
     skill_misses = [m for m in misses if m[0] == skill_path.relative_to(REPO)]
     if skill_misses:
@@ -203,8 +204,8 @@ def main():
     if misses:
         pct = 100.0 * len(misses) / max(total, 1)
         print(f"\n⚠ WARN: SKILL.md is clean, but auxiliary files have {len(misses)} unverified quotes ({pct:.1f}%).")
-        print("        These are typically notation drift (subscripts, math symbols) on real Kaiming text.")
-        print("        Inspect the list above; if any look fabricated, fix them.")
+        print("        These may be renderer/notation drift or true misses.")
+        print("        Inspect the list above before making stronger verification claims.")
         return 0
     print("\nAll quotes verified ✓")
     return 0

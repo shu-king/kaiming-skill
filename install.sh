@@ -51,6 +51,6 @@ echo "✓ symlinked $SKILL_DST → $SKILL_SRC"
 echo
 echo "Done. Activate inside Claude Code with one of these triggers:"
 echo "  • \"review my paper Kaiming-style\""
-echo "  • \"rewrite this paragraph in Kaiming's voice\""
+echo "  • \"rewrite this paragraph in a Kaiming-style register\""
 echo "  • \"design my ablation table\""
-echo "  • \"what would Kaiming say about X?\""
+echo "  • \"give me a corpus-grounded Kaiming-style critique of X\""

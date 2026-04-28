@@ -8,7 +8,7 @@ SEED="$REPO/assets/seed_talks.txt"
 OUT="$REPO/talks"
 mkdir -p "$OUT"
 
-UA="kaiming-persona-skill/1.0"
+UA="kaiming-he-skill/1.0"
 
 # Read seed file: skip blank lines and comments. Fields are whitespace-separated:
 # <type> <url> <short_id> <year> <title...>

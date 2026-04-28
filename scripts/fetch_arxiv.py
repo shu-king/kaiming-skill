@@ -19,7 +19,7 @@ SEED = REPO / "assets" / "seed_papers.txt"
 OUT = REPO / "papers"
 OUT.mkdir(exist_ok=True)
 
-UA = "kaiming-persona-skill/1.0 (research; contact: ireneyu1024@gmail.com)"
+UA = "kaiming-he-skill/1.0 (research; contact: ireneyu1024@gmail.com)"
 HEADERS = {"User-Agent": UA}
 SESSION = requests.Session()
 SESSION.headers.update(HEADERS)

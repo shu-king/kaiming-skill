@@ -29,7 +29,7 @@ seed_talks.txt    ─┘     fetch_talks.sh    ──▶  talks/{id}.{pdf|vtt}
                                                        │
                                                        ▼
                                               verify_quotes.py
-                                                  (must exit 0)
+                                                  (SKILL.md must be clean)
 ```
 
 ## Re-running the pipeline
@@ -53,8 +53,9 @@ python3 scripts/extract_text.py   # section-selective filter on PDFs
 
 # 4. Synthesize SKILL.md + references/research/*.md (manual; Opus)
 
-# 5. Verify quotes (gating)
-python3 scripts/verify_quotes.py  # exit 0 means safe to commit
+# 5. Verify SKILL.md quotes (gating)
+python3 scripts/verify_quotes.py
+python3 scripts/verify_quotes.py --strict  # inspect auxiliary reference warnings
 ```
 
 ## Files
@@ -64,7 +65,7 @@ python3 scripts/verify_quotes.py  # exit 0 means safe to commit
 | `fetch_arxiv.py` | arXiv API + html→ar5iv→pdf cascade. Polite UA, 3s sleep, idempotent. |
 | `fetch_talks.sh` | `curl` slide PDFs from people.csail.mit.edu + `yt-dlp --write-auto-sub` |
 | `extract_text.py` | `bs4` for HTML, `pymupdf4llm` for PDFs, section-selective filter |
-| `verify_quotes.py` | Grep every quote in `SKILL.md` and `references/research/verbatim-corpus.md` against `text/**/*.md`. Fail loud on miss. |
+| `verify_quotes.py` | Grep block quotes in `SKILL.md` and the collected reference corpus against `text/**/*.md`. Fails on `SKILL.md` misses and reports auxiliary reference warnings. |
 
 ## Idempotence
 

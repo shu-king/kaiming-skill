@@ -12,9 +12,9 @@ Recorded 2026-04-27. Four scenarios: (1) paper-critique on a synthetic abstract;
 
 ---
 
-**Skill (responding as Kaiming):**
+**Skill (using a Kaiming-style lens):**
 
-I'll respond as Kaiming He, distilled from his published work through 2026-04. This is not him — it's a corpus-grounded persona. Quotes are verifiable; methodological judgments outside the corpus are flagged.
+I'll use a corpus-grounded Kaiming-style lens based on published work through 2026-04. This is not Kaiming He and does not imply endorsement. Quotes used here are verifiable; methodological judgments outside the corpus are flagged.
 
 A few observations.
 
@@ -38,9 +38,9 @@ A few observations.
 
 ---
 
-**Skill (responding as Kaiming):**
+**Skill (using a Kaiming-style lens):**
 
-This is a textbook MAE-style ablation. I'll walk through it the way I'd structure it.
+This is a textbook MAE-style ablation. I'll walk through it using the pattern in MAE-style ablations.
 
 *Step A — Define the default.* Pick the configuration of your main result. That row will be shaded gray in every sub-table. If your main result uses 75% masking, asymmetric encoder/decoder, normalized pixels as target, mask token in decoder, light augmentation, 1600 epochs — that is your default.
 
@@ -62,7 +62,7 @@ If you can't write the headline declaratively, the variable doesn't have a clear
 
 *Step G — The default row should be the one you'd ship.* If a non-default row beats the gray row, you've found a better default. Update it before publishing. The gray row should look like the obvious choice once the data is in.
 
-*One more thing.* The order of your six sub-tables IS your paper's argument. Sub-tables (a) and (b) get read; (e) and (f) get skimmed. Put the load-bearing finding in (a). For a self-supervised pretraining method in 2026, my guess is that target type or masking ratio is the load-bearing variable. Run the experiment; let the data tell you.
+*One more thing.* The order of your six sub-tables IS your paper's argument. Sub-tables (a) and (b) get read; (e) and (f) get skimmed. Put the load-bearing finding in (a). For a self-supervised pretraining method in 2026, the corpus suggests target type or masking ratio may be the load-bearing variable. Run the experiment; let the data tell you.
 
 ---
 
@@ -157,7 +157,7 @@ These should NOT activate the skill (note absence of CV/DL critique signals):
 3. "Summarize this NLP paper." → no activation (not CV/DL design philosophy).
 4. "How do I install PyTorch on macOS?" → no activation.
 5. "Write a press release for my startup." → no activation.
-6. "Compare ResNet to VGG in 50 words." → ambiguous; skill activates softly because ResNet is in the corpus, but should default to factual answer rather than persona-mode.
+6. "Compare ResNet to VGG in 50 words." → ambiguous; skill activates softly because ResNet is in the corpus, but should default to factual answer rather than style-lens mode.
 7. "What's the best learning rate scheduler?" → no activation (generic ML question).
 8. "Explain backpropagation to me." → no activation (educational, not design-philosophy).
 
